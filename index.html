@@ -7,9 +7,9 @@
 <meta name="description" content="台灣彩券開獎數據自動更新與統計分析:威力彩、大樂透、今彩539 的頻率、遺漏、走勢、獎金分配與可調式策略選號器、預測核對。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script src="assets/chart.umd.js"></script>
 <style>
-/* ============ 彩研所 v1.1.0 ============
+/* ============ 彩研所 v1.2.0 ============
    色彩:攝影棚靛藍底 + 紙白卡 + 三遊戲主色
    大樂透=金 #F0BE4A|威力彩=硃紅 #DF4B3B|今彩539=青玉 #2E9E8A */
 :root{
@@ -147,6 +147,9 @@ input[type=range]{width:100%;accent-color:var(--red)}
 .recent-list td{white-space:nowrap}
 .scroll-x{overflow-x:auto}
 
+.err-bar{position:sticky;top:0;z-index:99;background:#7A1F14;color:#fff;font-size:.82rem;
+  padding:10px 16px;display:none;border-bottom:2px solid #DF4B3B}
+.err-bar b{margin-right:8px}
 footer{border-top:1px solid var(--ink-line);padding:26px 0 40px;color:#9FB0D4;font-size:.82rem}
 .disclaimer{background:var(--ink-deep);border:1px solid var(--ink-line);border-left:4px solid var(--gold);
   border-radius:10px;padding:14px 18px;margin-bottom:16px;line-height:1.8}
@@ -158,6 +161,7 @@ canvas{max-width:100%}
 </style>
 </head>
 <body>
+<div class="err-bar" id="errBar"></div>
 
 <header class="wrap">
   <div class="brand">
@@ -282,13 +286,24 @@ canvas{max-width:100%}
       任何號碼組合的中獎機率完全相同,「熱號」「冷號」「遺漏」對未來開獎不具預測力。
       策略選號器與預測核對僅供娛樂與選號輔助參考,請理性投注、量力而為。開獎結果與獎金以台灣彩券官方公告為準。
     </div>
-    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v1.1.0</span></div>
+    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v1.2.0</span></div>
   </div>
 </footer>
 
 <script>
 "use strict";
-const BUILD_VERSION = "v1.1.0";
+const BUILD_VERSION = "v1.2.0";
+
+/* ============ 錯誤攔截:任何 JS 錯誤都顯示在頁面頂端,不再整頁空白 ============ */
+function showErr(msg){
+  const bar = document.getElementById("errBar");
+  if(bar){ bar.style.display = "block"; bar.innerHTML = "<b>頁面發生錯誤(請截圖回報):</b>" + String(msg).replace(/[<>]/g,""); }
+}
+window.addEventListener("error", e => showErr((e.message||"未知錯誤") + (e.filename? " @ " + e.filename.split("/").pop() + ":" + e.lineno : "")));
+window.addEventListener("unhandledrejection", e => showErr("Promise: " + (e.reason && e.reason.message || e.reason)));
+function safe(label, fn){
+  try{ fn(); }catch(err){ console.error(label, err); showErr(label + ":" + (err && err.message || err)); }
+}
 
 /* ============ 遊戲設定 ============
    special:
@@ -379,6 +394,12 @@ function renderHero(){
   }
   const fp = firstPrizeRow(d);
   const strike = fp && fp.winners!=null && +fp.winners===0 ? `<span class="tag-strike">頭獎槓龜</span>` : "";
+  let moneyHTML = "";
+  if(d.money && Object.keys(d.money).length){
+    moneyHTML = `<div class="scroll-x" style="margin-top:8px"><table>` +
+      Object.entries(d.money).map(([k,v])=>`<tr><td>${esc(k)}</td><td class="num-td">${fmtNTD(v)}</td></tr>`).join("") +
+      `</table></div><p class="hero-note" style="margin-top:4px">上表為官方 API 回傳之金額欄位(欄位名照原樣顯示)。</p>`;
+  }
   let prizeHTML;
   if(Array.isArray(d.prizes) && d.prizes.length){
     prizeHTML = `<div class="prize-block"><h3>本期獎金分配</h3>
@@ -388,11 +409,11 @@ function renderHero(){
         <td>${esc(p.name||"—")}</td>
         <td class="num-td">${p.winners==null?"—":(+p.winners===0?"槓龜":(+p.winners).toLocaleString("zh-TW")+" 注")}</td>
         <td class="num-td">${fmtNTD(p.amount)}</td></tr>`).join("") +
-      `</table></div>
+      `</table></div>${moneyHTML}
       <p class="hero-note" style="margin-top:6px">獎金以台灣彩券官方公告為準。</p></div>`;
   }else{
-    prizeHTML = `<div class="prize-block"><h3>本期獎金分配</h3>
-      <p class="hero-note">獎金分配資料尚未取得——資料更新腳本會在每日更新時自動補抓,若持續未顯示,請查看 Actions log 並回報。</p></div>`;
+    prizeHTML = `<div class="prize-block"><h3>本期獎金分配</h3>${moneyHTML}
+      <p class="hero-note">各獎項分配明細尚未取得——資料更新腳本會在每日更新時自動補抓,若持續未顯示,請把 Actions log 貼回以便依官方格式修正。</p></div>`;
   }
   el.innerHTML = `
     <div class="hero-top">
@@ -426,7 +447,15 @@ function renderStats(){
 }
 
 function destroyChart(id){ if(state.charts[id]){ state.charts[id].destroy(); delete state.charts[id]; } }
-function makeChart(id, config){ destroyChart(id); state.charts[id] = new Chart($("#"+id), config); }
+function makeChart(id, config){
+  destroyChart(id);
+  if(typeof Chart === "undefined"){
+    const box = $("#"+id).parentElement;
+    if(box) box.innerHTML = '<p class="sub">圖表函式庫載入失敗(assets/chart.umd.js),請確認檔案已上傳。</p>';
+    return;
+  }
+  state.charts[id] = new Chart($("#"+id), config);
+}
 
 function renderFreqChart(){
   const ds = windowed(), g = cfg();
@@ -745,12 +774,20 @@ function render(){
   $("#strategySub").textContent = state.game==="lotto649"
     ? "拉動權重即可隨時調整選號方向;設定會自動儲存在你的瀏覽器。大樂透玩法為自選 6 碼(特別號以你的 6 碼比對)。權重代表「策略偏好」,不代表中獎機率——每期開獎皆為獨立事件。"
     : "拉動權重即可隨時調整選號方向;設定會自動儲存在你的瀏覽器。權重代表「策略偏好」,不代表中獎機率——每期開獎皆為獨立事件。";
-  renderStats(); renderFreqChart(); renderHotTable(); renderMissTable();
-  renderOddChart(); renderTailChart(); renderArea2(); renderRecent();
-  loadStrategy();
+  // 先渲染不依賴圖表函式庫的區塊,確保任何圖表問題都不會讓頁面空白
+  safe("統計卡", renderStats);
+  safe("熱號排行", renderHotTable);
+  safe("遺漏排行", renderMissTable);
+  safe("近期開獎", renderRecent);
+  safe("策略設定", loadStrategy);
   lastGenerated = null;
   $("#genOut").innerHTML = "";
-  renderPreds();
+  safe("預測核對", renderPreds);
+  // 圖表(各自獨立,失敗不影響其他區塊)
+  safe("頻率圖", renderFreqChart);
+  safe("奇偶走勢", renderOddChart);
+  safe("尾數分布", renderTailChart);
+  safe("第二區圖", renderArea2);
 }
 
 $$(".tab").forEach(b=>b.addEventListener("click",()=>{
