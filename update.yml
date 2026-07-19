@@ -1,0 +1,46 @@
+# 彩研所 TWLottery Lab — 自動更新開獎資料
+# BUILD_VERSION: v1.0.0
+name: 更新開獎資料
+
+on:
+  schedule:
+    # 台灣時間每日 21:35(UTC 13:35),開獎後約一小時執行
+    - cron: "35 13 * * *"
+  workflow_dispatch: {}   # 允許在 Actions 頁面手動觸發(首次建站請手動跑一次)
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 取出程式碼
+        uses: actions/checkout@v4
+
+      - name: 安裝 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 安裝套件
+        run: pip install requests
+
+      - name: 抓取最新開獎資料
+        run: python scripts/update_data.py
+
+      - name: 提交資料變更
+        run: |
+          git config user.name "twlottery-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/*.json
+          if git diff --cached --quiet; then
+            echo "資料無變更,不需提交。"
+          else
+            git commit -m "自動更新開獎資料 $(TZ=Asia/Taipei date '+%Y-%m-%d %H:%M')"
+            git push
+          fi
