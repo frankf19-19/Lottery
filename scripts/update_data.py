@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 彩研所 TWLottery Lab — 開獎資料自動更新腳本
-BUILD_VERSION = v1.2.0
+BUILD_VERSION = v2.0.0
 
 資料來源:台灣彩券官方網站 API(api.taiwanlottery.com)
 執行方式:由 GitHub Actions 排程呼叫(每日台灣時間 21:35),
         亦可手動執行:python scripts/update_data.py
 
-v1.2.0 新增:
+v2.0.0 新增:
   - 抓取各期「獎金分配」(獎項/中獎注數/單注獎金),存入每期 draws[].prizes
   - 首次遇到未知欄位時,log 會印出官方回應的欄位名稱,便於除錯
 
@@ -26,7 +26,7 @@ import datetime as dt
 
 import requests
 
-BUILD_VERSION = "v1.2.0"
+BUILD_VERSION = "v2.0.0"
 API_BASE = "https://api.taiwanlottery.com/TLCAPIWeB/Lottery/{endpoint}"
 BACKFILL_MONTHS = 14   # 首次回補的月數
 PRIZE_LOOKBACK = 8     # 每次執行最多補抓幾期的獎金分配
@@ -226,6 +226,34 @@ def fetch_prizes(cfg, period, debug=False):
     return None
 
 
+PROBE_ENDPOINTS = [
+    # 各期獎金分配候選
+    "Lotto649Prize", "SuperLotto638Prize", "DailyCashPrize",
+    "Lotto649PrizeResult", "SuperLotto638PrizeResult", "DailyCashPrizeResult",
+    "GetLotto649Prize", "GetSuperLotto638Prize",
+    # 累積頭獎/最新資訊候選
+    "JackpotInfo", "TotalPrizeInfo", "LastestLotteryInfo", "LotteryLastestInfo",
+    "GetJackpot", "IndexInfo", "HomeInfo",
+]
+
+
+def probe_endpoints(sample_period):
+    """一次性探測候選端點並把結果寫進 log(僅在獎金資料缺少時執行)。
+    log 中 HTTP 200 且非錯誤頁的候選,即為可用端點。"""
+    print("=== 端點探測開始(結果供修正版參考)===")
+    for ep in PROBE_ENDPOINTS:
+        for params in ({}, {"period": sample_period}):
+            try:
+                url = API_BASE.format(endpoint=ep)
+                r = requests.get(url, params=params, headers=HEADERS, timeout=15)
+                body = r.text[:300].replace("\n", " ")
+                print(f"[探測] {ep} {params or '{}'} -> HTTP {r.status_code}:{body}")
+            except requests.RequestException as e:
+                print(f"[探測] {ep} {params or '{}'} -> 失敗:{e}")
+            time.sleep(0.4)
+    print("=== 端點探測結束 ===")
+
+
 # ---------- 主流程 ----------
 
 def load_existing(path):
@@ -313,6 +341,22 @@ def main():
         except Exception as e:  # 單一遊戲失敗不中斷整體
             print(f"[{cfg['name']}] 未預期錯誤:{e}", file=sys.stderr)
     print(f"完成:{ok}/{len(GAMES)} 個遊戲更新成功。")
+
+    # 若獎金資料仍全數缺少,進行一次端點探測,把候選端點回應寫進 log
+    try:
+        need_probe, sample_period = True, None
+        for key in GAMES:
+            data = load_existing(os.path.join(DATA_DIR, f"{key}.json")) or {}
+            top = (data.get("draws") or [{}])[0]
+            if top.get("prizes"):
+                need_probe = False
+            if sample_period is None and top.get("period"):
+                sample_period = top["period"]
+        if need_probe and sample_period:
+            probe_endpoints(sample_period)
+    except Exception as e:
+        print(f"端點探測略過:{e}", file=sys.stderr)
+
     sys.exit(0 if ok > 0 else 1)
 
 
