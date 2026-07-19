@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 彩研所 TWLottery Lab — 開獎資料自動更新腳本
-BUILD_VERSION = v1.1.0
+BUILD_VERSION = v1.2.0
 
 資料來源:台灣彩券官方網站 API(api.taiwanlottery.com)
 執行方式:由 GitHub Actions 排程呼叫(每日台灣時間 21:35),
         亦可手動執行:python scripts/update_data.py
 
-v1.1.0 新增:
+v1.2.0 新增:
   - 抓取各期「獎金分配」(獎項/中獎注數/單注獎金),存入每期 draws[].prizes
   - 首次遇到未知欄位時,log 會印出官方回應的欄位名稱,便於除錯
 
@@ -26,7 +26,7 @@ import datetime as dt
 
 import requests
 
-BUILD_VERSION = "v1.1.0"
+BUILD_VERSION = "v1.2.0"
 API_BASE = "https://api.taiwanlottery.com/TLCAPIWeB/Lottery/{endpoint}"
 BACKFILL_MONTHS = 14   # 首次回補的月數
 PRIZE_LOOKBACK = 8     # 每次執行最多補抓幾期的獎金分配
@@ -115,6 +115,17 @@ def normalize(item, cfg):
         }
         if cfg["has_special"]:
             draw["special"] = appear[need - 1]
+        # 擷取項目中可能存在的金額類欄位(銷售額、獎金等),欄位名以官方回應為準
+        money = {}
+        for k, v in item.items():
+            lk = str(k).lower()
+            if any(h in lk for h in ("amount", "money", "prize", "sales", "jackpot", "bonus")):
+                try:
+                    money[str(k)] = int(float(v))
+                except (ValueError, TypeError):
+                    continue
+        if money:
+            draw["money"] = money
         return draw
     except (ValueError, TypeError):
         return None
@@ -194,20 +205,25 @@ def extract_prizes(obj):
 
 
 def fetch_prizes(cfg, period, debug=False):
-    """查詢單期獎金分配。以同一結果端點帶 period 參數查詢,通用解析。
-    找不到時回傳 None(不視為錯誤)。"""
-    try:
-        payload = api_get(cfg["endpoint"], {"period": period, "month": "", "pageNum": 1, "pageSize": 1})
-    except requests.RequestException as e:
-        print(f"[{cfg['name']}] 第 {period} 期獎金查詢失敗:{e}", file=sys.stderr)
-        return None
-    prizes = extract_prizes(payload)
-    if prizes is None and debug:
-        # 印出回應結構的頂層欄位,方便依實際格式修正
-        content = payload.get("content")
-        shape = {k: type(v).__name__ for k, v in content.items()} if isinstance(content, dict) else type(content).__name__
-        print(f"[{cfg['name']}] 第 {period} 期未解析到獎金欄位,content 結構:{json.dumps(shape, ensure_ascii=False)}")
-    return prizes
+    """查詢單期獎金分配。嘗試兩種參數形式,通用解析。找不到時回傳 None(不視為錯誤)。"""
+    param_variants = [
+        {"period": period, "month": "", "pageNum": 1, "pageSize": 1},
+        {"period": period},
+    ]
+    for i, params in enumerate(param_variants):
+        try:
+            payload = api_get(cfg["endpoint"], params)
+        except requests.RequestException as e:
+            print(f"[{cfg['name']}] 第 {period} 期獎金查詢(形式{i+1})失敗:{e}", file=sys.stderr)
+            continue
+        prizes = extract_prizes(payload)
+        if prizes:
+            return prizes
+        if debug:
+            # 印出截斷後的原始回應,讓 Actions log 足以確認官方實際格式
+            raw = json.dumps(payload, ensure_ascii=False)
+            print(f"[{cfg['name']}] 第 {period} 期(形式{i+1})未解析到獎金欄位,回應摘要:{raw[:1200]}")
+    return None
 
 
 # ---------- 主流程 ----------
@@ -243,6 +259,8 @@ def update_game(key, cfg):
             continue
         if items and month == months[-1]:
             print(f"[{cfg['name']}] 官方欄位範例:{sorted(items[0].keys())}")
+            raw0 = json.dumps(items[0], ensure_ascii=False)
+            print(f"[{cfg['name']}] 最新項目原始內容:{raw0[:800]}")
         for item in items:
             draw = normalize(item, cfg)
             if draw:
