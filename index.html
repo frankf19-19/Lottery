@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="assets/chart.umd.js"></script>
 <style>
-/* ================= 彩研所 v3.0.0 ─ 明亮現代(銀行 App 風) =================
+/* ================= 彩研所 v3.1.0 ─ 明亮現代(銀行 App 風) =================
    白底・鮮明色彩・粗黑體・柔和彩色陰影
    大樂透=琥珀橘 #F59E0B|威力彩=珊瑚紅 #EF4444|今彩539=翡翠綠 #10B981|品牌藍 #2563EB */
 :root{
@@ -351,13 +351,13 @@ canvas{max-width:100%}
       任何號碼組合的中獎機率完全相同,「熱號」「冷號」「遺漏」對未來開獎不具預測力。
       策略選號器與預測核對僅供娛樂與選號輔助參考,請理性投注、量力而為。開獎結果與獎金以台灣彩券官方公告為準。
     </div>
-    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v3.0.0</span></div>
+    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v3.1.0</span></div>
   </div>
 </footer>
 
 <script>
 "use strict";
-const BUILD_VERSION = "v3.0.0";
+const BUILD_VERSION = "v3.1.0";
 
 /* ============ 錯誤攔截 ============ */
 function showErr(msg){
@@ -439,12 +439,13 @@ function jackpotStreak(){
 function jackpotInfo(){
   const d = draws()[0];
   const fp = firstPrizeRow(d);
-  if(fp && fp.amount!=null){
+  if(fp){
     if(fp.winners!=null && +fp.winners===0){
-      return { label:"頭獎累積獎金(上期未開出)", amount:fp.amount,
-               note:`統計至第 ${d.period} 期・已連摃 ${jackpotStreak()} 期,實際累積金額以台彩公告為準` };
+      const accum = (fp.pool||0) + (fp.carry||0) || fp.amount;
+      if(accum) return { label:"頭獎累積獎金(上期未開出)", amount:accum,
+               note:`統計至第 ${d.period} 期・已連摃 ${jackpotStreak()} 期;下期累積金額以台彩公告為準` };
     }
-    if(fp.winners!=null && +fp.winners>0){
+    if(fp.winners!=null && +fp.winners>0 && fp.amount){
       return { label:`上期頭獎開出 ${+fp.winners} 注`, amount:fp.amount, note:"單注頭獎獎金" };
     }
   }
@@ -488,18 +489,26 @@ function renderHero(){
   let moneyHTML = "";
   if(d.money && Object.keys(d.money).length){
     moneyHTML = `<div class="scroll-x" style="margin-top:8px"><table>` +
-      Object.entries(d.money).map(([k,v])=>`<tr><td>${esc(k)}</td><td class="num-td">${fmtNTD(v)}</td></tr>`).join("") +
+      Object.entries(d.money).map(([k,v])=>{
+        const label = {sellAmount:"本期銷售金額", totalAmount:"官方 totalAmount"}[k] || k;
+        return `<tr><td>${esc(label)}</td><td class="num-td">${fmtNTD(v)}</td></tr>`;
+      }).join("") +
       `</table></div><p class="hero-note">上表為官方 API 回傳之金額欄位(欄位名照原樣顯示)。</p>`;
   }
   let prizeHTML;
   if(Array.isArray(d.prizes) && d.prizes.length){
     prizeHTML = `<div class="prize-block"><h3>本期獎金分配</h3>
       <div class="scroll-x"><table>
-        <tr><th>獎項</th><th class="num-td">中獎注數</th><th class="num-td">單注獎金</th></tr>` +
-      d.prizes.map(p=>`<tr>
+        <tr><th>獎項</th><th class="num-td">中獎注數</th><th class="num-td">單注獎金</th><th class="num-td">本期分配額</th></tr>` +
+      d.prizes.map(p=>{
+        const strikeRow = p.winners!=null && +p.winners===0;
+        const pool = (p.pool||0) + (p.name==="頭獎" ? (p.carry||0) : 0);
+        return `<tr>
         <td>${esc(p.name||"—")}</td>
-        <td class="num-td">${p.winners==null?"—":(+p.winners===0?"槓龜":(+p.winners).toLocaleString("zh-TW")+" 注")}</td>
-        <td class="num-td">${fmtNTD(p.amount)}</td></tr>`).join("") +
+        <td class="num-td">${p.winners==null?"—":(strikeRow?"槓龜":(+p.winners).toLocaleString("zh-TW")+" 注")}</td>
+        <td class="num-td">${strikeRow?"—":fmtNTD(p.amount)}</td>
+        <td class="num-td">${pool?fmtNTD(pool):"—"}${p.name==="頭獎"&&p.carry?"(含累積)":""}</td></tr>`;
+      }).join("") +
       `</table></div>${moneyHTML}
       <p class="hero-note">獎金以台灣彩券官方公告為準。</p></div>`;
   }else{
