@@ -1,8 +1,8 @@
 {
  "game": "superlotto638",
  "name": "威力彩",
- "build": "v1.1.0",
- "updated": "2026-07-19 13:50:13 +08:00",
+ "build": "v1.2.0",
+ "updated": "2026-07-19 14:03:44 +08:00",
  "count": 118,
  "draws": [
   {
@@ -25,7 +25,11 @@
     23,
     7
    ],
-   "special": 7
+   "special": 7,
+   "money": {
+    "totalAmount": 145322920,
+    "sellAmount": 50694600
+   }
   },
   {
    "period": "115000056",
@@ -47,7 +51,11 @@
     11,
     6
    ],
-   "special": 6
+   "special": 6,
+   "money": {
+    "totalAmount": 127311891,
+    "sellAmount": 48546800
+   }
   },
   {
    "period": "115000055",
@@ -69,7 +77,11 @@
     35,
     6
    ],
-   "special": 6
+   "special": 6,
+   "money": {
+    "totalAmount": 123246535,
+    "sellAmount": 52528700
+   }
   },
   {
    "period": "115000054",
@@ -91,7 +103,11 @@
     24,
     1
    ],
-   "special": 1
+   "special": 1,
+   "money": {
+    "totalAmount": 105504851,
+    "sellAmount": 54589600
+   }
   },
   {
    "period": "115000053",
@@ -113,7 +129,11 @@
     35,
     3
    ],
-   "special": 3
+   "special": 3,
+   "money": {
+    "totalAmount": 86800672,
+    "sellAmount": 52974600
+   }
   },
   {
    "period": "115000052",
@@ -135,7 +155,11 @@
     15,
     5
    ],
-   "special": 5
+   "special": 5,
+   "money": {
+    "totalAmount": 70266343,
+    "sellAmount": 55017800
+   }
   },
   {
    "period": "115000051",
@@ -157,7 +181,11 @@
     10,
     1
    ],
-   "special": 1
+   "special": 1,
+   "money": {
+    "totalAmount": 51108554,
+    "sellAmount": 51812300
+   }
   },
   {
    "period": "115000050",
@@ -179,7 +207,11 @@
     11,
     7
    ],
-   "special": 7
+   "special": 7,
+   "money": {
+    "totalAmount": 37849790,
+    "sellAmount": 68817800
+   }
   },
   {
    "period": "115000049",
@@ -201,7 +233,11 @@
     18,
     4
    ],
-   "special": 4
+   "special": 4,
+   "money": {
+    "totalAmount": 1110364725,
+    "sellAmount": 276456100
+   }
   },
   {
    "period": "115000048",
@@ -223,7 +259,11 @@
     19,
     6
    ],
-   "special": 6
+   "special": 6,
+   "money": {
+    "totalAmount": 1045176264,
+    "sellAmount": 234029600
+   }
   },
   {
    "period": "115000047",
@@ -245,7 +285,11 @@
     33,
     8
    ],
-   "special": 8
+   "special": 8,
+   "money": {
+    "totalAmount": 961052985,
+    "sellAmount": 214828900
+   }
   },
   {
    "period": "115000046",
@@ -267,7 +311,11 @@
     7,
     5
    ],
-   "special": 5
+   "special": 5,
+   "money": {
+    "totalAmount": 894143591,
+    "sellAmount": 205128700
+   }
   },
   {
    "period": "115000045",
@@ -289,7 +337,11 @@
     35,
     2
    ],
-   "special": 2
+   "special": 2,
+   "money": {
+    "totalAmount": 818517007,
+    "sellAmount": 179846700
+   }
   },
   {
    "period": "115000044",
@@ -311,7 +363,11 @@
     8,
     4
    ],
-   "special": 4
+   "special": 4,
+   "money": {
+    "totalAmount": 760047323,
+    "sellAmount": 189245500
+   }
   },
   {
    "period": "115000043",
