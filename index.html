@@ -2,181 +2,233 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>彩研所 TWLottery Lab|威力彩・大樂透・今彩539 開獎數據分析</title>
-<meta name="description" content="台灣彩券開獎數據自動更新與統計分析:威力彩、大樂透、今彩539 的頻率、遺漏、走勢、獎金分配與可調式策略選號器、預測核對。">
+<meta name="description" content="台灣彩券開獎數據自動更新與統計分析:威力彩、大樂透、今彩539 的頻率、遺漏、走勢、獎金與可調式策略選號器、預測核對。">
+<meta name="theme-color" content="#0C1526">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
 <script src="assets/chart.umd.js"></script>
 <style>
-/* ============ 彩研所 v1.2.0 ============
-   色彩:攝影棚靛藍底 + 紙白卡 + 三遊戲主色
-   大樂透=金 #F0BE4A|威力彩=硃紅 #DF4B3B|今彩539=青玉 #2E9E8A */
+/* ================= 彩研所 v2.0.0 ─ 視覺系統 =================
+   底:暖紙白  看板:深墨藍夜色  卡:純白髮絲框
+   大樂透=琥珀金 #C99732|威力彩=緋紅 #C4402F|今彩539=翡翠 #178A6B */
 :root{
-  --ink:#16233F; --ink-deep:#0E1730; --ink-line:#2B3A5E;
-  --paper:#F7F4EC; --paper-dim:#EDE8DB; --text:#20242C; --text-dim:#6A6F7B;
-  --gold:#F0BE4A; --red:#DF4B3B; --jade:#2E9E8A;
-  --accent:var(--gold);
-  --radius:14px;
+  --bg:#F4F2EC; --ink:#171A21; --ink-soft:#4C5261; --muted:#8A8F9C;
+  --card:#FFFFFF; --line:#E7E2D6; --line-soft:#F0EDE4;
+  --panel-a:#0C1526; --panel-b:#1A2B49; --panel-line:#2C3D5F; --panel-text:#EAF0FB; --panel-dim:#9FB0D4;
+  --gold:#C99732; --gold-deep:#8F6A1B; --red:#C4402F; --red-deep:#8C2A1E; --jade:#178A6B; --jade-deep:#0E5F49;
+  --accent:var(--gold); --accent-deep:var(--gold-deep);
+  --r-lg:20px; --r-md:14px;
+  --shadow:0 1px 2px rgba(23,26,33,.05), 0 12px 32px -12px rgba(23,26,33,.14);
   --font-body:"Noto Sans TC",system-ui,sans-serif;
   --font-disp:"Noto Serif TC",serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto} *{animation:none!important;transition:none!important}}
-body{background:var(--ink);color:var(--paper);font-family:var(--font-body);line-height:1.65;
-  background-image:radial-gradient(ellipse 80% 50% at 50% -10%, #24365E 0%, transparent 60%)}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.7;
+  background-image:radial-gradient(circle at 15% 0%, rgba(201,151,50,.06), transparent 40%)}
 a{color:inherit}
-.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 clamp(14px,3.5vw,24px)}
 
-/* ---- Header ---- */
-header{padding:34px 0 10px}
-.brand h1{font-family:var(--font-disp);font-weight:900;font-size:clamp(1.7rem,4vw,2.4rem);letter-spacing:.06em}
-.brand h1 .en{font-family:var(--font-body);font-weight:500;font-size:.45em;letter-spacing:.22em;color:#9FB0D4;margin-left:10px}
-.meta-line{color:#9FB0D4;font-size:.85rem;margin-top:6px}
-.meta-line b{color:var(--paper)}
+/* ---- 錯誤橫幅 ---- */
+.err-bar{position:sticky;top:0;z-index:99;background:#7A1F14;color:#fff;font-size:.82rem;
+  padding:10px 16px;display:none;border-bottom:2px solid #C4402F}
+.err-bar b{margin-right:8px}
 
-/* ---- 遊戲切換籤 ---- */
-.tabs{display:flex;gap:10px;margin:22px 0 0;flex-wrap:wrap}
-.tab{appearance:none;border:1px solid var(--ink-line);background:var(--ink-deep);color:#B9C6E4;
-  font-family:var(--font-body);font-weight:700;font-size:1rem;padding:12px 22px;cursor:pointer;
-  border-radius:10px 10px 0 0;transition:background .15s,color .15s}
-.tab:hover{color:var(--paper)}
-.tab:focus-visible{outline:2px solid var(--paper);outline-offset:2px}
-.tab .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:1px}
+/* ---- 頂列品牌 ---- */
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:22px 0 14px;flex-wrap:wrap}
+.brand{font-family:var(--font-disp);font-weight:900;font-size:clamp(1.35rem,4vw,1.7rem);letter-spacing:.08em}
+.brand .en{font-family:var(--font-body);font-weight:500;font-size:.5em;letter-spacing:.26em;color:var(--muted);margin-left:10px}
+.updated{font-size:.78rem;color:var(--muted)}
+.updated b{color:var(--ink-soft);font-weight:500}
+
+/* ---- 膠囊式遊戲切換(手機吸附置頂) ---- */
+.tabs-holder{position:sticky;top:10px;z-index:50;display:flex;justify-content:flex-start;margin-bottom:14px}
+.tabs{display:inline-flex;gap:2px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
+  border:1px solid var(--line);border-radius:999px;padding:4px;box-shadow:var(--shadow)}
+.tab{appearance:none;border:none;background:transparent;color:var(--ink-soft);cursor:pointer;
+  font-family:var(--font-body);font-weight:700;font-size:clamp(.85rem,2.8vw,.95rem);
+  padding:10px clamp(12px,3.4vw,22px);border-radius:999px;display:flex;align-items:center;gap:7px;
+  transition:background .18s,color .18s;min-height:42px}
+.tab .dot{width:8px;height:8px;border-radius:50%;flex:none}
 .tab[data-g="lotto649"] .dot{background:var(--gold)}
 .tab[data-g="superlotto638"] .dot{background:var(--red)}
 .tab[data-g="dailycash539"] .dot{background:var(--jade)}
-.tab.active{background:var(--paper);color:var(--text);border-color:var(--paper)}
+.tab.active{background:var(--ink);color:#fff}
+.tab:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 
-/* ---- Hero:最新開獎 ---- */
-.hero{background:var(--paper);color:var(--text);border-radius:0 var(--radius) var(--radius) var(--radius);
-  padding:26px 26px 22px;box-shadow:0 14px 40px rgba(0,0,0,.35)}
-.hero-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
-.hero-top .t{font-family:var(--font-disp);font-weight:900;font-size:1.3rem}
-.hero-top .p{color:var(--text-dim);font-size:.9rem}
-.balls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:18px 0 6px}
-.ball{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-weight:900;font-size:1.35rem;color:#3B2A05;
-  background:radial-gradient(circle at 32% 28%, #fff 0%, var(--ball,#F0BE4A) 42%, var(--ball-deep,#C79226) 100%);
-  box-shadow:inset -3px -6px 10px rgba(0,0,0,.22), 0 6px 12px rgba(0,0,0,.18)}
-.ball.sp{color:#fff;--ball:#3A4A73;--ball-deep:#1C2846}
-.ball-plus{font-size:1.5rem;color:var(--text-dim);font-weight:700}
-.ball-label{font-size:.72rem;color:var(--text-dim);text-align:center;margin-top:4px}
-.ball-col{display:flex;flex-direction:column;align-items:center}
-.hero-note{font-size:.82rem;color:var(--text-dim)}
-.prize-block{margin-top:16px;border-top:1px dashed #D8D2C2;padding-top:14px}
-.prize-block h3{font-family:var(--font-disp);font-weight:900;font-size:.98rem;margin-bottom:8px}
-.tag-strike{display:inline-block;background:var(--red);color:#fff;font-size:.75rem;font-weight:700;
-  border-radius:6px;padding:2px 8px;margin-left:8px;vertical-align:2px}
+/* ---- 開獎看板(主視覺) ---- */
+.hero{position:relative;overflow:hidden;color:var(--panel-text);
+  background:linear-gradient(140deg,var(--panel-a) 20%,var(--panel-b) 100%);
+  border-radius:var(--r-lg);box-shadow:0 24px 48px -18px rgba(12,21,38,.5)}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 46% at 34% 40%, rgba(240,214,150,.14), transparent 70%)}
+.hero-in{position:relative;padding:clamp(20px,4.5vw,34px)}
+.hero-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.3em;color:var(--panel-dim);text-transform:uppercase}
+.hero-title{font-family:var(--font-disp);font-weight:900;font-size:clamp(1.35rem,4.6vw,1.9rem);letter-spacing:.05em;margin-top:2px}
+.hero-title .tag-strike{display:inline-block;background:var(--red);color:#fff;font-family:var(--font-body);
+  font-size:.68rem;font-weight:700;letter-spacing:.1em;border-radius:6px;padding:3px 9px;margin-left:10px;vertical-align:4px}
+.hero-meta{font-size:clamp(.78rem,2.6vw,.88rem);color:var(--panel-dim)}
+.balls{display:flex;gap:clamp(7px,2vw,13px);flex-wrap:wrap;align-items:center;margin:clamp(16px,3.6vw,24px) 0 4px}
+.ball{--sz:clamp(46px,11vw,64px);width:var(--sz);height:var(--sz);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-weight:900;
+  font-size:calc(var(--sz)*.4);color:#3A2A05;font-variant-numeric:tabular-nums;
+  background:radial-gradient(circle at 30% 24%, #FFF7E0 0%, var(--ball,#E9BE5C) 46%, var(--ball-deep,#9C7420) 100%);
+  box-shadow:inset -4px -9px 14px rgba(0,0,0,.30), inset 3px 5px 8px rgba(255,255,255,.45), 0 10px 22px rgba(0,0,0,.42)}
+.ball.sp{color:#fff;--ball:#7C90BC;--ball-deep:#3A4C74}
+.ball-plus{font-size:1.4rem;color:var(--panel-dim);font-weight:700}
+.ball-col{display:flex;flex-direction:column;align-items:center;gap:5px}
+.ball-label{font-size:.7rem;color:var(--panel-dim);letter-spacing:.12em}
+.hero-note{font-size:.75rem;color:var(--panel-dim);margin-top:10px}
 
-/* ---- 版面 ---- */
-main{padding:26px 0 40px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
-@media(max-width:860px){.grid{grid-template-columns:1fr}}
-.card{background:var(--paper);color:var(--text);border-radius:var(--radius);padding:20px 22px}
-.card h2{font-family:var(--font-disp);font-weight:900;font-size:1.08rem;margin-bottom:4px}
-.card .sub{font-size:.8rem;color:var(--text-dim);margin-bottom:12px}
+/* 頭獎金額緞帶 */
+.jackpot{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:clamp(14px,3vw,20px);
+  padding:clamp(12px,3vw,18px) clamp(14px,3.4vw,22px);border-radius:var(--r-md);
+  background:linear-gradient(120deg, rgba(240,214,150,.13), rgba(240,214,150,.04));
+  border:1px solid rgba(240,214,150,.32)}
+.jackpot .jk-label{font-size:.78rem;color:#EBD9A8;letter-spacing:.14em}
+.jackpot .jk-amt{font-family:var(--font-disp);font-weight:900;color:#F5DFA4;
+  font-size:clamp(1.5rem,6vw,2.3rem);line-height:1.1;font-variant-numeric:tabular-nums}
+.jackpot .jk-note{font-size:.75rem;color:var(--panel-dim);flex-basis:100%}
+.jackpot.pending .jk-amt{font-size:clamp(.9rem,3.4vw,1rem);font-family:var(--font-body);font-weight:500;color:var(--panel-dim)}
+
+/* 獎金分配(看板內淺色內嵌卡) */
+.prize-inset{margin-top:14px;background:rgba(255,255,255,.045);border:1px solid var(--panel-line);
+  border-radius:var(--r-md);padding:14px clamp(12px,3vw,18px)}
+.prize-inset h3{font-family:var(--font-disp);font-weight:700;font-size:.95rem;letter-spacing:.08em;margin-bottom:8px;color:#EAF0FB}
+.prize-inset table{color:var(--panel-text)}
+.prize-inset th{color:var(--panel-dim);border-bottom:1px solid var(--panel-line)}
+.prize-inset td{border-bottom:1px solid rgba(44,61,95,.55)}
+.prize-inset .hero-note{margin-top:8px}
+
+/* ---- 統計卡 ---- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:12px;margin-top:16px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);
+  padding:14px 16px;box-shadow:var(--shadow)}
+.stat .k{font-size:.74rem;color:var(--muted);letter-spacing:.05em}
+.stat .v{font-family:var(--font-disp);font-weight:900;font-size:clamp(1.45rem,4.6vw,1.75rem);margin-top:2px;line-height:1.2}
+.stat .v small{font-size:.55em;color:var(--muted);font-family:var(--font-body);font-weight:500;margin-left:2px}
+.stat.hot .v{color:var(--accent-deep)}
+
+/* ---- 統計視窗 ---- */
+.win-picker{display:flex;gap:8px;align-items:center;margin:18px 0 4px;flex-wrap:wrap}
+.win-picker span{font-size:.82rem;color:var(--muted)}
+.win-btn{appearance:none;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);
+  padding:8px 15px;border-radius:999px;cursor:pointer;font-size:.83rem;font-weight:500;min-height:38px}
+.win-btn.active{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:700}
+.win-btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+/* ---- 卡片版面 ---- */
+main{padding:16px 0 44px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+@media(max-width:880px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:clamp(16px,3.6vw,24px);box-shadow:var(--shadow)}
 .card.full{grid-column:1 / -1}
+.card h2{font-family:var(--font-disp);font-weight:900;font-size:1.05rem;letter-spacing:.05em;
+  display:flex;align-items:center;gap:9px;margin-bottom:3px}
+.card h2::before{content:"";width:4px;height:16px;border-radius:2px;background:var(--accent);flex:none}
+.card .sub{font-size:.78rem;color:var(--muted);margin-bottom:12px}
 
-/* 快速統計卡 */
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px}
-.stat{background:var(--ink-deep);border:1px solid var(--ink-line);border-radius:12px;padding:14px 16px}
-.stat .k{font-size:.78rem;color:#9FB0D4}
-.stat .v{font-family:var(--font-disp);font-weight:900;font-size:1.5rem;color:var(--paper);margin-top:2px}
-.stat .v small{font-size:.65em;color:#9FB0D4;font-family:var(--font-body);font-weight:500}
-.stat.hot .v{color:var(--gold)}
-
-/* 視窗選擇 */
-.win-picker{display:flex;gap:8px;align-items:center;margin-top:22px;flex-wrap:wrap}
-.win-picker span{font-size:.85rem;color:#9FB0D4}
-.win-btn{appearance:none;border:1px solid var(--ink-line);background:transparent;color:#B9C6E4;
-  padding:6px 14px;border-radius:999px;cursor:pointer;font-size:.85rem;font-weight:500}
-.win-btn:focus-visible{outline:2px solid var(--paper);outline-offset:2px}
-.win-btn.active{background:var(--paper);color:var(--text);border-color:var(--paper);font-weight:700}
-
-/* 表格 */
-table{width:100%;border-collapse:collapse;font-size:.88rem}
-th{text-align:left;color:var(--text-dim);font-weight:500;font-size:.78rem;padding:6px 8px;border-bottom:1px solid var(--paper-dim)}
-td{padding:7px 8px;border-bottom:1px solid var(--paper-dim)}
+/* ---- 表格 ---- */
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th{text-align:left;color:var(--muted);font-weight:500;font-size:.74rem;letter-spacing:.05em;
+  padding:6px 8px;border-bottom:1px solid var(--line)}
+td{padding:8px;border-bottom:1px solid var(--line-soft)}
 tr:last-child td{border-bottom:none}
 .num-td{text-align:right;font-variant-numeric:tabular-nums}
 .mini-ball{display:inline-flex;width:30px;height:30px;border-radius:50%;align-items:center;justify-content:center;
-  font-weight:700;font-size:.85rem;color:#3B2A05;margin-right:4px;
-  background:radial-gradient(circle at 32% 28%, #fff 0%, var(--ball,#F0BE4A) 45%, var(--ball-deep,#C79226) 100%)}
-.mini-ball.sp{color:#fff;--ball:#3A4A73;--ball-deep:#1C2846}
+  font-weight:700;font-size:.82rem;color:#3A2A05;margin-right:4px;font-variant-numeric:tabular-nums;
+  background:radial-gradient(circle at 30% 26%, #FFF7E0 0%, var(--ball,#E9BE5C) 48%, var(--ball-deep,#9C7420) 100%);
+  box-shadow:inset -2px -4px 6px rgba(0,0,0,.22), 0 2px 5px rgba(0,0,0,.18)}
+.mini-ball.sp{color:#fff;--ball:#7C90BC;--ball-deep:#3A4C74}
 .mini-ball.hit{outline:3px solid var(--red);outline-offset:1px}
-.bar-track{background:var(--paper-dim);border-radius:99px;height:8px;overflow:hidden}
+.bar-track{background:var(--line-soft);border-radius:99px;height:7px;overflow:hidden}
 .bar-fill{height:100%;border-radius:99px;background:var(--accent)}
 
-/* 策略選號器 */
-.sliders{display:grid;grid-template-columns:1fr 1fr;gap:14px 26px;margin:14px 0}
+/* ---- 策略選號器 ---- */
+.sliders{display:grid;grid-template-columns:1fr 1fr;gap:16px 30px;margin:16px 0 4px}
 @media(max-width:720px){.sliders{grid-template-columns:1fr}}
-.slider label{display:flex;justify-content:space-between;font-size:.85rem;font-weight:500;margin-bottom:4px}
-.slider label output{color:var(--red);font-weight:700}
-input[type=range]{width:100%;accent-color:var(--red)}
-.strategy-row{display:flex;gap:14px;flex-wrap:wrap;align-items:end;margin-top:10px}
-.field{display:flex;flex-direction:column;gap:4px;font-size:.82rem}
-.field input[type=text],.field select{
-  font-family:var(--font-body);font-size:.9rem;padding:8px 10px;border-radius:8px;border:1px solid #C9C2B0;background:#fff;color:var(--text)}
-.btn{appearance:none;border:none;background:var(--red);color:#fff;font-family:var(--font-body);
-  font-weight:700;font-size:.95rem;padding:11px 26px;border-radius:10px;cursor:pointer}
-.btn:hover{filter:brightness(1.08)}
-.btn:focus-visible{outline:2px solid var(--text);outline-offset:2px}
-.btn.ghost{background:transparent;color:var(--text);border:1px solid #C9C2B0;font-weight:500}
-.btn.small{font-size:.82rem;padding:7px 14px;border-radius:8px}
+.slider label{display:flex;justify-content:space-between;font-size:.84rem;font-weight:500;margin-bottom:6px}
+.slider label output{color:var(--accent-deep);font-weight:700;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent-deep);height:28px}
+.strategy-row{display:flex;gap:12px;flex-wrap:wrap;align-items:end;margin-top:14px}
+.field{display:flex;flex-direction:column;gap:5px;font-size:.78rem;color:var(--ink-soft)}
+.field input[type=text],.field select{font-family:var(--font-body);font-size:.9rem;padding:10px 12px;
+  border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink);min-height:42px}
+.btn{appearance:none;border:none;background:var(--ink);color:#fff;font-family:var(--font-body);
+  font-weight:700;font-size:.92rem;padding:12px 26px;border-radius:11px;cursor:pointer;min-height:44px;
+  box-shadow:0 6px 14px -6px rgba(23,26,33,.4);transition:transform .12s,filter .15s}
+.btn:hover{filter:brightness(1.15)}
+.btn:active{transform:translateY(1px)}
+.btn.accent{background:var(--accent-deep)}
+.btn.ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--line);font-weight:500;box-shadow:none}
+.btn.small{font-size:.8rem;padding:8px 15px;border-radius:9px;min-height:38px}
+.btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .gen-out{margin-top:16px;display:flex;flex-direction:column;gap:10px}
-.gen-set{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#fff;border:1px dashed #D8D2C2;border-radius:10px;padding:10px 12px}
-.gen-set .idx{font-family:var(--font-disp);font-weight:900;color:var(--text-dim);width:2.2em}
-.empty-hint{background:var(--ink-deep);border:1px dashed var(--ink-line);border-radius:var(--radius);
-  padding:26px;text-align:center;color:#9FB0D4;margin-top:18px}
-.empty-hint b{color:var(--paper)}
+.gen-set{display:flex;align-items:center;gap:9px;flex-wrap:wrap;background:#FCFBF7;
+  border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+.gen-set .idx{font-family:var(--font-disp);font-weight:900;color:var(--muted);width:2em;font-size:.9rem}
+.empty-hint{background:var(--card);border:1px dashed var(--line);border-radius:var(--r-lg);
+  padding:26px;text-align:center;color:var(--muted);margin-top:16px}
+.empty-hint b{color:var(--ink)}
 
-/* 預測核對 */
-.pred-rec{background:#fff;border:1px solid #E4DECF;border-radius:12px;padding:14px 16px;margin-bottom:14px}
+/* ---- 預測核對 ---- */
+.pred-rec{background:#FCFBF7;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:14px}
 .pred-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
-.pred-head .info{font-size:.82rem;color:var(--text-dim)}
-.pred-head .info b{color:var(--text)}
+.pred-head .info{font-size:.8rem;color:var(--muted)}
+.pred-head .info b{color:var(--ink-soft)}
 .pred-actions{display:flex;gap:8px}
-.pred-wait{font-size:.85rem;color:var(--text-dim);background:var(--paper-dim);border-radius:8px;padding:8px 12px}
-.pred-sum{font-size:.83rem;color:var(--text-dim);margin-top:8px}
-.pred-sum b{color:var(--text)}
+.pred-wait{font-size:.84rem;color:var(--ink-soft);background:var(--line-soft);border-radius:10px;padding:10px 13px}
+.pred-sum{font-size:.82rem;color:var(--muted);margin-top:8px}
+.pred-sum b{color:var(--ink)}
 .tier-win{color:var(--red);font-weight:700}
-.tier-none{color:var(--text-dim)}
+.tier-none{color:var(--muted)}
 
 .recent-list td{white-space:nowrap}
-.scroll-x{overflow-x:auto}
+.scroll-x{overflow-x:auto;-webkit-overflow-scrolling:touch}
 
-.err-bar{position:sticky;top:0;z-index:99;background:#7A1F14;color:#fff;font-size:.82rem;
-  padding:10px 16px;display:none;border-bottom:2px solid #DF4B3B}
-.err-bar b{margin-right:8px}
-footer{border-top:1px solid var(--ink-line);padding:26px 0 40px;color:#9FB0D4;font-size:.82rem}
-.disclaimer{background:var(--ink-deep);border:1px solid var(--ink-line);border-left:4px solid var(--gold);
-  border-radius:10px;padding:14px 18px;margin-bottom:16px;line-height:1.8}
-.disclaimer b{color:var(--paper)}
-.build-tag{font-family:monospace;color:#7285AC}
+/* ---- Footer ---- */
+footer{border-top:1px solid var(--line);padding:26px 0 max(34px, env(safe-area-inset-bottom));color:var(--muted);font-size:.8rem}
+.disclaimer{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);
+  border-radius:12px;padding:14px 18px;margin-bottom:16px;line-height:1.85;color:var(--ink-soft)}
+.disclaimer b{color:var(--ink)}
+.build-tag{font-family:monospace;color:var(--muted)}
 canvas{max-width:100%}
-.chart-box{position:relative;height:300px}
-.chart-box.tall{height:340px}
+.chart-box{position:relative;height:clamp(230px,50vw,300px)}
+.chart-box.tall{position:relative;height:clamp(250px,56vw,340px)}
+
+/* 進場動畫(尊重減少動態偏好) */
+@media (prefers-reduced-motion: no-preference){
+  .hero,.stat,.card{animation:rise .5s ease both}
+  .stat:nth-child(2){animation-delay:.04s}.stat:nth-child(3){animation-delay:.08s}
+  .stat:nth-child(4){animation-delay:.12s}.stat:nth-child(5){animation-delay:.16s}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 <div class="err-bar" id="errBar"></div>
 
 <header class="wrap">
-  <div class="brand">
-    <h1>彩研所<span class="en">TWLOTTERY LAB</span></h1>
+  <div class="topbar">
+    <div class="brand">彩研所<span class="en">TWLOTTERY LAB</span></div>
+    <div class="updated">資料每日自動更新・更新於 <b id="updatedAt">載入中…</b></div>
   </div>
-  <div class="meta-line">開獎資料每日自動更新|資料更新於:<b id="updatedAt">載入中…</b></div>
-  <div class="tabs" role="tablist" aria-label="遊戲切換">
-    <button class="tab active" role="tab" data-g="lotto649"><span class="dot"></span>大樂透</button>
-    <button class="tab" role="tab" data-g="superlotto638"><span class="dot"></span>威力彩</button>
-    <button class="tab" role="tab" data-g="dailycash539"><span class="dot"></span>今彩539</button>
+  <div class="tabs-holder">
+    <div class="tabs" role="tablist" aria-label="遊戲切換">
+      <button class="tab active" role="tab" data-g="lotto649"><span class="dot"></span>大樂透</button>
+      <button class="tab" role="tab" data-g="superlotto638"><span class="dot"></span>威力彩</button>
+      <button class="tab" role="tab" data-g="dailycash539"><span class="dot"></span>今彩539</button>
+    </div>
   </div>
-  <section class="hero" id="hero" aria-live="polite"></section>
+  <section class="hero"><div class="hero-in" id="hero" aria-live="polite"></div></section>
   <div class="stats" id="quickStats"></div>
   <div class="win-picker" id="winPicker">
-    <span>統計視窗:</span>
+    <span>統計視窗</span>
     <button class="win-btn" data-w="30">近 30 期</button>
     <button class="win-btn active" data-w="50">近 50 期</button>
     <button class="win-btn" data-w="100">近 100 期</button>
@@ -205,7 +257,7 @@ canvas{max-width:100%}
 
     <div class="card">
       <h2>遺漏排行(冷號)</h2>
-      <div class="sub">距離上次開出的期數(愈久未開愈上面)</div>
+      <div class="sub">距離上次開出的期數,愈久未開排愈前</div>
       <table id="missTable"></table>
     </div>
 
@@ -229,7 +281,7 @@ canvas{max-width:100%}
 
     <div class="card full" id="strategyCard">
       <h2>策略選號器</h2>
-      <div class="sub" id="strategySub">拉動權重即可隨時調整選號方向;設定會自動儲存在你的瀏覽器。權重代表「策略偏好」,不代表中獎機率——每期開獎皆為獨立事件。</div>
+      <div class="sub" id="strategySub"></div>
       <div class="sliders">
         <div class="slider">
           <label>熱號權重(偏好近期常開)<output id="oHot">50</output></label>
@@ -251,7 +303,7 @@ canvas{max-width:100%}
       <div class="strategy-row">
         <div class="field">
           <label for="excludeNums">排除號碼(逗號分隔,可留空)</label>
-          <input type="text" id="excludeNums" placeholder="例:4, 14, 44" size="18">
+          <input type="text" id="excludeNums" placeholder="例:4, 14, 44" size="16">
         </div>
         <div class="field">
           <label for="setCount">產生組數</label>
@@ -259,7 +311,7 @@ canvas{max-width:100%}
             <option>1</option><option>2</option><option>3</option><option selected>5</option><option>8</option><option>10</option>
           </select>
         </div>
-        <button class="btn" id="genBtn">產生號碼</button>
+        <button class="btn accent" id="genBtn">產生號碼</button>
         <button class="btn ghost" id="resetBtn">重設策略</button>
       </div>
       <div class="gen-out" id="genOut"></div>
@@ -286,13 +338,13 @@ canvas{max-width:100%}
       任何號碼組合的中獎機率完全相同,「熱號」「冷號」「遺漏」對未來開獎不具預測力。
       策略選號器與預測核對僅供娛樂與選號輔助參考,請理性投注、量力而為。開獎結果與獎金以台灣彩券官方公告為準。
     </div>
-    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v1.2.0</span></div>
+    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v2.0.0</span></div>
   </div>
 </footer>
 
 <script>
 "use strict";
-const BUILD_VERSION = "v1.2.0";
+const BUILD_VERSION = "v2.0.0";
 
 /* ============ 錯誤攔截:任何 JS 錯誤都顯示在頁面頂端,不再整頁空白 ============ */
 function showErr(msg){
@@ -305,15 +357,11 @@ function safe(label, fn){
   try{ fn(); }catch(err){ console.error(label, err); showErr(label + ":" + (err && err.message || err)); }
 }
 
-/* ============ 遊戲設定 ============
-   special:
-     lotto649      = "drawn7th"(特別號為開出的第 7 球;玩家只選 6 碼,以 6 碼比對特別號)
-     superlotto638 = "area2"(第二區 1–8 為玩家自選 1 碼)
-     dailycash539  = "none" */
+/* ============ 遊戲設定 ============ */
 const GAMES = {
-  lotto649:      { name:"大樂透",  file:"data/lotto649.json",      max:49, picks:6, special:"drawn7th", spLabel:"特別號", color:"#F0BE4A", deep:"#C79226", schedule:"每週二、五開獎", expect:36/49 },
-  superlotto638: { name:"威力彩",  file:"data/superlotto638.json", max:38, picks:6, special:"area2",    spLabel:"第二區", spMax:8, color:"#DF4B3B", deep:"#A82F22", schedule:"每週一、四開獎", expect:36/38 },
-  dailycash539:  { name:"今彩539", file:"data/dailycash539.json",  max:39, picks:5, special:"none",     color:"#2E9E8A", deep:"#1E7263", schedule:"每日開獎(週日除外)", expect:25/39 }
+  lotto649:      { name:"大樂透",  file:"data/lotto649.json",      max:49, picks:6, special:"drawn7th", spLabel:"特別號", ball:"#E9BE5C", ballDeep:"#9C7420", accent:"#C99732", accentDeep:"#8F6A1B", schedule:"每週二、五開獎", expect:36/49 },
+  superlotto638: { name:"威力彩",  file:"data/superlotto638.json", max:38, picks:6, special:"area2",    spLabel:"第二區", spMax:8, ball:"#E86A55", ballDeep:"#8C2A1E", accent:"#C4402F", accentDeep:"#8C2A1E", schedule:"每週一、四開獎", expect:36/38 },
+  dailycash539:  { name:"今彩539", file:"data/dailycash539.json",  max:39, picks:5, special:"none",     ball:"#4FBF9F", ballDeep:"#0E5F49", accent:"#178A6B", accentDeep:"#0E5F49", schedule:"每日開獎(週日除外)", expect:25/39 }
 };
 
 const state = { game:"lotto649", win:50, data:{}, charts:{} };
@@ -329,6 +377,11 @@ function windowed(){ const d = draws(); return state.win>0 ? d.slice(0,state.win
 function fmtNTD(v){
   if(v==null || isNaN(+v)) return "—";
   return "NT$" + (+v).toLocaleString("zh-TW");
+}
+function applyAccent(){
+  const g = cfg();
+  document.documentElement.style.setProperty("--accent", g.accent);
+  document.documentElement.style.setProperty("--accent-deep", g.accentDeep);
 }
 
 /* ============ 資料載入 ============ */
@@ -362,7 +415,6 @@ function firstPrizeRow(d){
   return d.prizes.find(p => (p.name||"").includes("頭")) || d.prizes[0];
 }
 function jackpotStreak(){
-  // 從最新一期往回數:頭獎中獎注數為 0 的連續期數;遇到無獎金資料即停止
   let streak = 0;
   for(const d of draws()){
     const fp = firstPrizeRow(d);
@@ -371,38 +423,65 @@ function jackpotStreak(){
   }
   return streak;
 }
+function jackpotInfo(){
+  // 依最新一期獎金資料組出頭獎金額資訊;539 頭獎為固定獎金
+  const d = draws()[0];
+  const fp = firstPrizeRow(d);
+  if(fp && fp.amount!=null){
+    if(fp.winners!=null && +fp.winners===0){
+      return { label:"頭獎累積獎金(上期未開出)", amount:fp.amount,
+               note:`統計至第 ${d.period} 期・已連摃 ${jackpotStreak()} 期,實際累積金額以台彩公告為準` };
+    }
+    if(fp.winners!=null && +fp.winners>0){
+      return { label:`上期頭獎開出 ${+fp.winners} 注`, amount:fp.amount, note:"單注頭獎獎金" };
+    }
+  }
+  if(state.game==="dailycash539"){
+    return { label:"頭獎固定獎金", amount:8000000, note:"今彩539 頭獎為固定 NT$800 萬(多注中獎依規定分配),以台彩公告為準" };
+  }
+  return null;
+}
 
 /* ============ 畫面 ============ */
 function ballHTML(n, sp=false){
   const g = cfg();
-  const style = sp ? "" : `style="--ball:${g.color};--ball-deep:${g.deep}"`;
+  const style = sp ? "" : `style="--ball:${g.ball};--ball-deep:${g.ballDeep}"`;
   return `<div class="ball ${sp?"sp":""}" ${style}>${pad2(n)}</div>`;
 }
 function miniBall(n, opts={}){
   const g = cfg();
   const cls = ["mini-ball", opts.sp?"sp":"", opts.hit?"hit":""].filter(Boolean).join(" ");
-  const style = opts.sp ? "" : `style="--ball:${g.color};--ball-deep:${g.deep}"`;
+  const style = opts.sp ? "" : `style="--ball:${g.ball};--ball-deep:${g.ballDeep}"`;
   return `<span class="${cls}" ${style}>${pad2(n)}</span>`;
 }
 
 function renderHero(){
   const d = draws()[0], g = cfg(), el = $("#hero");
-  if(!d){ el.innerHTML = `<div class="hero-top"><div class="t">${g.name}</div><div class="p">${g.schedule}</div></div><p class="hero-note">尚無資料,等待首次自動更新。</p>`; return; }
+  if(!d){
+    el.innerHTML = `<div class="hero-eyebrow">LATEST DRAW</div>
+      <div class="hero-title">${g.name}</div>
+      <p class="hero-note">尚無資料,等待首次自動更新。(${g.schedule})</p>`;
+    return;
+  }
+  const fp = firstPrizeRow(d);
+  const strike = fp && fp.winners!=null && +fp.winners===0 ? `<span class="tag-strike">頭獎槓龜</span>` : "";
   let balls = d.numbers.map(n=>`<div class="ball-col">${ballHTML(n)}</div>`).join("");
   if(g.special!=="none" && d.special!=null){
     balls += `<div class="ball-plus">+</div><div class="ball-col">${ballHTML(d.special,true)}<div class="ball-label">${g.spLabel}</div></div>`;
   }
-  const fp = firstPrizeRow(d);
-  const strike = fp && fp.winners!=null && +fp.winners===0 ? `<span class="tag-strike">頭獎槓龜</span>` : "";
+  const jk = jackpotInfo();
+  const jkHTML = jk
+    ? `<div class="jackpot"><div><div class="jk-label">${esc(jk.label)}</div><div class="jk-amt">${fmtNTD(jk.amount)}</div></div><div class="jk-note">${esc(jk.note)}</div></div>`
+    : `<div class="jackpot pending"><div><div class="jk-label">頭獎金額</div><div class="jk-amt">獎金資料接通後將自動顯示累積頭獎與各獎項分配</div></div></div>`;
   let moneyHTML = "";
   if(d.money && Object.keys(d.money).length){
     moneyHTML = `<div class="scroll-x" style="margin-top:8px"><table>` +
       Object.entries(d.money).map(([k,v])=>`<tr><td>${esc(k)}</td><td class="num-td">${fmtNTD(v)}</td></tr>`).join("") +
-      `</table></div><p class="hero-note" style="margin-top:4px">上表為官方 API 回傳之金額欄位(欄位名照原樣顯示)。</p>`;
+      `</table></div><p class="hero-note">上表為官方 API 回傳之金額欄位(欄位名照原樣顯示)。</p>`;
   }
   let prizeHTML;
   if(Array.isArray(d.prizes) && d.prizes.length){
-    prizeHTML = `<div class="prize-block"><h3>本期獎金分配</h3>
+    prizeHTML = `<div class="prize-inset"><h3>本期獎金分配</h3>
       <div class="scroll-x"><table>
         <tr><th>獎項</th><th class="num-td">中獎注數</th><th class="num-td">單注獎金</th></tr>` +
       d.prizes.map(p=>`<tr>
@@ -410,18 +489,22 @@ function renderHero(){
         <td class="num-td">${p.winners==null?"—":(+p.winners===0?"槓龜":(+p.winners).toLocaleString("zh-TW")+" 注")}</td>
         <td class="num-td">${fmtNTD(p.amount)}</td></tr>`).join("") +
       `</table></div>${moneyHTML}
-      <p class="hero-note" style="margin-top:6px">獎金以台灣彩券官方公告為準。</p></div>`;
+      <p class="hero-note">獎金以台灣彩券官方公告為準。</p></div>`;
   }else{
-    prizeHTML = `<div class="prize-block"><h3>本期獎金分配</h3>${moneyHTML}
-      <p class="hero-note">各獎項分配明細尚未取得——資料更新腳本會在每日更新時自動補抓,若持續未顯示,請把 Actions log 貼回以便依官方格式修正。</p></div>`;
+    prizeHTML = `<div class="prize-inset"><h3>本期獎金分配</h3>${moneyHTML}
+      <p class="hero-note">各獎項分配明細尚未取得——更新腳本每日會自動補抓並掃描官方端點,請把 Actions log 貼回即可依實際格式接通。</p></div>`;
   }
   el.innerHTML = `
     <div class="hero-top">
-      <div class="t">${g.name} 最新開獎${strike}</div>
-      <div class="p">第 ${esc(d.period)} 期・${esc(d.date)}・${g.schedule}</div>
+      <div>
+        <div class="hero-eyebrow">LATEST DRAW</div>
+        <div class="hero-title">${g.name} 最新開獎${strike}</div>
+      </div>
+      <div class="hero-meta">第 ${esc(d.period)} 期・${esc(d.date)}・${g.schedule}</div>
     </div>
     <div class="balls">${balls}</div>
     <p class="hero-note">正選號碼由小至大排列;開獎結果以台灣彩券官方公告為準。</p>
+    ${jkHTML}
     ${prizeHTML}`;
 }
 
@@ -437,13 +520,13 @@ function renderStats(){
   }
   const streak = jackpotStreak();
   const streakCard = firstPrizeRow(draws()[0])
-    ? `<div class="stat hot"><div class="k">頭獎連摃</div><div class="v">${streak}<small> 期</small></div></div>` : "";
+    ? `<div class="stat hot"><div class="k">頭獎連摃</div><div class="v">${streak}<small>期</small></div></div>` : "";
   el.innerHTML = `
-    <div class="stat"><div class="k">累計期數(全部)</div><div class="v">${draws().length}<small> 期</small></div></div>
+    <div class="stat"><div class="k">累計期數(全部)</div><div class="v">${draws().length}<small>期</small></div></div>
     ${streakCard}
-    <div class="stat"><div class="k">視窗內最熱號碼</div><div class="v">${pad2(hotN)}<small> ${f[hotN]} 次</small></div></div>
-    <div class="stat"><div class="k">視窗內最冷號碼</div><div class="v">${pad2(coldN)}<small> ${f[coldN]} 次</small></div></div>
-    <div class="stat"><div class="k">最大遺漏</div><div class="v">${pad2(missN)}<small> ${miss[missN]} 期未開</small></div></div>`;
+    <div class="stat"><div class="k">視窗內最熱號碼</div><div class="v">${pad2(hotN)}<small>${f[hotN]} 次</small></div></div>
+    <div class="stat"><div class="k">視窗內最冷號碼</div><div class="v">${pad2(coldN)}<small>${f[coldN]} 次</small></div></div>
+    <div class="stat"><div class="k">最大遺漏</div><div class="v">${pad2(missN)}<small>${miss[missN]} 期未開</small></div></div>`;
 }
 
 function destroyChart(id){ if(state.charts[id]){ state.charts[id].destroy(); delete state.charts[id]; } }
@@ -466,9 +549,10 @@ function renderFreqChart(){
   const maxV = Math.max(...vals,1);
   makeChart("freqChart",{
     type:"bar",
-    data:{labels, datasets:[{data:vals, backgroundColor:vals.map(v=>v===maxV?g.deep:g.color), borderRadius:3}]},
+    data:{labels, datasets:[{data:vals, backgroundColor:vals.map(v=>v===maxV?g.accentDeep:g.accent), borderRadius:4}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{x:{ticks:{font:{size:10}},grid:{display:false}},y:{beginAtZero:true,ticks:{precision:0}}}}
+      scales:{x:{ticks:{font:{size:10},color:"#8A8F9C"},grid:{display:false}},
+              y:{beginAtZero:true,ticks:{precision:0,color:"#8A8F9C"},grid:{color:"#F0EDE4"}}}}
   });
 }
 
@@ -478,9 +562,9 @@ function renderHotTable(){
   for(let n=1;n<=cfg().max;n++) rows.push([n,f[n]]);
   rows.sort((a,b)=>b[1]-a[1]);
   const top = rows.slice(0,8), maxV = top[0]?.[1]||1;
-  $("#hotTable").innerHTML = `<tr><th>號碼</th><th>次數</th><th style="width:45%">相對熱度</th></tr>` +
+  $("#hotTable").innerHTML = `<tr><th>號碼</th><th>次數</th><th style="width:44%">相對熱度</th></tr>` +
     top.map(([n,v])=>`<tr><td>${miniBall(n)}</td><td>${v} 次</td>
-      <td><div class="bar-track"><div class="bar-fill" style="width:${Math.round(v/maxV*100)}%;background:${cfg().color}"></div></div></td></tr>`).join("");
+      <td><div class="bar-track"><div class="bar-fill" style="width:${Math.round(v/maxV*100)}%"></div></div></td></tr>`).join("");
 }
 
 function renderMissTable(){
@@ -489,9 +573,9 @@ function renderMissTable(){
   for(let n=1;n<=cfg().max;n++) rows.push([n,miss[n]]);
   rows.sort((a,b)=>b[1]-a[1]);
   const top = rows.slice(0,8), maxV = top[0]?.[1]||1;
-  $("#missTable").innerHTML = `<tr><th>號碼</th><th>遺漏</th><th style="width:45%">相對長度</th></tr>` +
+  $("#missTable").innerHTML = `<tr><th>號碼</th><th>遺漏</th><th style="width:44%">相對長度</th></tr>` +
     top.map(([n,v])=>`<tr><td>${miniBall(n)}</td><td>${v} 期</td>
-      <td><div class="bar-track"><div class="bar-fill" style="width:${Math.round(v/maxV*100)}%;background:#3A4A73"></div></div></td></tr>`).join("");
+      <td><div class="bar-track"><div class="bar-fill" style="width:${Math.round(v/maxV*100)}%;background:#3A4C74"></div></div></td></tr>`).join("");
 }
 
 function renderOddChart(){
@@ -500,9 +584,10 @@ function renderOddChart(){
     type:"line",
     data:{labels:ds.map(d=>d.period.slice(-3)),
       datasets:[{label:"奇數個數",data:ds.map(d=>d.numbers.filter(n=>n%2===1).length),
-        borderColor:g.color,backgroundColor:g.color,tension:.3,pointRadius:4}]},
+        borderColor:g.accent,backgroundColor:g.accent,tension:.35,pointRadius:3.5}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{y:{min:0,max:g.picks,ticks:{stepSize:1}},x:{grid:{display:false},title:{display:true,text:"期別(末三碼)"}}}}
+      scales:{y:{min:0,max:g.picks,ticks:{stepSize:1,color:"#8A8F9C"},grid:{color:"#F0EDE4"}},
+              x:{grid:{display:false},ticks:{color:"#8A8F9C"},title:{display:true,text:"期別(末三碼)",color:"#8A8F9C",font:{size:11}}}}}
   });
 }
 
@@ -513,9 +598,10 @@ function renderTailChart(){
   ds.forEach(d=>d.numbers.forEach(n=>t[n%10]++));
   makeChart("tailChart",{
     type:"bar",
-    data:{labels:[..."0123456789"].map(x=>x+" 尾"),datasets:[{data:t,backgroundColor:g.color,borderRadius:3}]},
+    data:{labels:[..."0123456789"].map(x=>x+" 尾"),datasets:[{data:t,backgroundColor:g.accent,borderRadius:4}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{y:{beginAtZero:true,ticks:{precision:0}},x:{grid:{display:false}}}}
+      scales:{y:{beginAtZero:true,ticks:{precision:0,color:"#8A8F9C"},grid:{color:"#F0EDE4"}},
+              x:{grid:{display:false},ticks:{color:"#8A8F9C"}}}}
   });
 }
 
@@ -528,9 +614,10 @@ function renderArea2(){
   ds.forEach(d=>{ if(d.special>=1 && d.special<=8) f[d.special]++; });
   makeChart("area2Chart",{
     type:"bar",
-    data:{labels:[1,2,3,4,5,6,7,8].map(pad2),datasets:[{data:f.slice(1),backgroundColor:"#3A4A73",borderRadius:3}]},
+    data:{labels:[1,2,3,4,5,6,7,8].map(pad2),datasets:[{data:f.slice(1),backgroundColor:"#3A4C74",borderRadius:4}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{y:{beginAtZero:true,ticks:{precision:0}},x:{grid:{display:false}}}}
+      scales:{y:{beginAtZero:true,ticks:{precision:0,color:"#8A8F9C"},grid:{color:"#F0EDE4"}},
+              x:{grid:{display:false},ticks:{color:"#8A8F9C"}}}}
   });
 }
 
@@ -554,7 +641,7 @@ function renderRecent(){
 
 /* ============ 策略選號器 ============ */
 const SLIDERS = ["wHot","wCold","wMiss","wRand"];
-let lastGenerated = null; // {sets:[{n:[..], a2}], weights:{...}}
+let lastGenerated = null;
 
 function strategyKey(){ return "twlab-strategy-" + state.game; }
 function predKey(){ return "twlab-preds-" + state.game; }
@@ -620,7 +707,7 @@ function generateSets(){
   }
   lastGenerated = { sets, weights: currentStrategy() };
   const html = sets.map((s,i)=>{
-    const sp = s.a2 ? `<span class="ball-plus" style="font-size:1rem">+</span>` + miniBall(s.a2,{sp:true}) : "";
+    const sp = s.a2 ? `<span class="ball-plus" style="font-size:1rem;color:var(--muted)">+</span>` + miniBall(s.a2,{sp:true}) : "";
     return `<div class="gen-set"><span class="idx">${pad2(i+1)}</span>${s.n.map(n=>miniBall(n)).join("")}${sp}</div>`;
   });
   html.push(`<div class="strategy-row">
@@ -655,7 +742,6 @@ function savePrediction(){
 
 /* ============ 預測核對 ============ */
 function tierName(m, spHit){
-  const g = cfg();
   if(state.game==="lotto649"){
     if(m===6) return "頭獎";
     if(m===5 && spHit) return "貳獎";
@@ -686,7 +772,6 @@ function tierName(m, spHit){
   return null;
 }
 function findTargetDraw(afterPeriod){
-  // 儲存預測後的「下一期」= 期別大於 afterPeriod 的最小期別
   const after = parseInt(afterPeriod,10) || 0;
   let target = null;
   for(const d of draws()){
@@ -694,6 +779,11 @@ function findTargetDraw(afterPeriod){
     if(p > after && (target===null || p < parseInt(target.period,10))) target = d;
   }
   return target;
+}
+function spTierNote(){
+  if(state.game==="lotto649") return "大樂透以你的 6 碼比對第 7 顆開出的特別號。";
+  if(state.game==="superlotto638") return "威力彩需同時比對第二區。";
+  return "";
 }
 function renderPreds(){
   const g = cfg(), preds = loadPreds(), el = $("#predList");
@@ -714,18 +804,16 @@ function renderPreds(){
       const rows = rec.sets.map((s,i)=>{
         const m = s.n.filter(n=>drawnSet.has(n)).length;
         totalHit += m;
-        let spHit = false, spTxt = "";
+        let spHit = false;
         if(g.special==="drawn7th"){
           spHit = s.n.includes(target.special);
-          spTxt = spHit ? "含特別號" : "";
         }else if(g.special==="area2"){
           spHit = s.a2 === target.special;
-          spTxt = (s.a2!=null ? `二區 ${pad2(s.a2)}${spHit?"(中)":""}` : "");
         }
         const tier = tierName(m, spHit);
         return `<tr>
           <td>${pad2(i+1)}</td>
-          <td>${s.n.map(n=>miniBall(n,{hit:drawnSet.has(n)})).join("")}${s.a2!=null?`<span class="ball-plus" style="font-size:.9rem">+</span>`+miniBall(s.a2,{sp:true,hit:spHit}):""}</td>
+          <td>${s.n.map(n=>miniBall(n,{hit:drawnSet.has(n)})).join("")}${s.a2!=null?`<span class="ball-plus" style="font-size:.9rem;color:var(--muted)">+</span>`+miniBall(s.a2,{sp:true,hit:spHit}):""}</td>
           <td class="num-td">${m}${g.special==="drawn7th"&&spHit?"+特":""}</td>
           <td>${tier?`<span class="tier-win">${tier}</span>`:`<span class="tier-none">未中獎</span>`}</td>
         </tr>`;
@@ -756,25 +844,21 @@ function renderPreds(){
     renderPreds();
   }));
 }
-function spTierNote(){
-  if(state.game==="lotto649") return "大樂透以你的 6 碼比對第 7 顆開出的特別號。";
-  if(state.game==="superlotto638") return "威力彩需同時比對第二區。";
-  return "";
-}
 
 /* ============ 事件與總渲染 ============ */
 function render(){
+  applyAccent();
   const info = state.data[state.game] || {};
   $("#updatedAt").textContent = info.updated || "—";
   const has = draws().length > 0;
   $("#emptyHint").hidden = has;
   $("#analysisGrid").style.display = has ? "" : "none";
-  renderHero();
+  safe("開獎看板", renderHero);
   if(!has) return;
   $("#strategySub").textContent = state.game==="lotto649"
     ? "拉動權重即可隨時調整選號方向;設定會自動儲存在你的瀏覽器。大樂透玩法為自選 6 碼(特別號以你的 6 碼比對)。權重代表「策略偏好」,不代表中獎機率——每期開獎皆為獨立事件。"
     : "拉動權重即可隨時調整選號方向;設定會自動儲存在你的瀏覽器。權重代表「策略偏好」,不代表中獎機率——每期開獎皆為獨立事件。";
-  // 先渲染不依賴圖表函式庫的區塊,確保任何圖表問題都不會讓頁面空白
+  // 先渲染不依賴圖表函式庫的區塊
   safe("統計卡", renderStats);
   safe("熱號排行", renderHotTable);
   safe("遺漏排行", renderMissTable);
@@ -794,7 +878,6 @@ $$(".tab").forEach(b=>b.addEventListener("click",()=>{
   $$(".tab").forEach(x=>x.classList.remove("active"));
   b.classList.add("active");
   state.game = b.dataset.g;
-  document.documentElement.style.setProperty("--accent", cfg().color);
   render();
 }));
 $$(".win-btn").forEach(b=>b.addEventListener("click",()=>{
