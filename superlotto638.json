@@ -1,0 +1,9 @@
+{
+ "game": "superlotto638",
+ "name": "威力彩",
+ "build": "v1.0.0",
+ "seed": true,
+ "updated": "2026-07-19 00:00:00 +08:00(種子資料,Actions 首次執行後自動回補完整歷史)",
+ "count": 0,
+ "draws": []
+}
