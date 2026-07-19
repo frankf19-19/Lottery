@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 """
 彩研所 TWLottery Lab — 開獎資料自動更新腳本
-BUILD_VERSION = v3.0.0
+BUILD_VERSION = v3.1.0
 
 資料來源:台灣彩券官方網站 API(api.taiwanlottery.com)
 執行方式:由 GitHub Actions 排程呼叫(每日台灣時間 21:35),
         亦可手動執行:python scripts/update_data.py
 
-v3.0.0 新增:
-  - 抓取各期「獎金分配」(獎項/中獎注數/單注獎金),存入每期 draws[].prizes
-  - 首次遇到未知欄位時,log 會印出官方回應的欄位名稱,便於除錯
+v3.1.0(依 Actions log 確認之官方格式接通):
+  - 今彩539 端點修正為 Daily539Result(原 DailyCashResult 為 404)
+  - 獎金分配改由月份 API 內嵌的 *Assign 欄位解析(jackpotAssign / super638JackpotAssign 等)
+  - 既有資料缺獎金時自動全量回補升級
 
 行為:
   1. 首次執行(data/*.json 不存在或為種子)→ 自動回補 BACKFILL_MONTHS 個月歷史
@@ -26,10 +27,9 @@ import datetime as dt
 
 import requests
 
-BUILD_VERSION = "v3.0.0"
+BUILD_VERSION = "v3.1.0"
 API_BASE = "https://api.taiwanlottery.com/TLCAPIWeB/Lottery/{endpoint}"
 BACKFILL_MONTHS = 14   # 首次回補的月數
-PRIZE_LOOKBACK = 8     # 每次執行最多補抓幾期的獎金分配
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
 
 HEADERS = {
@@ -52,7 +52,7 @@ GAMES = {
     },
     "dailycash539": {
         "name": "今彩539",
-        "endpoint": "DailyCashResult",
+        "endpoint": "Daily539Result",
         "picks": 5,
         "has_special": False,
     },
@@ -115,11 +115,16 @@ def normalize(item, cfg):
         }
         if cfg["has_special"]:
             draw["special"] = appear[need - 1]
-        # 擷取項目中可能存在的金額類欄位(銷售額、獎金等),欄位名以官方回應為準
+        prizes = extract_assign_prizes(item)
+        if prizes:
+            draw["prizes"] = prizes
+        # 銷售/總額等純數值金額欄位(排除 *Assign 巢狀欄位)
         money = {}
         for k, v in item.items():
             lk = str(k).lower()
-            if any(h in lk for h in ("amount", "money", "prize", "sales", "jackpot", "bonus")):
+            if lk.endswith("assign"):
+                continue
+            if any(h in lk for h in ("amount", "money", "sales", "jackpot", "bonus")):
                 try:
                     money[str(k)] = int(float(v))
                 except (ValueError, TypeError):
@@ -131,127 +136,43 @@ def normalize(item, cfg):
         return None
 
 
-# ---------- 獎金分配 ----------
-
-def _is_amount_key(lk):
-    return (any(h in lk for h in ("amount", "money", "ntd", "bonus"))
-            or lk.endswith("prize") or "unitprize" in lk)
-
-
-def _is_count_key(lk):
-    return (not _is_amount_key(lk)
-            and any(h in lk for h in ("count", "winner", "wincnt", "winnum", "unit")))
-
-
-def _is_name_key(lk):
-    return (not _is_amount_key(lk) and not _is_count_key(lk)
-            and any(h in lk for h in ("name", "title", "rank", "item", "type", "level")))
-
-
-def _pick_key(d_lower, predicate):
-    for lk, orig in d_lower.items():
-        if predicate(lk):
-            return orig
-    return None
-
-
-def extract_prizes(obj):
-    """遞迴掃描 API 回應,尋找疑似「獎金分配」的 list[dict] 結構。
-    條件:同一 list 內至少兩筆 dict,且各筆能辨識出金額欄位,並有名稱或注數欄位。
-    回傳 [{name, winners, amount}, ...] 或 None。"""
-    candidates = []
-
-    def parse_rows(lst):
-        rows = []
-        for x in lst:
-            if not isinstance(x, dict):
-                return None
-            lower = {k.lower(): k for k in x}
-            k_amt = _pick_key(lower, _is_amount_key)
-            k_cnt = _pick_key(lower, _is_count_key)
-            k_name = _pick_key(lower, _is_name_key)
-            if k_amt is None or (k_cnt is None and k_name is None):
-                return None
-            try:
-                amount = int(float(x[k_amt]))
-            except (ValueError, TypeError):
-                amount = None
-            winners = None
-            if k_cnt is not None:
-                try:
-                    winners = int(float(x[k_cnt]))
-                except (ValueError, TypeError):
-                    winners = None
-            rows.append({
-                "name": str(x[k_name]).strip() if k_name is not None else "",
-                "winners": winners,
-                "amount": amount,
-            })
-        return rows if len(rows) >= 2 else None
-
-    def walk(o):
-        if isinstance(o, list):
-            rows = parse_rows(o)
-            if rows:
-                candidates.append(rows)
-            for v in o:
-                walk(v)
-        elif isinstance(o, dict):
-            for v in o.values():
-                walk(v)
-
-    walk(obj)
-    return max(candidates, key=len) if candidates else None
-
-
-def fetch_prizes(cfg, period, debug=False):
-    """查詢單期獎金分配。嘗試兩種參數形式,通用解析。找不到時回傳 None(不視為錯誤)。"""
-    param_variants = [
-        {"period": period, "month": "", "pageNum": 1, "pageSize": 1},
-        {"period": period},
-    ]
-    for i, params in enumerate(param_variants):
-        try:
-            payload = api_get(cfg["endpoint"], params)
-        except requests.RequestException as e:
-            print(f"[{cfg['name']}] 第 {period} 期獎金查詢(形式{i+1})失敗:{e}", file=sys.stderr)
-            continue
-        prizes = extract_prizes(payload)
-        if prizes:
-            return prizes
-        if debug:
-            # 印出截斷後的原始回應,讓 Actions log 足以確認官方實際格式
-            raw = json.dumps(payload, ensure_ascii=False)
-            print(f"[{cfg['name']}] 第 {period} 期(形式{i+1})未解析到獎金欄位,回應摘要:{raw[:1200]}")
-    return None
-
-
-PROBE_ENDPOINTS = [
-    # 各期獎金分配候選
-    "Lotto649Prize", "SuperLotto638Prize", "DailyCashPrize",
-    "Lotto649PrizeResult", "SuperLotto638PrizeResult", "DailyCashPrizeResult",
-    "GetLotto649Prize", "GetSuperLotto638Prize",
-    # 累積頭獎/最新資訊候選
-    "JackpotInfo", "TotalPrizeInfo", "LastestLotteryInfo", "LotteryLastestInfo",
-    "GetJackpot", "IndexInfo", "HomeInfo",
+# 官方月份 API 內嵌的獎金分配欄位(鍵名結尾),依獎項順序排列
+TIER_SUFFIXES = [
+    ("jackpotassign", "頭獎"), ("secondassign", "貳獎"), ("thirdassign", "參獎"),
+    ("fourthassign", "肆獎"), ("fifthassign", "伍獎"), ("sixthassign", "陸獎"),
+    ("seventhassign", "柒獎"), ("eighthassign", "捌獎"), ("ninthassign", "玖獎"),
+    ("normalassign", "普獎"),
 ]
 
 
-def probe_endpoints(sample_period):
-    """一次性探測候選端點並把結果寫進 log(僅在獎金資料缺少時執行)。
-    log 中 HTTP 200 且非錯誤頁的候選,即為可用端點。"""
-    print("=== 端點探測開始(結果供修正版參考)===")
-    for ep in PROBE_ENDPOINTS:
-        for params in ({}, {"period": sample_period}):
-            try:
-                url = API_BASE.format(endpoint=ep)
-                r = requests.get(url, params=params, headers=HEADERS, timeout=15)
-                body = r.text[:300].replace("\n", " ")
-                print(f"[探測] {ep} {params or '{}'} -> HTTP {r.status_code}:{body}")
-            except requests.RequestException as e:
-                print(f"[探測] {ep} {params or '{}'} -> 失敗:{e}")
-            time.sleep(0.4)
-    print("=== 端點探測結束 ===")
+def _to_int(v):
+    try:
+        return int(float(v))
+    except (ValueError, TypeError):
+        return None
+
+
+def extract_assign_prizes(item):
+    """解析官方回應內嵌的 *Assign 獎金分配欄位(依 2026-07 Actions log 確認之格式)。
+    每個 Assign 為 {"prize": 本期分配額, "lastPrize": 前期累積, "winnerCount": 注數, "perPrize": 每注獎金}
+    大樂透為 jackpotAssign...normalAssign;威力彩為 super638JackpotAssign...;539 同型。"""
+    rows = []
+    lower_map = {str(k).lower(): k for k in item}
+    for suffix, name in TIER_SUFFIXES:
+        for lk, orig in lower_map.items():
+            if lk.endswith(suffix):
+                a = item.get(orig)
+                if isinstance(a, dict):
+                    al = {str(k).lower(): v for k, v in a.items()}
+                    rows.append({
+                        "name": name,
+                        "winners": _to_int(al.get("winnercount")),
+                        "amount": _to_int(al.get("perprize")),
+                        "pool": _to_int(al.get("prize")),
+                        "carry": _to_int(al.get("lastprize")),
+                    })
+                break
+    return rows if rows else None
 
 
 # ---------- 主流程 ----------
@@ -271,7 +192,8 @@ def update_game(key, cfg):
     existing = load_existing(path)
     old_draws = (existing or {}).get("draws") or []
     is_seed = bool((existing or {}).get("seed"))
-    first_run = len(old_draws) == 0 or is_seed
+    lacks_prizes = not any(d.get("prizes") for d in old_draws[:10])
+    first_run = len(old_draws) == 0 or is_seed or lacks_prizes
 
     months = month_list(BACKFILL_MONTHS if first_run else 2)
     mode = "回補" if first_run else "增量"
@@ -293,8 +215,8 @@ def update_game(key, cfg):
             draw = normalize(item, cfg)
             if draw:
                 prev = merged.get(draw["period"])
-                if prev and prev.get("prizes"):
-                    draw["prizes"] = prev["prizes"]  # 保留既有獎金資料
+                if prev and prev.get("prizes") and not draw.get("prizes"):
+                    draw["prizes"] = prev["prizes"]  # 新抓不到時保留既有獎金資料
                 merged[draw["period"]] = draw
                 fetched += 1
         time.sleep(0.6)  # 對官方伺服器保持禮貌
@@ -303,15 +225,6 @@ def update_game(key, cfg):
     if not draws:
         print(f"[{cfg['name']}] 無資料可寫入,略過。", file=sys.stderr)
         return False
-
-    # 補抓最近幾期缺少的獎金分配
-    pending = [d for d in draws[:PRIZE_LOOKBACK] if not d.get("prizes")]
-    for i, d in enumerate(pending):
-        prizes = fetch_prizes(cfg, d["period"], debug=(i == 0))
-        if prizes:
-            d["prizes"] = prizes
-            print(f"[{cfg['name']}] 第 {d['period']} 期獎金分配:{len(prizes)} 個獎項")
-        time.sleep(0.6)
 
     out = {
         "game": key,
@@ -341,21 +254,6 @@ def main():
         except Exception as e:  # 單一遊戲失敗不中斷整體
             print(f"[{cfg['name']}] 未預期錯誤:{e}", file=sys.stderr)
     print(f"完成:{ok}/{len(GAMES)} 個遊戲更新成功。")
-
-    # 若獎金資料仍全數缺少,進行一次端點探測,把候選端點回應寫進 log
-    try:
-        need_probe, sample_period = True, None
-        for key in GAMES:
-            data = load_existing(os.path.join(DATA_DIR, f"{key}.json")) or {}
-            top = (data.get("draws") or [{}])[0]
-            if top.get("prizes"):
-                need_probe = False
-            if sample_period is None and top.get("period"):
-                sample_period = top["period"]
-        if need_probe and sample_period:
-            probe_endpoints(sample_period)
-    except Exception as e:
-        print(f"端點探測略過:{e}", file=sys.stderr)
 
     sys.exit(0 if ok > 0 else 1)
 
