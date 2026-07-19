@@ -1,8 +1,8 @@
 {
  "game": "superlotto638",
  "name": "威力彩",
- "build": "v3.0.0",
- "updated": "2026-07-19 14:40:03 +08:00",
+ "build": "v3.1.0",
+ "updated": "2026-07-19 14:51:05 +08:00",
  "count": 118,
  "draws": [
   {
@@ -26,6 +26,78 @@
     7
    ],
    "special": 7,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 14942147,
+     "carry": 115589619
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 1846782,
+     "carry": 1851271
+    },
+    {
+     "name": "參獎",
+     "winners": 1,
+     "amount": 150000,
+     "pool": 150000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 37,
+     "amount": 20000,
+     "pool": 740000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 227,
+     "amount": 4000,
+     "pool": 908000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1425,
+     "amount": 800,
+     "pool": 1140000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2612,
+     "amount": 400,
+     "pool": 1044800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13158,
+     "amount": 200,
+     "pool": 2631600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 16353,
+     "amount": 100,
+     "pool": 1635300,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 28434,
+     "amount": 100,
+     "pool": 2843400,
+     "carry": 0
+    }
+   ],
    "money": {
     "totalAmount": 145322920,
     "sellAmount": 50694600
@@ -52,6 +124,78 @@
     6
    ],
    "special": 6,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 14978468,
+     "carry": 100611151
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 1851271,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 5,
+     "amount": 150000,
+     "pool": 750000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 23,
+     "amount": 20000,
+     "pool": 460000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 176,
+     "amount": 4000,
+     "pool": 704000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1136,
+     "amount": 800,
+     "pool": 908800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2144,
+     "amount": 400,
+     "pool": 857600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 11055,
+     "amount": 200,
+     "pool": 2211000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 14860,
+     "amount": 100,
+     "pool": 1486000,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 24936,
+     "amount": 100,
+     "pool": 2493600,
+     "carry": 0
+    }
+   ],
    "money": {
     "totalAmount": 127311891,
     "sellAmount": 48546800
@@ -78,6 +222,78 @@
     6
    ],
    "special": 6,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 16634531,
+     "carry": 83976620
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 12435083,
+     "pool": 2055953,
+     "carry": 10379130
+    },
+    {
+     "name": "參獎",
+     "winners": 3,
+     "amount": 150000,
+     "pool": 450000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 30,
+     "amount": 20000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 140,
+     "amount": 4000,
+     "pool": 560000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1113,
+     "amount": 800,
+     "pool": 890400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2180,
+     "amount": 400,
+     "pool": 872000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 12260,
+     "amount": 200,
+     "pool": 2452000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 15104,
+     "amount": 100,
+     "pool": 1510400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 28655,
+     "amount": 100,
+     "pool": 2865500,
+     "carry": 0
+    }
+   ],
    "money": {
     "totalAmount": 123246535,
     "sellAmount": 52528700
@@ -104,6 +320,78 @@
     1
    ],
    "special": 1,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 16798910,
+     "carry": 67177710
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2076269,
+     "carry": 8302861
+    },
+    {
+     "name": "參獎",
+     "winners": 6,
+     "amount": 150000,
+     "pool": 900000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 40,
+     "amount": 20000,
+     "pool": 800000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 163,
+     "amount": 4000,
+     "pool": 652000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1308,
+     "amount": 800,
+     "pool": 1046400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2272,
+     "amount": 400,
+     "pool": 908800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 11760,
+     "amount": 200,
+     "pool": 2352000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 18611,
+     "amount": 100,
+     "pool": 1861100,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 26288,
+     "amount": 100,
+     "pool": 2628800,
+     "carry": 0
+    }
+   ],
    "money": {
     "totalAmount": 105504851,
     "sellAmount": 54589600
@@ -130,6 +418,78 @@
     3
    ],
    "special": 3,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 15856177,
+     "carry": 51321533
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 1959752,
+     "carry": 6343109
+    },
+    {
+     "name": "參獎",
+     "winners": 6,
+     "amount": 150000,
+     "pool": 900000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 26,
+     "amount": 20000,
+     "pool": 520000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 175,
+     "amount": 4000,
+     "pool": 700000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1174,
+     "amount": 800,
+     "pool": 939200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2276,
+     "amount": 400,
+     "pool": 910400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13443,
+     "amount": 200,
+     "pool": 2688600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 15856,
+     "amount": 100,
+     "pool": 1585600,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 30763,
+     "amount": 100,
+     "pool": 3076300,
+     "carry": 0
+    }
+   ],
    "money": {
     "totalAmount": 86800672,
     "sellAmount": 52974600
@@ -156,6 +516,78 @@
     5
    ],
    "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 15715700,
+     "carry": 35605833
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 1942389,
+     "carry": 4400720
+    },
+    {
+     "name": "參獎",
+     "winners": 5,
+     "amount": 150000,
+     "pool": 750000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 30,
+     "amount": 20000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 224,
+     "amount": 4000,
+     "pool": 896000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1416,
+     "amount": 800,
+     "pool": 1132800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2901,
+     "amount": 400,
+     "pool": 1160400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 15109,
+     "amount": 200,
+     "pool": 3021800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 18518,
+     "amount": 100,
+     "pool": 1851800,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 31889,
+     "amount": 100,
+     "pool": 3188900,
+     "carry": 0
+    }
+   ],
    "money": {
     "totalAmount": 70266343,
     "sellAmount": 55017800
@@ -182,6 +614,78 @@
     1
    ],
    "special": 1,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 15481340,
+     "carry": 20124493
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 1913424,
+     "carry": 2487296
+    },
+    {
+     "name": "參獎",
+     "winners": 5,
+     "amount": 150000,
+     "pool": 750000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 23,
+     "amount": 20000,
+     "pool": 460000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 192,
+     "amount": 4000,
+     "pool": 768000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1399,
+     "amount": 800,
+     "pool": 1119200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2561,
+     "amount": 400,
+     "pool": 1024400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 12701,
+     "amount": 200,
+     "pool": 2540200,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 17284,
+     "amount": 100,
+     "pool": 1728400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 27118,
+     "amount": 100,
+     "pool": 2711800,
+     "carry": 0
+    }
+   ],
    "money": {
     "totalAmount": 51108554,
     "sellAmount": 51812300
@@ -208,6 +712,78 @@
     7
    ],
    "special": 7,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 20124493,
+     "carry": 0
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2487296,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 4,
+     "amount": 150000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 29,
+     "amount": 20000,
+     "pool": 580000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 241,
+     "amount": 4000,
+     "pool": 964000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1456,
+     "amount": 800,
+     "pool": 1164800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3579,
+     "amount": 400,
+     "pool": 1431600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 19902,
+     "amount": 200,
+     "pool": 3980400,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 20469,
+     "amount": 100,
+     "pool": 2046900,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 44703,
+     "amount": 100,
+     "pool": 4470300,
+     "carry": 0
+    }
+   ],
    "money": {
     "totalAmount": 37849790,
     "sellAmount": 68817800
@@ -234,6 +810,78 @@
     4
    ],
    "special": 4,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 1,
+     "amount": 1038715450,
+     "pool": 80401580,
+     "carry": 958313870
+    },
+    {
+     "name": "貳獎",
+     "winners": 7,
+     "amount": 1419610,
+     "pool": 9937274,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 29,
+     "amount": 150000,
+     "pool": 4350000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 213,
+     "amount": 20000,
+     "pool": 4260000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 1000,
+     "amount": 4000,
+     "pool": 4000000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 7172,
+     "amount": 800,
+     "pool": 5737600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 13053,
+     "amount": 400,
+     "pool": 5221200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 69163,
+     "amount": 200,
+     "pool": 13832600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 93032,
+     "amount": 100,
+     "pool": 9303200,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 150074,
+     "amount": 100,
+     "pool": 15007400,
+     "carry": 0
+    }
+   ],
    "money": {
     "totalAmount": 1110364725,
     "sellAmount": 276456100
@@ -260,6 +908,78 @@
     6
    ],
    "special": 6,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 70508630,
+     "carry": 887805240
+    },
+    {
+     "name": "貳獎",
+     "winners": 2,
+     "amount": 18684646,
+     "pool": 8714549,
+     "carry": 28654744
+    },
+    {
+     "name": "參獎",
+     "winners": 18,
+     "amount": 150000,
+     "pool": 2700000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 134,
+     "amount": 20000,
+     "pool": 2680000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 720,
+     "amount": 4000,
+     "pool": 2880000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 5280,
+     "amount": 800,
+     "pool": 4224000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 11001,
+     "amount": 400,
+     "pool": 4400400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 59888,
+     "amount": 200,
+     "pool": 11977600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 72332,
+     "amount": 100,
+     "pool": 7233200,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 133979,
+     "amount": 100,
+     "pool": 13397900,
+     "carry": 0
+    }
+   ],
    "money": {
     "totalAmount": 1045176264,
     "sellAmount": 234029600
@@ -286,6 +1006,78 @@
     8
    ],
    "special": 8,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 65470976,
+     "carry": 822334264
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 8091918,
+     "carry": 20562826
+    },
+    {
+     "name": "參獎",
+     "winners": 15,
+     "amount": 150000,
+     "pool": 2250000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 108,
+     "amount": 20000,
+     "pool": 2160000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 678,
+     "amount": 4000,
+     "pool": 2712000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 4697,
+     "amount": 800,
+     "pool": 3757600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 9589,
+     "amount": 400,
+     "pool": 3835600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 53917,
+     "amount": 200,
+     "pool": 10783400,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 65381,
+     "amount": 100,
+     "pool": 6538100,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 125563,
+     "amount": 100,
+     "pool": 12556300,
+     "carry": 0
+    }
+   ],
    "money": {
     "totalAmount": 961052985,
     "sellAmount": 214828900
@@ -312,6 +1104,78 @@
     5
    ],
    "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 54801113,
+     "carry": 767533151
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 6773171,
+     "carry": 13789655
+    },
+    {
+     "name": "參獎",
+     "winners": 33,
+     "amount": 150000,
+     "pool": 4950000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 136,
+     "amount": 20000,
+     "pool": 2720000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 1012,
+     "amount": 4000,
+     "pool": 4048000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 5401,
+     "amount": 800,
+     "pool": 4320800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 11874,
+     "amount": 400,
+     "pool": 4749600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 58023,
+     "amount": 200,
+     "pool": 11604600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 70046,
+     "amount": 100,
+     "pool": 7004600,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 118489,
+     "amount": 100,
+     "pool": 11848900,
+     "carry": 0
+    }
+   ],
    "money": {
     "totalAmount": 894143591,
     "sellAmount": 205128700
@@ -338,6 +1202,78 @@
     2
    ],
    "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 54932121,
+     "carry": 712601030
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 6789363,
+     "carry": 7000292
+    },
+    {
+     "name": "參獎",
+     "winners": 13,
+     "amount": 150000,
+     "pool": 1950000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 108,
+     "amount": 20000,
+     "pool": 2160000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 604,
+     "amount": 4000,
+     "pool": 2416000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 4150,
+     "amount": 800,
+     "pool": 3320000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 7874,
+     "amount": 400,
+     "pool": 3149600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 43518,
+     "amount": 200,
+     "pool": 8703600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 56557,
+     "amount": 100,
+     "pool": 5655700,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 98393,
+     "amount": 100,
+     "pool": 9839300,
+     "carry": 0
+    }
+   ],
    "money": {
     "totalAmount": 818517007,
     "sellAmount": 179846700
@@ -364,6 +1300,78 @@
     4
    ],
    "special": 4,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 56638732,
+     "carry": 655962298
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 7000292,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 11,
+     "amount": 150000,
+     "pool": 1650000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 129,
+     "amount": 20000,
+     "pool": 2580000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 711,
+     "amount": 4000,
+     "pool": 2844000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 5191,
+     "amount": 800,
+     "pool": 4152800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 8766,
+     "amount": 400,
+     "pool": 3506400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 46509,
+     "amount": 200,
+     "pool": 9301800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 64490,
+     "amount": 100,
+     "pool": 6449000,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 99620,
+     "amount": 100,
+     "pool": 9962000,
+     "carry": 0
+    }
+   ],
    "money": {
     "totalAmount": 760047323,
     "sellAmount": 189245500
@@ -389,7 +1397,83 @@
     34,
     3
    ],
-   "special": 3
+   "special": 3,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 50038607,
+     "carry": 605923691
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 11863993,
+     "pool": 6184547,
+     "carry": 5679446
+    },
+    {
+     "name": "參獎",
+     "winners": 11,
+     "amount": 150000,
+     "pool": 1650000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 76,
+     "amount": 20000,
+     "pool": 1520000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 472,
+     "amount": 4000,
+     "pool": 1888000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 3175,
+     "amount": 800,
+     "pool": 2540000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 6189,
+     "amount": 400,
+     "pool": 2475600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 35541,
+     "amount": 200,
+     "pool": 7108200,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 45859,
+     "amount": 100,
+     "pool": 4585900,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 81755,
+     "amount": 100,
+     "pool": 8175500,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 697769492,
+    "sellAmount": 156666100
+   }
   },
   {
    "period": "115000042",
@@ -411,7 +1495,83 @@
     31,
     3
    ],
-   "special": 3
+   "special": 3,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 45951888,
+     "carry": 559971803
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 5679446,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 18,
+     "amount": 150000,
+     "pool": 2700000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 116,
+     "amount": 20000,
+     "pool": 2320000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 507,
+     "amount": 4000,
+     "pool": 2028000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 3740,
+     "amount": 800,
+     "pool": 2992000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 6778,
+     "amount": 400,
+     "pool": 2711200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 37375,
+     "amount": 200,
+     "pool": 7475000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 48140,
+     "amount": 100,
+     "pool": 4814000,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 84177,
+     "amount": 100,
+     "pool": 8417700,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 645061038,
+    "sellAmount": 154707700
+   }
   },
   {
    "period": "115000041",
@@ -433,7 +1593,83 @@
     22,
     1
    ],
-   "special": 1
+   "special": 1,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 41174359,
+     "carry": 518797444
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 10159062,
+     "pool": 5088965,
+     "carry": 5070097
+    },
+    {
+     "name": "參獎",
+     "winners": 14,
+     "amount": 150000,
+     "pool": 2100000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 127,
+     "amount": 20000,
+     "pool": 2540000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 407,
+     "amount": 4000,
+     "pool": 1628000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 3572,
+     "amount": 800,
+     "pool": 2857600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 5862,
+     "amount": 400,
+     "pool": 2344800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 31590,
+     "amount": 200,
+     "pool": 6318000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 44491,
+     "amount": 100,
+     "pool": 4449100,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 71800,
+     "amount": 100,
+     "pool": 7180000,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 599548366,
+    "sellAmount": 137601500
+   }
   },
   {
    "period": "115000040",
@@ -455,7 +1691,83 @@
     14,
     4
    ],
-   "special": 4
+   "special": 4,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 41021697,
+     "carry": 477775747
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 5070097,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 14,
+     "amount": 150000,
+     "pool": 2100000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 99,
+     "amount": 20000,
+     "pool": 1980000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 445,
+     "amount": 4000,
+     "pool": 1780000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 3148,
+     "amount": 800,
+     "pool": 2518400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 6138,
+     "amount": 400,
+     "pool": 2455200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 33556,
+     "amount": 200,
+     "pool": 6711200,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 43289,
+     "amount": 100,
+     "pool": 4328900,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 73663,
+     "amount": 100,
+     "pool": 7366300,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 553107542,
+    "sellAmount": 136966900
+   }
   },
   {
    "period": "115000039",
@@ -477,7 +1789,83 @@
     17,
     8
    ],
-   "special": 8
+   "special": 8,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 32651625,
+     "carry": 445124122
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 8458449,
+     "pool": 4035594,
+     "carry": 4422855
+    },
+    {
+     "name": "參獎",
+     "winners": 13,
+     "amount": 150000,
+     "pool": 1950000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 87,
+     "amount": 20000,
+     "pool": 1740000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 399,
+     "amount": 4000,
+     "pool": 1596000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 2823,
+     "amount": 800,
+     "pool": 2258400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 5529,
+     "amount": 400,
+     "pool": 2211600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 28384,
+     "amount": 200,
+     "pool": 5676800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 37495,
+     "amount": 100,
+     "pool": 3749500,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 60794,
+     "amount": 100,
+     "pool": 6079400,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 511495897,
+    "sellAmount": 112634400
+   }
   },
   {
    "period": "115000038",
@@ -499,7 +1887,83 @@
     38,
     5
    ],
-   "special": 5
+   "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 35784919,
+     "carry": 409339203
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 4422855,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 10,
+     "amount": 150000,
+     "pool": 1500000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 50,
+     "amount": 20000,
+     "pool": 1000000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 381,
+     "amount": 4000,
+     "pool": 1524000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 2552,
+     "amount": 800,
+     "pool": 2041600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 5458,
+     "amount": 400,
+     "pool": 2183200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 30349,
+     "amount": 200,
+     "pool": 6069800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 35283,
+     "amount": 100,
+     "pool": 3528300,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 70150,
+     "amount": 100,
+     "pool": 7015000,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 474408878,
+    "sellAmount": 118308500
+   }
   },
   {
    "period": "115000037",
@@ -521,7 +1985,83 @@
     14,
     3
    ],
-   "special": 3
+   "special": 3,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 26773264,
+     "carry": 382565939
+    },
+    {
+     "name": "貳獎",
+     "winners": 4,
+     "amount": 2598711,
+     "pool": 3309055,
+     "carry": 7085792
+    },
+    {
+     "name": "參獎",
+     "winners": 10,
+     "amount": 150000,
+     "pool": 1500000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 245,
+     "amount": 20000,
+     "pool": 4900000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 388,
+     "amount": 4000,
+     "pool": 1552000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 2883,
+     "amount": 800,
+     "pool": 2306400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 4482,
+     "amount": 400,
+     "pool": 1792800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 25071,
+     "amount": 200,
+     "pool": 5014200,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 31414,
+     "amount": 100,
+     "pool": 3141400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 57132,
+     "amount": 100,
+     "pool": 5713200,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 445654051,
+    "sellAmount": 101822400
+   }
   },
   {
    "period": "115000036",
@@ -543,7 +2083,83 @@
     38,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 30693100,
+     "carry": 351872839
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 3793529,
+     "carry": 3292263
+    },
+    {
+     "name": "參獎",
+     "winners": 7,
+     "amount": 150000,
+     "pool": 1050000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 49,
+     "amount": 20000,
+     "pool": 980000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 295,
+     "amount": 4000,
+     "pool": 1180000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 2340,
+     "amount": 800,
+     "pool": 1872000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 4094,
+     "amount": 400,
+     "pool": 1637600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 22246,
+     "amount": 200,
+     "pool": 4449200,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 31484,
+     "amount": 100,
+     "pool": 3148400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 51658,
+     "amount": 100,
+     "pool": 5165800,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 409134732,
+    "sellAmount": 98126600
+   }
   },
   {
    "period": "115000035",
@@ -565,7 +2181,83 @@
     19,
     8
    ],
-   "special": 8
+   "special": 8,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 26637401,
+     "carry": 325235438
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 3292263,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 4,
+     "amount": 150000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 38,
+     "amount": 20000,
+     "pool": 760000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 260,
+     "amount": 4000,
+     "pool": 1040000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1930,
+     "amount": 800,
+     "pool": 1544000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3465,
+     "amount": 400,
+     "pool": 1386000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 19154,
+     "amount": 200,
+     "pool": 3830800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 25191,
+     "amount": 100,
+     "pool": 2519100,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 43266,
+     "amount": 100,
+     "pool": 4326600,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 371171603,
+    "sellAmount": 83520300
+   }
   },
   {
    "period": "115000034",
@@ -587,7 +2279,83 @@
     6,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 25226965,
+     "carry": 300008473
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 5809397,
+     "pool": 3117939,
+     "carry": 2691458
+    },
+    {
+     "name": "參獎",
+     "winners": 9,
+     "amount": 150000,
+     "pool": 1350000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 66,
+     "amount": 20000,
+     "pool": 1320000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 285,
+     "amount": 4000,
+     "pool": 1140000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 2183,
+     "amount": 800,
+     "pool": 1746400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 4106,
+     "amount": 400,
+     "pool": 1642400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 22425,
+     "amount": 200,
+     "pool": 4485000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 27319,
+     "amount": 100,
+     "pool": 2731900,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 51461,
+     "amount": 100,
+     "pool": 5146100,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 350606636,
+    "sellAmount": 87103100
+   }
   },
   {
    "period": "115000033",
@@ -609,7 +2377,83 @@
     27,
     5
    ],
-   "special": 5
+   "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 21776342,
+     "carry": 278232131
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2691458,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 9,
+     "amount": 150000,
+     "pool": 1350000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 58,
+     "amount": 20000,
+     "pool": 1160000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 245,
+     "amount": 4000,
+     "pool": 980000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1825,
+     "amount": 800,
+     "pool": 1460000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3343,
+     "amount": 400,
+     "pool": 1337200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 17857,
+     "amount": 200,
+     "pool": 3571400,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 23424,
+     "amount": 100,
+     "pool": 2342400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 40048,
+     "amount": 100,
+     "pool": 4004800,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 318905731,
+    "sellAmount": 73952000
+   }
   },
   {
    "period": "115000032",
@@ -631,7 +2475,83 @@
     19,
     8
    ],
-   "special": 8
+   "special": 8,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 22018991,
+     "carry": 256213140
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 5316941,
+     "pool": 2721448,
+     "carry": 2595493
+    },
+    {
+     "name": "參獎",
+     "winners": 9,
+     "amount": 150000,
+     "pool": 1350000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 50,
+     "amount": 20000,
+     "pool": 1000000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 246,
+     "amount": 4000,
+     "pool": 984000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1738,
+     "amount": 800,
+     "pool": 1390400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3219,
+     "amount": 400,
+     "pool": 1287600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 17551,
+     "amount": 200,
+     "pool": 3510200,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 22803,
+     "amount": 100,
+     "pool": 2280300,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 40420,
+     "amount": 100,
+     "pool": 4042000,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 299393573,
+    "sellAmount": 73790800
+   }
   },
   {
    "period": "115000031",
@@ -653,7 +2573,83 @@
     30,
     6
    ],
-   "special": 6
+   "special": 6,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 20999901,
+     "carry": 235213239
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2595493,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 1,
+     "amount": 150000,
+     "pool": 150000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 37,
+     "amount": 20000,
+     "pool": 740000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 221,
+     "amount": 4000,
+     "pool": 884000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1499,
+     "amount": 800,
+     "pool": 1199200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2847,
+     "amount": 400,
+     "pool": 1138800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 15311,
+     "amount": 200,
+     "pool": 3062200,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 20674,
+     "amount": 100,
+     "pool": 2067400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 34404,
+     "amount": 100,
+     "pool": 3440400,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 271490634,
+    "sellAmount": 65958900
+   }
   },
   {
    "period": "115000030",
@@ -675,7 +2671,83 @@
     11,
     5
    ],
-   "special": 5
+   "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 18753991,
+     "carry": 216459248
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 8755946,
+     "pool": 2317909,
+     "carry": 6438037
+    },
+    {
+     "name": "參獎",
+     "winners": 9,
+     "amount": 150000,
+     "pool": 1350000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 70,
+     "amount": 20000,
+     "pool": 1400000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 285,
+     "amount": 4000,
+     "pool": 1140000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 2186,
+     "amount": 800,
+     "pool": 1748800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3555,
+     "amount": 400,
+     "pool": 1422000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 17685,
+     "amount": 200,
+     "pool": 3537000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 24990,
+     "amount": 100,
+     "pool": 2499000,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 38407,
+     "amount": 100,
+     "pool": 3840700,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 260906685,
+    "sellAmount": 69108000
+   }
   },
   {
    "period": "115000029",
@@ -697,7 +2769,83 @@
     34,
     3
    ],
-   "special": 3
+   "special": 3,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 18179522,
+     "carry": 198279726
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2246907,
+     "carry": 4191130
+    },
+    {
+     "name": "參獎",
+     "winners": 7,
+     "amount": 150000,
+     "pool": 1050000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 46,
+     "amount": 20000,
+     "pool": 920000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 199,
+     "amount": 4000,
+     "pool": 796000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1586,
+     "amount": 800,
+     "pool": 1268800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2789,
+     "amount": 400,
+     "pool": 1115600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 15602,
+     "amount": 200,
+     "pool": 3120400,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 20455,
+     "amount": 100,
+     "pool": 2045500,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 35413,
+     "amount": 100,
+     "pool": 3541300,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 236754886,
+    "sellAmount": 62334600
+   }
   },
   {
    "period": "115000028",
@@ -719,7 +2867,83 @@
     38,
     4
    ],
-   "special": 4
+   "special": 4,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 16633904,
+     "carry": 181645822
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2055875,
+     "carry": 2135255
+    },
+    {
+     "name": "參獎",
+     "winners": 8,
+     "amount": 150000,
+     "pool": 1200000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 40,
+     "amount": 20000,
+     "pool": 800000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 211,
+     "amount": 4000,
+     "pool": 844000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1628,
+     "amount": 800,
+     "pool": 1302400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2765,
+     "amount": 400,
+     "pool": 1106000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 14973,
+     "amount": 200,
+     "pool": 2994600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 19277,
+     "amount": 100,
+     "pool": 1927700,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 33367,
+     "amount": 100,
+     "pool": 3336700,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 215982257,
+    "sellAmount": 58547600
+   }
   },
   {
    "period": "115000027",
@@ -741,7 +2965,83 @@
     23,
     6
    ],
-   "special": 6
+   "special": 6,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 17276159,
+     "carry": 164369663
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2135255,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 10,
+     "amount": 150000,
+     "pool": 1500000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 38,
+     "amount": 20000,
+     "pool": 760000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 222,
+     "amount": 4000,
+     "pool": 888000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1417,
+     "amount": 800,
+     "pool": 1133600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2775,
+     "amount": 400,
+     "pool": 1110000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 15130,
+     "amount": 200,
+     "pool": 3026000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 19064,
+     "amount": 100,
+     "pool": 1906400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 34721,
+     "amount": 100,
+     "pool": 3472100,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 197577178,
+    "sellAmount": 60377300
+   }
   },
   {
    "period": "115000026",
@@ -763,7 +3063,83 @@
     22,
     1
    ],
-   "special": 1
+   "special": 1,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 21434016,
+     "carry": 142935647
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 17486463,
+     "pool": 2649148,
+     "carry": 14837315
+    },
+    {
+     "name": "參獎",
+     "winners": 2,
+     "amount": 150000,
+     "pool": 300000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 41,
+     "amount": 20000,
+     "pool": 820000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 179,
+     "amount": 4000,
+     "pool": 716000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1239,
+     "amount": 800,
+     "pool": 991200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2343,
+     "amount": 400,
+     "pool": 937200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 12995,
+     "amount": 200,
+     "pool": 2599000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 18280,
+     "amount": 100,
+     "pool": 1828000,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 30213,
+     "amount": 100,
+     "pool": 3021300,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 193068827,
+    "sellAmount": 64174300
+   }
   },
   {
    "period": "115000025",
@@ -785,7 +3161,83 @@
     13,
     5
    ],
-   "special": 5
+   "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 17683605,
+     "carry": 125252042
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2185614,
+     "carry": 12651701
+    },
+    {
+     "name": "參獎",
+     "winners": 6,
+     "amount": 150000,
+     "pool": 900000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 45,
+     "amount": 20000,
+     "pool": 900000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 253,
+     "amount": 4000,
+     "pool": 1012000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1330,
+     "amount": 800,
+     "pool": 1064000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2981,
+     "amount": 400,
+     "pool": 1192400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 15882,
+     "amount": 200,
+     "pool": 3176400,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 18058,
+     "amount": 100,
+     "pool": 1805800,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 35215,
+     "amount": 100,
+     "pool": 3521500,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 171345063,
+    "sellAmount": 60802400
+   }
   },
   {
    "period": "115000024",
@@ -807,7 +3259,83 @@
     33,
     5
    ],
-   "special": 5
+   "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 19981269,
+     "carry": 105270773
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2469595,
+     "carry": 10182106
+    },
+    {
+     "name": "參獎",
+     "winners": 8,
+     "amount": 150000,
+     "pool": 1200000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 45,
+     "amount": 20000,
+     "pool": 900000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 230,
+     "amount": 4000,
+     "pool": 920000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1598,
+     "amount": 800,
+     "pool": 1278400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3055,
+     "amount": 400,
+     "pool": 1222000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 16366,
+     "amount": 200,
+     "pool": 3273200,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 20956,
+     "amount": 100,
+     "pool": 2095600,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 37400,
+     "amount": 100,
+     "pool": 3740000,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 152532944,
+    "sellAmount": 67418300
+   }
   },
   {
    "period": "115000023",
@@ -829,7 +3357,83 @@
     31,
     1
    ],
-   "special": 1
+   "special": 1,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 20288164,
+     "carry": 84982609
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2507525,
+     "carry": 7674581
+    },
+    {
+     "name": "參獎",
+     "winners": 5,
+     "amount": 150000,
+     "pool": 750000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 26,
+     "amount": 20000,
+     "pool": 520000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 202,
+     "amount": 4000,
+     "pool": 808000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1226,
+     "amount": 800,
+     "pool": 980800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2601,
+     "amount": 400,
+     "pool": 1040400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13696,
+     "amount": 200,
+     "pool": 2739200,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 18287,
+     "amount": 100,
+     "pool": 1828700,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 32223,
+     "amount": 100,
+     "pool": 3222300,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 127342280,
+    "sellAmount": 63063800
+   }
   },
   {
    "period": "115000022",
@@ -851,7 +3455,83 @@
     31,
     1
    ],
-   "special": 1
+   "special": 1,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 20949042,
+     "carry": 64033567
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2589207,
+     "carry": 5085374
+    },
+    {
+     "name": "參獎",
+     "winners": 9,
+     "amount": 150000,
+     "pool": 1350000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 58,
+     "amount": 20000,
+     "pool": 1160000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 184,
+     "amount": 4000,
+     "pool": 736000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1502,
+     "amount": 800,
+     "pool": 1201600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2831,
+     "amount": 400,
+     "pool": 1132400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 16743,
+     "amount": 200,
+     "pool": 3348600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 19852,
+     "amount": 100,
+     "pool": 1985200,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 38978,
+     "amount": 100,
+     "pool": 3897800,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 107468791,
+    "sellAmount": 69727000
+   }
   },
   {
    "period": "115000021",
@@ -873,7 +3553,83 @@
     31,
     8
    ],
-   "special": 8
+   "special": 8,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 19386344,
+     "carry": 44647223
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2396065,
+     "carry": 2689309
+    },
+    {
+     "name": "參獎",
+     "winners": 6,
+     "amount": 150000,
+     "pool": 900000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 60,
+     "amount": 20000,
+     "pool": 1200000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 222,
+     "amount": 4000,
+     "pool": 888000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1467,
+     "amount": 800,
+     "pool": 1173600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2967,
+     "amount": 400,
+     "pool": 1186800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 16124,
+     "amount": 200,
+     "pool": 3224800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 20959,
+     "amount": 100,
+     "pool": 2095900,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 36572,
+     "amount": 100,
+     "pool": 3657200,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 83445242,
+    "sellAmount": 65652200
+   }
   },
   {
    "period": "115000020",
@@ -895,7 +3651,83 @@
     29,
     8
    ],
-   "special": 8
+   "special": 8,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 21758960,
+     "carry": 22888263
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2689309,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 6,
+     "amount": 150000,
+     "pool": 900000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 39,
+     "amount": 20000,
+     "pool": 780000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 229,
+     "amount": 4000,
+     "pool": 916000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1581,
+     "amount": 800,
+     "pool": 1264800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3077,
+     "amount": 400,
+     "pool": 1230800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 17489,
+     "amount": 200,
+     "pool": 3497800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 21725,
+     "amount": 100,
+     "pool": 2172500,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 41728,
+     "amount": 100,
+     "pool": 4172800,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 62271233,
+    "sellAmount": 71605400
+   }
   },
   {
    "period": "115000019",
@@ -917,7 +3749,83 @@
     7,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 22888263,
+     "carry": 0
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 5423388,
+     "pool": 2828886,
+     "carry": 2594502
+    },
+    {
+     "name": "參獎",
+     "winners": 4,
+     "amount": 150000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 38,
+     "amount": 20000,
+     "pool": 760000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 216,
+     "amount": 4000,
+     "pool": 864000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1657,
+     "amount": 800,
+     "pool": 1325600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3155,
+     "amount": 400,
+     "pool": 1262000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 16945,
+     "amount": 200,
+     "pool": 3389000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 22455,
+     "amount": 100,
+     "pool": 2245500,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 38080,
+     "amount": 100,
+     "pool": 3808000,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 42565752,
+    "sellAmount": 72675000
+   }
   },
   {
    "period": "115000018",
@@ -939,7 +3847,83 @@
     7,
     5
    ],
-   "special": 5
+   "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 1,
+     "amount": 200000000,
+     "pool": 62104211,
+     "carry": 137895789
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2594502,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 13,
+     "amount": 150000,
+     "pool": 1950000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 81,
+     "amount": 20000,
+     "pool": 1620000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 318,
+     "amount": 4000,
+     "pool": 1272000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 2130,
+     "amount": 800,
+     "pool": 1704000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 4209,
+     "amount": 400,
+     "pool": 1683600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 21550,
+     "amount": 200,
+     "pool": 4310000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 28014,
+     "amount": 100,
+     "pool": 2801400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 45120,
+     "amount": 100,
+     "pool": 4512000,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 222447503,
+    "sellAmount": 78980700
+   }
   },
   {
    "period": "115000017",
@@ -961,7 +3945,83 @@
     27,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 24844875,
+     "carry": 113050914
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 7626170,
+     "pool": 3070714,
+     "carry": 4555456
+    },
+    {
+     "name": "參獎",
+     "winners": 4,
+     "amount": 150000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 44,
+     "amount": 20000,
+     "pool": 880000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 267,
+     "amount": 4000,
+     "pool": 1068000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1848,
+     "amount": 800,
+     "pool": 1478400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3608,
+     "amount": 400,
+     "pool": 1443200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 19540,
+     "amount": 200,
+     "pool": 3908000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 24654,
+     "amount": 100,
+     "pool": 2465400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 43832,
+     "amount": 100,
+     "pool": 4383200,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 161748160,
+    "sellAmount": 80257800
+   }
   },
   {
    "period": "115000016",
@@ -983,7 +4043,83 @@
     13,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 36857788,
+     "carry": 76193126
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 4555456,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 8,
+     "amount": 150000,
+     "pool": 1200000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 60,
+     "amount": 20000,
+     "pool": 1200000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 417,
+     "amount": 4000,
+     "pool": 1668000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 2889,
+     "amount": 800,
+     "pool": 2311200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 5443,
+     "amount": 400,
+     "pool": 2177200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 29245,
+     "amount": 200,
+     "pool": 5849000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 38388,
+     "amount": 100,
+     "pool": 3838800,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 65251,
+     "amount": 100,
+     "pool": 6525100,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 142375671,
+    "sellAmount": 120331900
+   }
   },
   {
    "period": "115000015",
@@ -1005,7 +4141,83 @@
     23,
     4
    ],
-   "special": 4
+   "special": 4,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 37586617,
+     "carry": 38606509
+    },
+    {
+     "name": "貳獎",
+     "winners": 3,
+     "amount": 18268627,
+     "pool": 4645537,
+     "carry": 50160346
+    },
+    {
+     "name": "參獎",
+     "winners": 22,
+     "amount": 150000,
+     "pool": 3300000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 83,
+     "amount": 20000,
+     "pool": 1660000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 464,
+     "amount": 4000,
+     "pool": 1856000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 3208,
+     "amount": 800,
+     "pool": 2566400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 5916,
+     "amount": 400,
+     "pool": 2366400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 32054,
+     "amount": 200,
+     "pool": 6410800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 43843,
+     "amount": 100,
+     "pool": 4384300,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 70309,
+     "amount": 100,
+     "pool": 7030900,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 160573810,
+    "sellAmount": 130558100
+   }
   },
   {
    "period": "115000014",
@@ -1027,7 +4239,83 @@
     38,
     3
    ],
-   "special": 3
+   "special": 3,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 38606509,
+     "carry": 0
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 4771591,
+     "carry": 45388755
+    },
+    {
+     "name": "參獎",
+     "winners": 7,
+     "amount": 150000,
+     "pool": 1050000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 53,
+     "amount": 20000,
+     "pool": 1060000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 416,
+     "amount": 4000,
+     "pool": 1664000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 3028,
+     "amount": 800,
+     "pool": 2422400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 5593,
+     "amount": 400,
+     "pool": 2237200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 30064,
+     "amount": 200,
+     "pool": 6012800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 39436,
+     "amount": 100,
+     "pool": 3943600,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 68213,
+     "amount": 100,
+     "pool": 6821300,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 113978155,
+    "sellAmount": 124708000
+   }
   },
   {
    "period": "115000013",
@@ -1049,7 +4337,83 @@
     22,
     3
    ],
-   "special": 3
+   "special": 3,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 2,
+     "amount": 677870347,
+     "pool": 200439979,
+     "carry": 1155300715
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 24773480,
+     "carry": 20615275
+    },
+    {
+     "name": "參獎",
+     "winners": 61,
+     "amount": 150000,
+     "pool": 9150000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 445,
+     "amount": 20000,
+     "pool": 8900000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 2159,
+     "amount": 4000,
+     "pool": 8636000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 15394,
+     "amount": 800,
+     "pool": 12315200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 28833,
+     "amount": 400,
+     "pool": 11533200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 160360,
+     "amount": 200,
+     "pool": 32072000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 202220,
+     "amount": 100,
+     "pool": 20222000,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 363074,
+     "amount": 100,
+     "pool": 36307400,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 1540265250,
+    "sellAmount": 662453200
+   }
   },
   {
    "period": "115000012",
@@ -1071,7 +4435,83 @@
     34,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 166796319,
+     "carry": 988504396
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 20615275,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 31,
+     "amount": 150000,
+     "pool": 4650000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 242,
+     "amount": 20000,
+     "pool": 4840000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 1649,
+     "amount": 4000,
+     "pool": 6596000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 11244,
+     "amount": 800,
+     "pool": 8995200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 23391,
+     "amount": 400,
+     "pool": 9356400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 133910,
+     "amount": 200,
+     "pool": 26782000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 156685,
+     "amount": 100,
+     "pool": 15668500,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 313247,
+     "amount": 100,
+     "pool": 31324700,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 1284128791,
+    "sellAmount": 537498900
+   }
   },
   {
    "period": "115000011",
@@ -1093,7 +4533,83 @@
     36,
     7
    ],
-   "special": 7
+   "special": 7,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 115552980,
+     "carry": 872951416
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 14281829,
+     "pool": 14281829,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 33,
+     "amount": 150000,
+     "pool": 4950000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 257,
+     "amount": 20000,
+     "pool": 5140000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 1529,
+     "amount": 4000,
+     "pool": 6116000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 9494,
+     "amount": 800,
+     "pool": 7595200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 19282,
+     "amount": 400,
+     "pool": 7712800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 100571,
+     "amount": 200,
+     "pool": 20114200,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 123910,
+     "amount": 100,
+     "pool": 12391000,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 217890,
+     "amount": 100,
+     "pool": 21789000,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 1088594426,
+    "sellAmount": 392078200
+   }
   },
   {
    "period": "115000010",
@@ -1115,7 +4631,83 @@
     27,
     5
    ],
-   "special": 5
+   "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 94151391,
+     "carry": 778800025
+    },
+    {
+     "name": "貳獎",
+     "winners": 4,
+     "amount": 13441113,
+     "pool": 11636688,
+     "carry": 42127764
+    },
+    {
+     "name": "參獎",
+     "winners": 27,
+     "amount": 150000,
+     "pool": 4050000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 173,
+     "amount": 20000,
+     "pool": 3460000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 927,
+     "amount": 4000,
+     "pool": 3708000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 6943,
+     "amount": 800,
+     "pool": 5554400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 13100,
+     "amount": 400,
+     "pool": 5240000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 72782,
+     "amount": 200,
+     "pool": 14556400,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 95432,
+     "amount": 100,
+     "pool": 9543200,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 166835,
+     "amount": 100,
+     "pool": 16683500,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 989511369,
+    "sellAmount": 306515600
+   }
   },
   {
    "period": "115000009",
@@ -1137,7 +4729,83 @@
     10,
     5
    ],
-   "special": 5
+   "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 76882672,
+     "carry": 701917353
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 9502352,
+     "carry": 32625412
+    },
+    {
+     "name": "參獎",
+     "winners": 21,
+     "amount": 150000,
+     "pool": 3150000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 183,
+     "amount": 20000,
+     "pool": 3660000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 935,
+     "amount": 4000,
+     "pool": 3740000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 6254,
+     "amount": 800,
+     "pool": 5003200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 12256,
+     "amount": 400,
+     "pool": 4902400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 63433,
+     "amount": 200,
+     "pool": 12686600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 81588,
+     "amount": 100,
+     "pool": 8158800,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 137429,
+     "amount": 100,
+     "pool": 13742900,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 875971690,
+    "sellAmount": 257143500
+   }
   },
   {
    "period": "115000008",
@@ -1159,7 +4827,83 @@
     38,
     4
    ],
-   "special": 4
+   "special": 4,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 66821053,
+     "carry": 635096300
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 8258781,
+     "carry": 24366631
+    },
+    {
+     "name": "參獎",
+     "winners": 20,
+     "amount": 150000,
+     "pool": 3000000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 181,
+     "amount": 20000,
+     "pool": 3620000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 888,
+     "amount": 4000,
+     "pool": 3552000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 6367,
+     "amount": 800,
+     "pool": 5093600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 10795,
+     "amount": 400,
+     "pool": 4318000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 56080,
+     "amount": 200,
+     "pool": 11216000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 79974,
+     "amount": 100,
+     "pool": 7997400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 122248,
+     "amount": 100,
+     "pool": 12224800,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 785564566,
+    "sellAmount": 229275700
+   }
   },
   {
    "period": "115000007",
@@ -1181,7 +4925,83 @@
     30,
     6
    ],
-   "special": 6
+   "special": 6,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 56271122,
+     "carry": 578825178
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 6954857,
+     "carry": 17411774
+    },
+    {
+     "name": "參獎",
+     "winners": 9,
+     "amount": 150000,
+     "pool": 1350000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 74,
+     "amount": 20000,
+     "pool": 1480000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 547,
+     "amount": 4000,
+     "pool": 2188000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 3836,
+     "amount": 800,
+     "pool": 3068800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 7371,
+     "amount": 400,
+     "pool": 2948400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 42115,
+     "amount": 200,
+     "pool": 8423000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 53182,
+     "amount": 100,
+     "pool": 5318200,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 97027,
+     "amount": 100,
+     "pool": 9702700,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 693942032,
+    "sellAmount": 177645600
+   }
   },
   {
    "period": "115000006",
@@ -1203,7 +5023,83 @@
     23,
     5
    ],
-   "special": 5
+   "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 55959822,
+     "carry": 522865356
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 6916382,
+     "carry": 10495392
+    },
+    {
+     "name": "參獎",
+     "winners": 12,
+     "amount": 150000,
+     "pool": 1800000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 69,
+     "amount": 20000,
+     "pool": 1380000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 543,
+     "amount": 4000,
+     "pool": 2172000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 3730,
+     "amount": 800,
+     "pool": 2984000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 7371,
+     "amount": 400,
+     "pool": 2948400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 41633,
+     "amount": 200,
+     "pool": 8326600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 51184,
+     "amount": 100,
+     "pool": 5118400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 94645,
+     "amount": 100,
+     "pool": 9464500,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 630430853,
+    "sellAmount": 176491100
+   }
   },
   {
    "period": "115000005",
@@ -1225,7 +5121,83 @@
     10,
     5
    ],
-   "special": 5
+   "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 43986011,
+     "carry": 478879345
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 5436473,
+     "carry": 5058919
+    },
+    {
+     "name": "參獎",
+     "winners": 14,
+     "amount": 150000,
+     "pool": 2100000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 89,
+     "amount": 20000,
+     "pool": 1780000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 489,
+     "amount": 4000,
+     "pool": 1956000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 3339,
+     "amount": 800,
+     "pool": 2671200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 6924,
+     "amount": 400,
+     "pool": 2769600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 39155,
+     "amount": 200,
+     "pool": 7831000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 46818,
+     "amount": 100,
+     "pool": 4681800,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 86426,
+     "amount": 100,
+     "pool": 8642600,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 565792949,
+    "sellAmount": 148826700
+   }
   },
   {
    "period": "115000004",
@@ -1247,7 +5219,83 @@
     38,
     3
    ],
-   "special": 3
+   "special": 3,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 40931255,
+     "carry": 437948090
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 5058919,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 13,
+     "amount": 150000,
+     "pool": 1950000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 103,
+     "amount": 20000,
+     "pool": 2060000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 445,
+     "amount": 4000,
+     "pool": 1780000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 3240,
+     "amount": 800,
+     "pool": 2592000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 6277,
+     "amount": 400,
+     "pool": 2510800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 33441,
+     "amount": 200,
+     "pool": 6688200,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 42836,
+     "amount": 100,
+     "pool": 4283600,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 74636,
+     "amount": 100,
+     "pool": 7463600,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 513266465,
+    "sellAmount": 136942500
+   }
   },
   {
    "period": "115000003",
@@ -1269,7 +5317,83 @@
     25,
     3
    ],
-   "special": 3
+   "special": 3,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 34163642,
+     "carry": 403784448
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 46059842,
+     "pool": 4222472,
+     "carry": 41837370
+    },
+    {
+     "name": "參獎",
+     "winners": 4,
+     "amount": 150000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 70,
+     "amount": 20000,
+     "pool": 1400000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 397,
+     "amount": 4000,
+     "pool": 1588000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 2553,
+     "amount": 800,
+     "pool": 2042400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 5997,
+     "amount": 400,
+     "pool": 2398800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 33342,
+     "amount": 200,
+     "pool": 6668400,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 35617,
+     "amount": 100,
+     "pool": 3561700,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 73599,
+     "amount": 100,
+     "pool": 7359900,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 509627133,
+    "sellAmount": 116373300
+   }
   },
   {
    "period": "115000002",
@@ -1291,7 +5415,83 @@
     19,
     4
    ],
-   "special": 4
+   "special": 4,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 34717266,
+     "carry": 369067182
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 4290898,
+     "carry": 37546472
+    },
+    {
+     "name": "參獎",
+     "winners": 14,
+     "amount": 150000,
+     "pool": 2100000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 62,
+     "amount": 20000,
+     "pool": 1240000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 389,
+     "amount": 4000,
+     "pool": 1556000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 2661,
+     "amount": 800,
+     "pool": 2128800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 5235,
+     "amount": 400,
+     "pool": 2094000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 28694,
+     "amount": 200,
+     "pool": 5738800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 35524,
+     "amount": 100,
+     "pool": 3552400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 64821,
+     "amount": 100,
+     "pool": 6482100,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 470513919,
+    "sellAmount": 116182300
+   }
   },
   {
    "period": "115000001",
@@ -1313,7 +5513,83 @@
     14,
     1
    ],
-   "special": 1
+   "special": 1,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 29487911,
+     "carry": 339579271
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 3644573,
+     "carry": 33901899
+    },
+    {
+     "name": "參獎",
+     "winners": 8,
+     "amount": 150000,
+     "pool": 1200000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 63,
+     "amount": 20000,
+     "pool": 1260000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 334,
+     "amount": 4000,
+     "pool": 1336000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 2467,
+     "amount": 800,
+     "pool": 1973600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 4235,
+     "amount": 400,
+     "pool": 1694000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 23300,
+     "amount": 200,
+     "pool": 4660000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 30932,
+     "amount": 100,
+     "pool": 3093200,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 53740,
+     "amount": 100,
+     "pool": 5374000,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 427204455,
+    "sellAmount": 97678700
+   }
   },
   {
    "period": "114000104",
@@ -1335,7 +5611,83 @@
     18,
     6
    ],
-   "special": 6
+   "special": 6,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 27953280,
+     "carry": 311625991
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 3454899,
+     "carry": 30447000
+    },
+    {
+     "name": "參獎",
+     "winners": 11,
+     "amount": 150000,
+     "pool": 1650000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 37,
+     "amount": 20000,
+     "pool": 740000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 364,
+     "amount": 4000,
+     "pool": 1456000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 2272,
+     "amount": 800,
+     "pool": 1817600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 4406,
+     "amount": 400,
+     "pool": 1762400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 23553,
+     "amount": 200,
+     "pool": 4710600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 32234,
+     "amount": 100,
+     "pool": 3223400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 50537,
+     "amount": 100,
+     "pool": 5053700,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 393894871,
+    "sellAmount": 94221600
+   }
   },
   {
    "period": "114000103",
@@ -1357,7 +5709,83 @@
     34,
     8
    ],
-   "special": 8
+   "special": 8,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 23564556,
+     "carry": 288061435
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2912473,
+     "carry": 27534527
+    },
+    {
+     "name": "參獎",
+     "winners": 9,
+     "amount": 150000,
+     "pool": 1350000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 48,
+     "amount": 20000,
+     "pool": 960000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 249,
+     "amount": 4000,
+     "pool": 996000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1837,
+     "amount": 800,
+     "pool": 1469600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3372,
+     "amount": 400,
+     "pool": 1348800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 18315,
+     "amount": 200,
+     "pool": 3663000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 24192,
+     "amount": 100,
+     "pool": 2419200,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 40946,
+     "amount": 100,
+     "pool": 4094600,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 358374192,
+    "sellAmount": 77778600
+   }
   },
   {
    "period": "114000102",
@@ -1379,7 +5807,83 @@
     34,
     8
    ],
-   "special": 8
+   "special": 8,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 24762866,
+     "carry": 263298569
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 3060578,
+     "carry": 24473949
+    },
+    {
+     "name": "參獎",
+     "winners": 9,
+     "amount": 150000,
+     "pool": 1350000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 39,
+     "amount": 20000,
+     "pool": 780000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 242,
+     "amount": 4000,
+     "pool": 968000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1615,
+     "amount": 800,
+     "pool": 1292000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3414,
+     "amount": 400,
+     "pool": 1365600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 19267,
+     "amount": 200,
+     "pool": 3853400,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 22549,
+     "amount": 100,
+     "pool": 2254900,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 48483,
+     "amount": 100,
+     "pool": 4848300,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 332308163,
+    "sellAmount": 80973900
+   }
   },
   {
    "period": "114000101",
@@ -1401,7 +5905,83 @@
     37,
     5
    ],
-   "special": 5
+   "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 19949986,
+     "carry": 243348583
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2465728,
+     "carry": 22008221
+    },
+    {
+     "name": "參獎",
+     "winners": 4,
+     "amount": 150000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 41,
+     "amount": 20000,
+     "pool": 820000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 274,
+     "amount": 4000,
+     "pool": 1096000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1665,
+     "amount": 800,
+     "pool": 1332000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3376,
+     "amount": 400,
+     "pool": 1350400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 17778,
+     "amount": 200,
+     "pool": 3555600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 21118,
+     "amount": 100,
+     "pool": 2111800,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 40235,
+     "amount": 100,
+     "pool": 4023500,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 302661819,
+    "sellAmount": 67827300
+   }
   },
   {
    "period": "114000100",
@@ -1423,7 +6003,83 @@
     26,
     6
    ],
-   "special": 6
+   "special": 6,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 20879270,
+     "carry": 222469313
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2580584,
+     "carry": 19427637
+    },
+    {
+     "name": "參獎",
+     "winners": 5,
+     "amount": 150000,
+     "pool": 750000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 31,
+     "amount": 20000,
+     "pool": 620000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 170,
+     "amount": 4000,
+     "pool": 680000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1317,
+     "amount": 800,
+     "pool": 1053600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2503,
+     "amount": 400,
+     "pool": 1001200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 14548,
+     "amount": 200,
+     "pool": 2909600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 18614,
+     "amount": 100,
+     "pool": 1861400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 33759,
+     "amount": 100,
+     "pool": 3375900,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 277608505,
+    "sellAmount": 64930100
+   }
   },
   {
    "period": "114000099",
@@ -1445,7 +6101,83 @@
     5,
     7
    ],
-   "special": 7
+   "special": 7,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 18190354,
+     "carry": 204278959
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2248246,
+     "carry": 17179391
+    },
+    {
+     "name": "參獎",
+     "winners": 8,
+     "amount": 150000,
+     "pool": 1200000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 40,
+     "amount": 20000,
+     "pool": 800000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 213,
+     "amount": 4000,
+     "pool": 852000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1433,
+     "amount": 800,
+     "pool": 1146400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2622,
+     "amount": 400,
+     "pool": 1048800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13985,
+     "amount": 200,
+     "pool": 2797000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 19499,
+     "amount": 100,
+     "pool": 1949900,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 30929,
+     "amount": 100,
+     "pool": 3092900,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 254783950,
+    "sellAmount": 60592000
+   }
   },
   {
    "period": "114000098",
@@ -1467,7 +6199,83 @@
     14,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 19039765,
+     "carry": 185239194
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2353229,
+     "carry": 14826162
+    },
+    {
+     "name": "參獎",
+     "winners": 7,
+     "amount": 150000,
+     "pool": 1050000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 42,
+     "amount": 20000,
+     "pool": 840000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 203,
+     "amount": 4000,
+     "pool": 812000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1271,
+     "amount": 800,
+     "pool": 1016800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2461,
+     "amount": 400,
+     "pool": 984400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 14288,
+     "amount": 200,
+     "pool": 2857600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 17422,
+     "amount": 100,
+     "pool": 1742200,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 33110,
+     "amount": 100,
+     "pool": 3311000,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 234072351,
+    "sellAmount": 61830900
+   }
   },
   {
    "period": "114000097",
@@ -1489,7 +6297,83 @@
     6,
     1
    ],
-   "special": 1
+   "special": 1,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 17589021,
+     "carry": 167650173
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2173923,
+     "carry": 12652239
+    },
+    {
+     "name": "參獎",
+     "winners": 4,
+     "amount": 150000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 25,
+     "amount": 20000,
+     "pool": 500000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 191,
+     "amount": 4000,
+     "pool": 764000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1386,
+     "amount": 800,
+     "pool": 1108800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2608,
+     "amount": 400,
+     "pool": 1043200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13890,
+     "amount": 200,
+     "pool": 2778000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 19364,
+     "amount": 100,
+     "pool": 1936400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 29556,
+     "amount": 100,
+     "pool": 2955600,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 211751357,
+    "sellAmount": 57179900
+   }
   },
   {
    "period": "114000096",
@@ -1511,7 +6395,83 @@
     5,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 17124579,
+     "carry": 150525594
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2116521,
+     "carry": 10535718
+    },
+    {
+     "name": "參獎",
+     "winners": 7,
+     "amount": 150000,
+     "pool": 1050000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 40,
+     "amount": 20000,
+     "pool": 800000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 205,
+     "amount": 4000,
+     "pool": 820000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1529,
+     "amount": 800,
+     "pool": 1223200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3021,
+     "amount": 400,
+     "pool": 1208400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 15399,
+     "amount": 200,
+     "pool": 3079800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 20860,
+     "amount": 100,
+     "pool": 2086000,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 32913,
+     "amount": 100,
+     "pool": 3291300,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 193861112,
+    "sellAmount": 59636000
+   }
   },
   {
    "period": "114000095",
@@ -1533,7 +6493,83 @@
     33,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 17497106,
+     "carry": 133028488
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2162563,
+     "carry": 8373155
+    },
+    {
+     "name": "參獎",
+     "winners": 0,
+     "amount": 150000,
+     "pool": 0,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 32,
+     "amount": 20000,
+     "pool": 640000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 171,
+     "amount": 4000,
+     "pool": 684000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1170,
+     "amount": 800,
+     "pool": 936000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2364,
+     "amount": 400,
+     "pool": 945600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13305,
+     "amount": 200,
+     "pool": 2661000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 16354,
+     "amount": 100,
+     "pool": 1635400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 30682,
+     "amount": 100,
+     "pool": 3068200,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 171631513,
+    "sellAmount": 54963400
+   }
   },
   {
    "period": "114000094",
@@ -1555,7 +6591,83 @@
     34,
     7
    ],
-   "special": 7
+   "special": 7,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 18861236,
+     "carry": 114167252
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2331164,
+     "carry": 6041991
+    },
+    {
+     "name": "參獎",
+     "winners": 3,
+     "amount": 150000,
+     "pool": 450000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 30,
+     "amount": 20000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 188,
+     "amount": 4000,
+     "pool": 752000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1292,
+     "amount": 800,
+     "pool": 1033600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2566,
+     "amount": 400,
+     "pool": 1026400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 14167,
+     "amount": 200,
+     "pool": 2833400,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 18164,
+     "amount": 100,
+     "pool": 1816400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 31242,
+     "amount": 100,
+     "pool": 3124200,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 153037643,
+    "sellAmount": 59688000
+   }
   },
   {
    "period": "114000093",
@@ -1577,7 +6689,83 @@
     20,
     7
    ],
-   "special": 7
+   "special": 7,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 16364323,
+     "carry": 97802929
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2022556,
+     "carry": 4019435
+    },
+    {
+     "name": "參獎",
+     "winners": 3,
+     "amount": 150000,
+     "pool": 450000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 27,
+     "amount": 20000,
+     "pool": 540000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 186,
+     "amount": 4000,
+     "pool": 744000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1262,
+     "amount": 800,
+     "pool": 1009600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2564,
+     "amount": 400,
+     "pool": 1025600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13849,
+     "amount": 200,
+     "pool": 2769800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 17745,
+     "amount": 100,
+     "pool": 1774500,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 31259,
+     "amount": 100,
+     "pool": 3125900,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 131648644,
+    "sellAmount": 54229600
+   }
   },
   {
    "period": "114000092",
@@ -1599,7 +6787,83 @@
     19,
     6
    ],
-   "special": 6
+   "special": 6,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 18235045,
+     "carry": 79567884
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2253769,
+     "carry": 1765666
+    },
+    {
+     "name": "參獎",
+     "winners": 3,
+     "amount": 150000,
+     "pool": 450000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 22,
+     "amount": 20000,
+     "pool": 440000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 182,
+     "amount": 4000,
+     "pool": 728000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1111,
+     "amount": 800,
+     "pool": 888800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2251,
+     "amount": 400,
+     "pool": 900400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 12889,
+     "amount": 200,
+     "pool": 2577800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 16465,
+     "amount": 100,
+     "pool": 1646500,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 29653,
+     "amount": 100,
+     "pool": 2965300,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 112419165,
+    "sellAmount": 56519300
+   }
   },
   {
    "period": "114000091",
@@ -1621,7 +6885,83 @@
     11,
     4
    ],
-   "special": 4
+   "special": 4,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 14285843,
+     "carry": 65282041
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 1765666,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 7,
+     "amount": 150000,
+     "pool": 1050000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 39,
+     "amount": 20000,
+     "pool": 780000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 187,
+     "amount": 4000,
+     "pool": 748000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1387,
+     "amount": 800,
+     "pool": 1109600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2236,
+     "amount": 400,
+     "pool": 894400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 11848,
+     "amount": 200,
+     "pool": 2369600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 16810,
+     "amount": 100,
+     "pool": 1681000,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 26202,
+     "amount": 100,
+     "pool": 2620200,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 92586351,
+    "sellAmount": 49644200
+   }
   },
   {
    "period": "114000090",
@@ -1643,7 +6983,83 @@
     6,
     4
    ],
-   "special": 4
+   "special": 4,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 16537174,
+     "carry": 48744867
+    },
+    {
+     "name": "貳獎",
+     "winners": 2,
+     "amount": 2024406,
+     "pool": 2043920,
+     "carry": 2004893
+    },
+    {
+     "name": "參獎",
+     "winners": 4,
+     "amount": 150000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 33,
+     "amount": 20000,
+     "pool": 660000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 155,
+     "amount": 4000,
+     "pool": 620000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1164,
+     "amount": 800,
+     "pool": 931200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2163,
+     "amount": 400,
+     "pool": 865200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 12085,
+     "amount": 200,
+     "pool": 2417000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 15890,
+     "amount": 100,
+     "pool": 1589000,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 27550,
+     "amount": 100,
+     "pool": 2755000,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 79768255,
+    "sellAmount": 52760900
+   }
   },
   {
    "period": "114000089",
@@ -1665,7 +7081,83 @@
     11,
     8
    ],
-   "special": 8
+   "special": 8,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 16221411,
+     "carry": 32523456
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2004893,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 2,
+     "amount": 150000,
+     "pool": 300000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 32,
+     "amount": 20000,
+     "pool": 640000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 174,
+     "amount": 4000,
+     "pool": 696000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1105,
+     "amount": 800,
+     "pool": 884000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2214,
+     "amount": 400,
+     "pool": 885600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 12449,
+     "amount": 200,
+     "pool": 2489800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 15796,
+     "amount": 100,
+     "pool": 1579600,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 28982,
+     "amount": 100,
+     "pool": 2898200,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 61122961,
+    "sellAmount": 51999100
+   }
   },
   {
    "period": "114000088",
@@ -1687,7 +7179,83 @@
     4,
     4
    ],
-   "special": 4
+   "special": 4,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 16834737,
+     "carry": 15688719
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 7907769,
+     "pool": 2080697,
+     "carry": 5827072
+    },
+    {
+     "name": "參獎",
+     "winners": 2,
+     "amount": 150000,
+     "pool": 300000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 19,
+     "amount": 20000,
+     "pool": 380000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 192,
+     "amount": 4000,
+     "pool": 768000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1009,
+     "amount": 800,
+     "pool": 807200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2302,
+     "amount": 400,
+     "pool": 920800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13473,
+     "amount": 200,
+     "pool": 2694600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 14612,
+     "amount": 100,
+     "pool": 1461200,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 32282,
+     "amount": 100,
+     "pool": 3228200,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 50991226,
+    "sellAmount": 53591700
+   }
   },
   {
    "period": "114000087",
@@ -1709,7 +7277,83 @@
     14,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 15688719,
+     "carry": 0
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 1939055,
+     "carry": 3888017
+    },
+    {
+     "name": "參獎",
+     "winners": 4,
+     "amount": 150000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 21,
+     "amount": 20000,
+     "pool": 420000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 163,
+     "amount": 4000,
+     "pool": 652000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1052,
+     "amount": 800,
+     "pool": 841600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2293,
+     "amount": 400,
+     "pool": 917200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 12432,
+     "amount": 200,
+     "pool": 2486400,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 14631,
+     "amount": 100,
+     "pool": 1463100,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 28508,
+     "amount": 100,
+     "pool": 2850800,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 31746892,
+    "sellAmount": 50652500
+   }
   },
   {
    "period": "114000086",
@@ -1731,7 +7375,83 @@
     11,
     6
    ],
-   "special": 6
+   "special": 6,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 1,
+     "amount": 200000000,
+     "pool": 100456235,
+     "carry": 99543765
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2050147,
+     "carry": 1837870
+    },
+    {
+     "name": "參獎",
+     "winners": 5,
+     "amount": 150000,
+     "pool": 750000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 28,
+     "amount": 20000,
+     "pool": 560000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 193,
+     "amount": 4000,
+     "pool": 772000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1306,
+     "amount": 800,
+     "pool": 1044800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2592,
+     "amount": 400,
+     "pool": 1036800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13926,
+     "amount": 200,
+     "pool": 2785200,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 17255,
+     "amount": 100,
+     "pool": 1725500,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 31168,
+     "amount": 100,
+     "pool": 3116800,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 215679118,
+    "sellAmount": 55325100
+   }
   },
   {
    "period": "114000085",
@@ -1753,7 +7473,83 @@
     11,
     8
    ],
-   "special": 8
+   "special": 8,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 14870039,
+     "carry": 84673726
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 1837870,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 7,
+     "amount": 150000,
+     "pool": 1050000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 23,
+     "amount": 20000,
+     "pool": 460000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 168,
+     "amount": 4000,
+     "pool": 672000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1123,
+     "amount": 800,
+     "pool": 898400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2446,
+     "amount": 400,
+     "pool": 978400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13120,
+     "amount": 200,
+     "pool": 2624000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 15803,
+     "amount": 100,
+     "pool": 1580300,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 28327,
+     "amount": 100,
+     "pool": 2832700,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 112477436,
+    "sellAmount": 50552200
+   }
   },
   {
    "period": "114000084",
@@ -1775,7 +7571,83 @@
     8,
     5
    ],
-   "special": 5
+   "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 15407795,
+     "carry": 69265931
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 1904334,
+     "pool": 1904334,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 5,
+     "amount": 150000,
+     "pool": 750000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 33,
+     "amount": 20000,
+     "pool": 660000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 199,
+     "amount": 4000,
+     "pool": 796000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1261,
+     "amount": 800,
+     "pool": 1008800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2459,
+     "amount": 400,
+     "pool": 983600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13060,
+     "amount": 200,
+     "pool": 2612000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 16481,
+     "amount": 100,
+     "pool": 1648100,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 29287,
+     "amount": 100,
+     "pool": 2928700,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 97965261,
+    "sellAmount": 52180600
+   }
   },
   {
    "period": "114000083",
@@ -1797,7 +7669,83 @@
     26,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 16607115,
+     "carry": 52658816
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 10718269,
+     "pool": 2052564,
+     "carry": 8665705
+    },
+    {
+     "name": "參獎",
+     "winners": 4,
+     "amount": 150000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 20,
+     "amount": 20000,
+     "pool": 400000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 179,
+     "amount": 4000,
+     "pool": 716000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1254,
+     "amount": 800,
+     "pool": 1003200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2520,
+     "amount": 400,
+     "pool": 1008000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13655,
+     "amount": 200,
+     "pool": 2731000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 17606,
+     "amount": 100,
+     "pool": 1760600,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 30754,
+     "amount": 100,
+     "pool": 3075400,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 91278401,
+    "sellAmount": 54461600
+   }
   },
   {
    "period": "114000082",
@@ -1819,7 +7767,83 @@
     24,
     1
    ],
-   "special": 1
+   "special": 1,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 16853476,
+     "carry": 35805340
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2083013,
+     "carry": 6582692
+    },
+    {
+     "name": "參獎",
+     "winners": 8,
+     "amount": 150000,
+     "pool": 1200000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 38,
+     "amount": 20000,
+     "pool": 760000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 196,
+     "amount": 4000,
+     "pool": 784000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1580,
+     "amount": 800,
+     "pool": 1264000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2727,
+     "amount": 400,
+     "pool": 1090800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 14804,
+     "amount": 200,
+     "pool": 2960800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 19746,
+     "amount": 100,
+     "pool": 1974600,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 32526,
+     "amount": 100,
+     "pool": 3252600,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 74611322,
+    "sellAmount": 58587800
+   }
   },
   {
    "period": "114000081",
@@ -1841,7 +7865,83 @@
     1,
     8
    ],
-   "special": 8
+   "special": 8,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 17803106,
+     "carry": 18002234
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2200383,
+     "carry": 4382309
+    },
+    {
+     "name": "參獎",
+     "winners": 4,
+     "amount": 150000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 24,
+     "amount": 20000,
+     "pool": 480000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 165,
+     "amount": 4000,
+     "pool": 660000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1173,
+     "amount": 800,
+     "pool": 938400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2470,
+     "amount": 400,
+     "pool": 988000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 14558,
+     "amount": 200,
+     "pool": 2911600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 17226,
+     "amount": 100,
+     "pool": 1722600,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 33142,
+     "amount": 100,
+     "pool": 3314200,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 54002833,
+    "sellAmount": 57487800
+   }
   },
   {
    "period": "114000080",
@@ -1863,7 +7963,83 @@
     5,
     5
    ],
-   "special": 5
+   "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 18002234,
+     "carry": 0
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2224995,
+     "carry": 2157314
+    },
+    {
+     "name": "參獎",
+     "winners": 5,
+     "amount": 150000,
+     "pool": 750000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 33,
+     "amount": 20000,
+     "pool": 660000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 248,
+     "amount": 4000,
+     "pool": 992000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1575,
+     "amount": 800,
+     "pool": 1260000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3353,
+     "amount": 400,
+     "pool": 1341200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 16950,
+     "amount": 200,
+     "pool": 3390000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 21327,
+     "amount": 100,
+     "pool": 2132700,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 35793,
+     "amount": 100,
+     "pool": 3579300,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 36489744,
+    "sellAmount": 62422600
+   }
   },
   {
    "period": "114000079",
@@ -1885,7 +8061,83 @@
     30,
     7
    ],
-   "special": 7
+   "special": 7,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 1,
+     "amount": 227106478,
+     "pool": 17454635,
+     "carry": 209651843
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2157314,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 10,
+     "amount": 150000,
+     "pool": 1500000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 41,
+     "amount": 20000,
+     "pool": 820000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 257,
+     "amount": 4000,
+     "pool": 1028000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1597,
+     "amount": 800,
+     "pool": 1277600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3087,
+     "amount": 400,
+     "pool": 1234800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 15840,
+     "amount": 200,
+     "pool": 3168000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 21252,
+     "amount": 100,
+     "pool": 2125200,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 34164,
+     "amount": 100,
+     "pool": 3416400,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 243833793,
+    "sellAmount": 62149000
+   }
   },
   {
    "period": "114000078",
@@ -1907,7 +8159,83 @@
     27,
     3
    ],
-   "special": 3
+   "special": 3,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 18639496,
+     "carry": 191012347
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 28462968,
+     "pool": 2303758,
+     "carry": 26159210
+    },
+    {
+     "name": "參獎",
+     "winners": 5,
+     "amount": 150000,
+     "pool": 750000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 18,
+     "amount": 20000,
+     "pool": 360000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 177,
+     "amount": 4000,
+     "pool": 708000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1280,
+     "amount": 800,
+     "pool": 1024000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2505,
+     "amount": 400,
+     "pool": 1002000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13734,
+     "amount": 200,
+     "pool": 2746800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 17885,
+     "amount": 100,
+     "pool": 1788500,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 31539,
+     "amount": 100,
+     "pool": 3153900,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 249648012,
+    "sellAmount": 59048100
+   }
   },
   {
    "period": "114000077",
@@ -1929,7 +8257,83 @@
     24,
     3
    ],
-   "special": 3
+   "special": 3,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 16431366,
+     "carry": 174580981
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2030843,
+     "carry": 24128367
+    },
+    {
+     "name": "參獎",
+     "winners": 4,
+     "amount": 150000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 39,
+     "amount": 20000,
+     "pool": 780000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 214,
+     "amount": 4000,
+     "pool": 856000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1548,
+     "amount": 800,
+     "pool": 1238400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2810,
+     "amount": 400,
+     "pool": 1124000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 15052,
+     "amount": 200,
+     "pool": 3010400,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 19307,
+     "amount": 100,
+     "pool": 1930700,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 32824,
+     "amount": 100,
+     "pool": 3282400,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 229993458,
+    "sellAmount": 56880200
+   }
   },
   {
    "period": "114000076",
@@ -1951,7 +8355,83 @@
     31,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 18546305,
+     "carry": 156034676
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2292239,
+     "carry": 21836128
+    },
+    {
+     "name": "參獎",
+     "winners": 4,
+     "amount": 150000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 37,
+     "amount": 20000,
+     "pool": 740000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 176,
+     "amount": 4000,
+     "pool": 704000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1505,
+     "amount": 800,
+     "pool": 1204000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2439,
+     "amount": 400,
+     "pool": 975600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13205,
+     "amount": 200,
+     "pool": 2641000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 18858,
+     "amount": 100,
+     "pool": 1885800,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 30139,
+     "amount": 100,
+     "pool": 3013900,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 210473649,
+    "sellAmount": 59277900
+   }
   },
   {
    "period": "114000075",
@@ -1973,7 +8453,83 @@
     25,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 17892760,
+     "carry": 138141916
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2211464,
+     "carry": 19624664
+    },
+    {
+     "name": "參獎",
+     "winners": 5,
+     "amount": 150000,
+     "pool": 750000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 28,
+     "amount": 20000,
+     "pool": 560000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 164,
+     "amount": 4000,
+     "pool": 656000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1257,
+     "amount": 800,
+     "pool": 1005600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2235,
+     "amount": 400,
+     "pool": 894000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 12951,
+     "amount": 200,
+     "pool": 2590200,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 16361,
+     "amount": 100,
+     "pool": 1636100,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 29446,
+     "amount": 100,
+     "pool": 2944600,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 188907305,
+    "sellAmount": 56619500
+   }
   },
   {
    "period": "114000074",
@@ -1995,7 +8551,83 @@
     38,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 18814795,
+     "carry": 119327121
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2325424,
+     "carry": 17299240
+    },
+    {
+     "name": "參獎",
+     "winners": 1,
+     "amount": 150000,
+     "pool": 150000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 26,
+     "amount": 20000,
+     "pool": 520000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 173,
+     "amount": 4000,
+     "pool": 692000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1301,
+     "amount": 800,
+     "pool": 1040800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2613,
+     "amount": 400,
+     "pool": 1045200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 14583,
+     "amount": 200,
+     "pool": 2916600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 18052,
+     "amount": 100,
+     "pool": 1805200,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 32689,
+     "amount": 100,
+     "pool": 3268900,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 169205281,
+    "sellAmount": 59234400
+   }
   },
   {
    "period": "114000073",
@@ -2017,7 +8649,83 @@
     18,
     6
    ],
-   "special": 6
+   "special": 6,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 17865886,
+     "carry": 101461235
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2208143,
+     "carry": 15091097
+    },
+    {
+     "name": "參獎",
+     "winners": 3,
+     "amount": 150000,
+     "pool": 450000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 42,
+     "amount": 20000,
+     "pool": 840000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 161,
+     "amount": 4000,
+     "pool": 644000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1257,
+     "amount": 800,
+     "pool": 1005600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2252,
+     "amount": 400,
+     "pool": 900800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 12686,
+     "amount": 200,
+     "pool": 2537200,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 17654,
+     "amount": 100,
+     "pool": 1765400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 28451,
+     "amount": 100,
+     "pool": 2845100,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 147614462,
+    "sellAmount": 56476600
+   }
   },
   {
    "period": "114000072",
@@ -2039,7 +8747,83 @@
     7,
     6
    ],
-   "special": 6
+   "special": 6,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 17566820,
+     "carry": 83894415
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2171180,
+     "carry": 12919917
+    },
+    {
+     "name": "參獎",
+     "winners": 2,
+     "amount": 150000,
+     "pool": 300000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 44,
+     "amount": 20000,
+     "pool": 880000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 212,
+     "amount": 4000,
+     "pool": 848000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1628,
+     "amount": 800,
+     "pool": 1302400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2813,
+     "amount": 400,
+     "pool": 1125200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 14664,
+     "amount": 200,
+     "pool": 2932800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 20217,
+     "amount": 100,
+     "pool": 2021700,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 31622,
+     "amount": 100,
+     "pool": 3162200,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 129124632,
+    "sellAmount": 58746000
+   }
   },
   {
    "period": "114000071",
@@ -2061,7 +8845,83 @@
     21,
     8
    ],
-   "special": 8
+   "special": 8,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 14506648,
+     "carry": 69387767
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 1792956,
+     "carry": 11126961
+    },
+    {
+     "name": "參獎",
+     "winners": 4,
+     "amount": 150000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 30,
+     "amount": 20000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 277,
+     "amount": 4000,
+     "pool": 1108000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1547,
+     "amount": 800,
+     "pool": 1237600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3485,
+     "amount": 400,
+     "pool": 1394000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 18278,
+     "amount": 200,
+     "pool": 3655600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 19522,
+     "amount": 100,
+     "pool": 1952200,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 37633,
+     "amount": 100,
+     "pool": 3763300,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 111125033,
+    "sellAmount": 55655100
+   }
   },
   {
    "period": "114000070",
@@ -2083,7 +8943,83 @@
     16,
     4
    ],
-   "special": 4
+   "special": 4,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 18091879,
+     "carry": 51295888
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2236075,
+     "carry": 8890886
+    },
+    {
+     "name": "參獎",
+     "winners": 2,
+     "amount": 150000,
+     "pool": 300000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 37,
+     "amount": 20000,
+     "pool": 740000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 192,
+     "amount": 4000,
+     "pool": 768000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1374,
+     "amount": 800,
+     "pool": 1099200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2831,
+     "amount": 400,
+     "pool": 1132400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 14985,
+     "amount": 200,
+     "pool": 2997000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 19556,
+     "amount": 100,
+     "pool": 1955600,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 33213,
+     "amount": 100,
+     "pool": 3321300,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 92828229,
+    "sellAmount": 59348100
+   }
   },
   {
    "period": "114000069",
@@ -2105,7 +9041,83 @@
     13,
     5
    ],
-   "special": 5
+   "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 16707084,
+     "carry": 34588804
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2064920,
+     "carry": 6825966
+    },
+    {
+     "name": "參獎",
+     "winners": 4,
+     "amount": 150000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 42,
+     "amount": 20000,
+     "pool": 840000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 207,
+     "amount": 4000,
+     "pool": 828000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1297,
+     "amount": 800,
+     "pool": 1037600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2558,
+     "amount": 400,
+     "pool": 1023200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 14192,
+     "amount": 200,
+     "pool": 2838400,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 17041,
+     "amount": 100,
+     "pool": 1704100,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 32200,
+     "amount": 100,
+     "pool": 3220000,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 72278075,
+    "sellAmount": 56115100
+   }
   },
   {
    "period": "114000068",
@@ -2127,7 +9139,83 @@
     21,
     3
    ],
-   "special": 3
+   "special": 3,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 18699594,
+     "carry": 15889210
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2311185,
+     "carry": 4514781
+    },
+    {
+     "name": "參獎",
+     "winners": 3,
+     "amount": 150000,
+     "pool": 450000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 24,
+     "amount": 20000,
+     "pool": 480000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 192,
+     "amount": 4000,
+     "pool": 768000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1306,
+     "amount": 800,
+     "pool": 1044800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2521,
+     "amount": 400,
+     "pool": 1008400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13834,
+     "amount": 200,
+     "pool": 2766800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 18137,
+     "amount": 100,
+     "pool": 1813700,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 31997,
+     "amount": 100,
+     "pool": 3199700,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 52946171,
+    "sellAmount": 59167600
+   }
   },
   {
    "period": "114000067",
@@ -2149,7 +9237,83 @@
     19,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 15889210,
+     "carry": 0
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 1963834,
+     "carry": 2550947
+    },
+    {
+     "name": "參獎",
+     "winners": 9,
+     "amount": 150000,
+     "pool": 1350000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 44,
+     "amount": 20000,
+     "pool": 880000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 222,
+     "amount": 4000,
+     "pool": 888000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1423,
+     "amount": 800,
+     "pool": 1138400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2575,
+     "amount": 400,
+     "pool": 1030000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13675,
+     "amount": 200,
+     "pool": 2735000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 17892,
+     "amount": 100,
+     "pool": 1789200,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 28943,
+     "amount": 100,
+     "pool": 2894300,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 33108892,
+    "sellAmount": 55559900
+   }
   },
   {
    "period": "114000066",
@@ -2171,7 +9335,83 @@
     26,
     6
    ],
-   "special": 6
+   "special": 6,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 1,
+     "amount": 268911196,
+     "pool": 20639482,
+     "carry": 248271714
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2550947,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 6,
+     "amount": 150000,
+     "pool": 900000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 46,
+     "amount": 20000,
+     "pool": 920000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 270,
+     "amount": 4000,
+     "pool": 1080000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1973,
+     "amount": 800,
+     "pool": 1578400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3331,
+     "amount": 400,
+     "pool": 1332400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 17645,
+     "amount": 200,
+     "pool": 3529000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 23768,
+     "amount": 100,
+     "pool": 2376800,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 39354,
+     "amount": 100,
+     "pool": 3935400,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 287114144,
+    "sellAmount": 70622600
+   }
   },
   {
    "period": "114000065",
@@ -2193,7 +9433,83 @@
     11,
     3
    ],
-   "special": 3
+   "special": 3,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 19631749,
+     "carry": 228639965
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 21856303,
+     "pool": 2426395,
+     "carry": 19429908
+    },
+    {
+     "name": "參獎",
+     "winners": 5,
+     "amount": 150000,
+     "pool": 750000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 30,
+     "amount": 20000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 210,
+     "amount": 4000,
+     "pool": 840000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1523,
+     "amount": 800,
+     "pool": 1218400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2679,
+     "amount": 400,
+     "pool": 1071600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 15158,
+     "amount": 200,
+     "pool": 3031600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 20249,
+     "amount": 100,
+     "pool": 2024900,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 33457,
+     "amount": 100,
+     "pool": 3345700,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 283010218,
+    "sellAmount": 63527900
+   }
   },
   {
    "period": "114000064",
@@ -2215,7 +9531,83 @@
     18,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 20199346,
+     "carry": 208440619
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2496548,
+     "carry": 16933360
+    },
+    {
+     "name": "參獎",
+     "winners": 5,
+     "amount": 150000,
+     "pool": 750000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 40,
+     "amount": 20000,
+     "pool": 800000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 240,
+     "amount": 4000,
+     "pool": 960000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1726,
+     "amount": 800,
+     "pool": 1380800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3165,
+     "amount": 400,
+     "pool": 1266000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 16881,
+     "amount": 200,
+     "pool": 3376200,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 22763,
+     "amount": 100,
+     "pool": 2276300,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 36874,
+     "amount": 100,
+     "pool": 3687400,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 262566574,
+    "sellAmount": 67622900
+   }
   },
   {
    "period": "114000063",
@@ -2237,7 +9629,83 @@
     18,
     7
    ],
-   "special": 7
+   "special": 7,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 16779552,
+     "carry": 191661067
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2073877,
+     "carry": 14859483
+    },
+    {
+     "name": "參獎",
+     "winners": 9,
+     "amount": 150000,
+     "pool": 1350000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 55,
+     "amount": 20000,
+     "pool": 1100000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 275,
+     "amount": 4000,
+     "pool": 1100000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1666,
+     "amount": 800,
+     "pool": 1332800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3276,
+     "amount": 400,
+     "pool": 1310400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 16569,
+     "amount": 200,
+     "pool": 3313800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 21844,
+     "amount": 100,
+     "pool": 2184400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 34818,
+     "amount": 100,
+     "pool": 3481800,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 240547180,
+    "sellAmount": 61866600
+   }
   },
   {
    "period": "114000062",
@@ -2259,7 +9727,83 @@
     32,
     1
    ],
-   "special": 1
+   "special": 1,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 17755063,
+     "carry": 173906004
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2194446,
+     "carry": 12665037
+    },
+    {
+     "name": "參獎",
+     "winners": 3,
+     "amount": 150000,
+     "pool": 450000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 25,
+     "amount": 20000,
+     "pool": 500000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 151,
+     "amount": 4000,
+     "pool": 604000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1211,
+     "amount": 800,
+     "pool": 968800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2157,
+     "amount": 400,
+     "pool": 862800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 12201,
+     "amount": 200,
+     "pool": 2440200,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 16091,
+     "amount": 100,
+     "pool": 1609100,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 29196,
+     "amount": 100,
+     "pool": 2919600,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 216875051,
+    "sellAmount": 55098200
+   }
   },
   {
    "period": "114000061",
@@ -2281,7 +9825,83 @@
     31,
     3
    ],
-   "special": 3
+   "special": 3,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 16692292,
+     "carry": 157213712
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2063092,
+     "carry": 10601945
+    },
+    {
+     "name": "參獎",
+     "winners": 2,
+     "amount": 150000,
+     "pool": 300000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 30,
+     "amount": 20000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 180,
+     "amount": 4000,
+     "pool": 720000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1186,
+     "amount": 800,
+     "pool": 948800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2285,
+     "amount": 400,
+     "pool": 914000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 12877,
+     "amount": 200,
+     "pool": 2575400,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 16696,
+     "amount": 100,
+     "pool": 1669600,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 29444,
+     "amount": 100,
+     "pool": 2944400,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 197243242,
+    "sellAmount": 53504700
+   }
   },
   {
    "period": "114000060",
@@ -2303,7 +9923,83 @@
     16,
     5
    ],
-   "special": 5
+   "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 16892756,
+     "carry": 140320956
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2087868,
+     "carry": 8514077
+    },
+    {
+     "name": "參獎",
+     "winners": 5,
+     "amount": 150000,
+     "pool": 750000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 22,
+     "amount": 20000,
+     "pool": 440000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 185,
+     "amount": 4000,
+     "pool": 740000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1296,
+     "amount": 800,
+     "pool": 1036800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2223,
+     "amount": 400,
+     "pool": 889200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 12303,
+     "amount": 200,
+     "pool": 2460600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 15949,
+     "amount": 100,
+     "pool": 1594900,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 28208,
+     "amount": 100,
+     "pool": 2820800,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 178547958,
+    "sellAmount": 54023500
+   }
   },
   {
    "period": "114000059",
@@ -2325,7 +10021,83 @@
     7,
     5
    ],
-   "special": 5
+   "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 16140639,
+     "carry": 124180317
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 1994910,
+     "carry": 6519167
+    },
+    {
+     "name": "參獎",
+     "winners": 4,
+     "amount": 150000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 41,
+     "amount": 20000,
+     "pool": 820000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 188,
+     "amount": 4000,
+     "pool": 752000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1366,
+     "amount": 800,
+     "pool": 1092800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2623,
+     "amount": 400,
+     "pool": 1049200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13794,
+     "amount": 200,
+     "pool": 2758800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 18512,
+     "amount": 100,
+     "pool": 1851200,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 30722,
+     "amount": 100,
+     "pool": 3072200,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 160831234,
+    "sellAmount": 54785000
+   }
   },
   {
    "period": "114000058",
@@ -2347,7 +10119,83 @@
     20,
     4
    ],
-   "special": 4
+   "special": 4,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 17076826,
+     "carry": 107103491
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2110618,
+     "carry": 4408549
+    },
+    {
+     "name": "參獎",
+     "winners": 3,
+     "amount": 150000,
+     "pool": 450000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 28,
+     "amount": 20000,
+     "pool": 560000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 165,
+     "amount": 4000,
+     "pool": 660000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1268,
+     "amount": 800,
+     "pool": 1014400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2399,
+     "amount": 400,
+     "pool": 959600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13197,
+     "amount": 200,
+     "pool": 2639400,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 17560,
+     "amount": 100,
+     "pool": 1756000,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 29307,
+     "amount": 100,
+     "pool": 2930700,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 141669585,
+    "sellAmount": 54831900
+   }
   },
   {
    "period": "114000057",
@@ -2369,7 +10217,83 @@
     6,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 17760074,
+     "carry": 89343417
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2195065,
+     "carry": 2213484
+    },
+    {
+     "name": "參獎",
+     "winners": 2,
+     "amount": 150000,
+     "pool": 300000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 31,
+     "amount": 20000,
+     "pool": 620000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 152,
+     "amount": 4000,
+     "pool": 608000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1249,
+     "amount": 800,
+     "pool": 999200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2302,
+     "amount": 400,
+     "pool": 920800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 12757,
+     "amount": 200,
+     "pool": 2551400,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 17235,
+     "amount": 100,
+     "pool": 1723500,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 29354,
+     "amount": 100,
+     "pool": 2935400,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 122170341,
+    "sellAmount": 55660800
+   }
   },
   {
    "period": "114000056",
@@ -2391,7 +10315,83 @@
     19,
     4
    ],
-   "special": 4
+   "special": 4,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 17909100,
+     "carry": 71434317
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2213484,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 5,
+     "amount": 150000,
+     "pool": 750000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 42,
+     "amount": 20000,
+     "pool": 840000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 247,
+     "amount": 4000,
+     "pool": 988000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1429,
+     "amount": 800,
+     "pool": 1143200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2729,
+     "amount": 400,
+     "pool": 1091600,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 14298,
+     "amount": 200,
+     "pool": 2859600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 19156,
+     "amount": 100,
+     "pool": 1915600,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 32689,
+     "amount": 100,
+     "pool": 3268900,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 104413802,
+    "sellAmount": 59962700
+   }
   },
   {
    "period": "114000055",
@@ -2413,7 +10413,83 @@
     28,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 16285144,
+     "carry": 55149173
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 8828959,
+     "pool": 2012770,
+     "carry": 6816189
+    },
+    {
+     "name": "參獎",
+     "winners": 4,
+     "amount": 150000,
+     "pool": 600000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 40,
+     "amount": 20000,
+     "pool": 800000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 192,
+     "amount": 4000,
+     "pool": 768000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1162,
+     "amount": 800,
+     "pool": 929600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2507,
+     "amount": 400,
+     "pool": 1002800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13583,
+     "amount": 200,
+     "pool": 2716600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 17145,
+     "amount": 100,
+     "pool": 1714500,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 30187,
+     "amount": 100,
+     "pool": 3018700,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 91813477,
+    "sellAmount": 54269300
+   }
   },
   {
    "period": "114000054",
@@ -2435,7 +10511,83 @@
     23,
     3
    ],
-   "special": 3
+   "special": 3,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 16657102,
+     "carry": 38492071
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2058742,
+     "carry": 4757447
+    },
+    {
+     "name": "參獎",
+     "winners": 5,
+     "amount": 150000,
+     "pool": 750000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 36,
+     "amount": 20000,
+     "pool": 720000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 182,
+     "amount": 4000,
+     "pool": 728000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1510,
+     "amount": 800,
+     "pool": 1208000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2312,
+     "amount": 400,
+     "pool": 924800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13519,
+     "amount": 200,
+     "pool": 2703800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 18498,
+     "amount": 100,
+     "pool": 1849800,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 29907,
+     "amount": 100,
+     "pool": 2990700,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 73840463,
+    "sellAmount": 55619900
+   }
   },
   {
    "period": "114000053",
@@ -2457,7 +10609,83 @@
     27,
     6
    ],
-   "special": 6
+   "special": 6,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 18584681,
+     "carry": 19907390
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2296983,
+     "carry": 2460464
+    },
+    {
+     "name": "參獎",
+     "winners": 7,
+     "amount": 150000,
+     "pool": 1050000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 33,
+     "amount": 20000,
+     "pool": 660000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 191,
+     "amount": 4000,
+     "pool": 764000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1342,
+     "amount": 800,
+     "pool": 1073600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2363,
+     "amount": 400,
+     "pool": 945200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 13528,
+     "amount": 200,
+     "pool": 2705600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 17673,
+     "amount": 100,
+     "pool": 1767300,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 30780,
+     "amount": 100,
+     "pool": 3078000,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 55293219,
+    "sellAmount": 59864300
+   }
   },
   {
    "period": "114000052",
@@ -2479,7 +10707,83 @@
     27,
     5
    ],
-   "special": 5
+   "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 19907390,
+     "carry": 0
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2460464,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 8,
+     "amount": 150000,
+     "pool": 1200000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 50,
+     "amount": 20000,
+     "pool": 1000000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 242,
+     "amount": 4000,
+     "pool": 968000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1675,
+     "amount": 800,
+     "pool": 1340000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 3127,
+     "amount": 400,
+     "pool": 1250800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 16757,
+     "amount": 200,
+     "pool": 3351400,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 21933,
+     "amount": 100,
+     "pool": 2193300,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 36319,
+     "amount": 100,
+     "pool": 3631900,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 37303255,
+    "sellAmount": 67824100
+   }
   },
   {
    "period": "114000051",
@@ -2501,7 +10805,83 @@
     38,
     4
    ],
-   "special": 4
+   "special": 4,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 1,
+     "amount": 1738137784,
+     "pool": 173471368,
+     "carry": 1564666416
+    },
+    {
+     "name": "貳獎",
+     "winners": 10,
+     "amount": 2144028,
+     "pool": 21440281,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 57,
+     "amount": 150000,
+     "pool": 8550000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 444,
+     "amount": 20000,
+     "pool": 8880000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 2049,
+     "amount": 4000,
+     "pool": 8196000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 14767,
+     "amount": 800,
+     "pool": 11813600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 27208,
+     "amount": 400,
+     "pool": 10883200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 146278,
+     "amount": 200,
+     "pool": 29255600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 189353,
+     "amount": 100,
+     "pool": 18935300,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 326759,
+     "amount": 100,
+     "pool": 32675900,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 1888767666,
+    "sellAmount": 589275000
+   }
   },
   {
    "period": "114000050",
@@ -2523,7 +10903,83 @@
     32,
     6
    ],
-   "special": 6
+   "special": 6,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 159542846,
+     "carry": 1405123570
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 19718778,
+     "pool": 19718778,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 38,
+     "amount": 150000,
+     "pool": 5700000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 267,
+     "amount": 20000,
+     "pool": 5340000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 1496,
+     "amount": 4000,
+     "pool": 5984000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 10934,
+     "amount": 800,
+     "pool": 8747200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 21555,
+     "amount": 400,
+     "pool": 8622000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 120025,
+     "amount": 200,
+     "pool": 24005000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 151050,
+     "amount": 100,
+     "pool": 15105000,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 273235,
+     "amount": 100,
+     "pool": 27323500,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 1685211895,
+    "sellAmount": 509251500
+   }
   },
   {
    "period": "114000049",
@@ -2545,7 +11001,83 @@
     20,
     6
    ],
-   "special": 6
+   "special": 6,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 140762168,
+     "carry": 1264361402
+    },
+    {
+     "name": "貳獎",
+     "winners": 2,
+     "amount": 16321083,
+     "pool": 17397571,
+     "carry": 15244595
+    },
+    {
+     "name": "參獎",
+     "winners": 39,
+     "amount": 150000,
+     "pool": 5850000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 225,
+     "amount": 20000,
+     "pool": 4500000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 1424,
+     "amount": 4000,
+     "pool": 5696000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 9759,
+     "amount": 800,
+     "pool": 7807200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 20218,
+     "amount": 400,
+     "pool": 8087200,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 111931,
+     "amount": 200,
+     "pool": 22386200,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 138089,
+     "amount": 100,
+     "pool": 13808900,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 259264,
+     "amount": 100,
+     "pool": 25926400,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 1531827637,
+    "sellAmount": 458584800
+   }
   },
   {
    "period": "114000048",
@@ -2567,7 +11099,83 @@
     11,
     3
    ],
-   "special": 3
+   "special": 3,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 123342634,
+     "carry": 1141018768
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 15244595,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 38,
+     "amount": 150000,
+     "pool": 5700000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 293,
+     "amount": 20000,
+     "pool": 5860000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 1419,
+     "amount": 4000,
+     "pool": 5676000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 10145,
+     "amount": 800,
+     "pool": 8116000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 18576,
+     "amount": 400,
+     "pool": 7430400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 100987,
+     "amount": 200,
+     "pool": 20197400,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 132554,
+     "amount": 100,
+     "pool": 13255400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 223378,
+     "amount": 100,
+     "pool": 22337800,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 1368178998,
+    "sellAmount": 413018600
+   }
   },
   {
    "period": "114000047",
@@ -2589,7 +11197,83 @@
     5,
     5
    ],
-   "special": 5
+   "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 109578953,
+     "carry": 1031439815
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 13543466,
+     "pool": 13543466,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 29,
+     "amount": 150000,
+     "pool": 4350000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 226,
+     "amount": 20000,
+     "pool": 4520000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 1395,
+     "amount": 4000,
+     "pool": 5580000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 8866,
+     "amount": 800,
+     "pool": 7092800,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 17770,
+     "amount": 400,
+     "pool": 7108000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 92420,
+     "amount": 200,
+     "pool": 18484000,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 119483,
+     "amount": 100,
+     "pool": 11948300,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 200330,
+     "amount": 100,
+     "pool": 20033000,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 1233678335,
+    "sellAmount": 367706400
+   }
   },
   {
    "period": "114000046",
@@ -2611,7 +11295,83 @@
     9,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 98762601,
+     "carry": 932677214
+    },
+    {
+     "name": "貳獎",
+     "winners": 4,
+     "amount": 5551462,
+     "pool": 12206613,
+     "carry": 9999238
+    },
+    {
+     "name": "參獎",
+     "winners": 29,
+     "amount": 150000,
+     "pool": 4350000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 323,
+     "amount": 20000,
+     "pool": 6460000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 1401,
+     "amount": 4000,
+     "pool": 5604000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 9683,
+     "amount": 800,
+     "pool": 7746400,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 17011,
+     "amount": 400,
+     "pool": 6804400,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 86074,
+     "amount": 200,
+     "pool": 17214800,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 119035,
+     "amount": 100,
+     "pool": 11903500,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 183552,
+     "amount": 100,
+     "pool": 18355200,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 1132083967,
+    "sellAmount": 344377300
+   }
   },
   {
    "period": "114000045",
@@ -2633,7 +11393,83 @@
     35,
     5
    ],
-   "special": 5
+   "special": 5,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 80902931,
+     "carry": 851774283
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 9999238,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 21,
+     "amount": 150000,
+     "pool": 3150000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 140,
+     "amount": 20000,
+     "pool": 2800000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 823,
+     "amount": 4000,
+     "pool": 3292000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 5190,
+     "amount": 800,
+     "pool": 4152000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 11565,
+     "amount": 400,
+     "pool": 4626000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 65456,
+     "amount": 200,
+     "pool": 13091200,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 74195,
+     "amount": 100,
+     "pool": 7419500,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 153983,
+     "amount": 100,
+     "pool": 15398300,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 996605453,
+    "sellAmount": 263329400
+   }
   },
   {
    "period": "114000044",
@@ -2655,7 +11491,83 @@
     16,
     2
    ],
-   "special": 2
+   "special": 2,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 71113621,
+     "carry": 780660662
+    },
+    {
+     "name": "貳獎",
+     "winners": 1,
+     "amount": 22100390,
+     "pool": 8789323,
+     "carry": 13311067
+    },
+    {
+     "name": "參獎",
+     "winners": 21,
+     "amount": 150000,
+     "pool": 3150000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 132,
+     "amount": 20000,
+     "pool": 2640000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 776,
+     "amount": 4000,
+     "pool": 3104000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 5202,
+     "amount": 800,
+     "pool": 4161600,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 10497,
+     "amount": 400,
+     "pool": 4198800,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 60198,
+     "amount": 200,
+     "pool": 12039600,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 70948,
+     "amount": 100,
+     "pool": 7094800,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 137436,
+     "amount": 100,
+     "pool": 13743600,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 924007074,
+    "sellAmount": 236427900
+   }
   }
  ]
 }
