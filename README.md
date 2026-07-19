@@ -1,25 +1,35 @@
 # 彩研所 TWLottery Lab
 
-**BUILD_VERSION: v1.0.0**
+**BUILD_VERSION: v1.1.0**
 
 台灣彩券(威力彩・大樂透・今彩539)開獎數據自動更新與統計分析網站。
 零成本靜態架構:單一 `index.html` 前端 + GitHub Actions Python 後端,部署於 GitHub Pages。
 
-## 功能
+## v1.1.0 變更
 
-- 每日自動抓取台彩官方 API 開獎資料(台灣時間 21:35),自動 commit 更新
-- 首次執行自動回補約 14 個月歷史開獎
-- 三遊戲切換:大樂透(1–49 選 6 + 特別號)、威力彩(1–38 選 6 + 第二區 1–8)、今彩539(1–39 選 5)
-- 統計分析:出現頻率、熱號/冷號、遺漏排行、奇偶走勢、尾數分布、威力彩第二區頻率
-- 統計視窗可切換:近 30 / 50 / 100 期 / 全部
-- 策略選號器:熱號、冷號、遺漏回補、隨機性四權重滑桿即時可調,可排除號碼,設定自動儲存於瀏覽器(localStorage)
+- 新增:各期獎金分配抓取(獎項/中獎注數/單注獎金),最新開獎區顯示獎金表,注數 0 顯示「槓龜」
+- 新增:「頭獎連摃」統計卡(依獎金資料自動計算連續槓龜期數)
+- 新增:預測核對——選號器產生的號碼可「儲存為預測」,下期開獎後自動對獎,
+  顯示每組命中數、對應獎項、平均命中 vs 純隨機理論期望值
+- 新增:每筆預測紀錄可一鍵「套用此策略」把當時權重回填滑桿再調整
+- 修正:大樂透選號改為正確玩法(自選 6 碼,特別號以玩家 6 碼比對;
+  v1.0.0 誤多產生一顆特別號)。威力彩維持自選 6 碼 + 第二區 1 碼
+
+## 功能總覽
+
+- 每日自動抓取台彩官方 API(台灣時間 21:35),自動 commit;首次執行回補約 14 個月歷史
+- 三遊戲:大樂透(1–49 選 6)、威力彩(1–38 選 6 + 第二區 1–8)、今彩539(1–39 選 5)
+- 統計:頻率、熱號/冷號、遺漏排行、奇偶走勢、尾數分布、威力彩第二區、獎金分配、頭獎連摃
+- 統計視窗:近 30 / 50 / 100 期 / 全部
+- 策略選號器:熱號、冷號、遺漏回補、隨機性四權重滑桿即時可調 + 排除號碼(localStorage 保存)
+- 預測核對:儲存 → 開獎 → 自動對獎 → 套用/調整策略,形成完整循環(紀錄存於瀏覽器)
 - 內建免責聲明:所有統計為描述性分析,每期開獎為獨立事件
 
 ## 檔案結構
 
 ```
 index.html                      前端 SPA(全部功能)
-scripts/update_data.py          資料抓取腳本(GitHub Actions 執行)
+scripts/update_data.py          資料抓取腳本(開獎 + 獎金分配)
 .github/workflows/update.yml    每日排程 + 手動觸發
 data/lotto649.json              大樂透資料(附種子資料)
 data/superlotto638.json         威力彩資料
@@ -28,30 +38,25 @@ data/dailycash539.json          今彩539 資料
 
 ## 部署步驟
 
-1. 建立新的 GitHub 儲存庫(例如 `twlottery-lab`),把本專案所有檔案上傳到根目錄。
-2. **Settings → Actions → General → Workflow permissions** 勾選
-   **Read and write permissions**,儲存(讓 Actions 能 commit 資料)。
-3. **Actions 頁籤 → 更新開獎資料 → Run workflow** 手動執行一次,
-   等待完成(首次回補歷史約需 1–2 分鐘),`data/` 內的 JSON 會自動更新。
-4. **Settings → Pages** → Source 選 **Deploy from a branch**,
-   Branch 選 `main` / `(root)`,儲存。
-5. 幾分鐘後網站上線:`https://<帳號>.github.io/twlottery-lab/`。
-   之後每天 21:35(台灣時間)自動更新,不需任何手動操作。
+1. 建立 GitHub 儲存庫,把所有檔案上傳到根目錄(升版時以 zip 內檔案完整覆蓋同名檔)。
+2. **Settings → Actions → General → Workflow permissions** 勾選 **Read and write permissions**。
+3. **Actions → 更新開獎資料 → Run workflow** 手動執行一次(首次回補約 1–2 分鐘)。
+4. **Settings → Pages** → Deploy from a branch → `main` / `(root)`。
+5. 上線後每天 21:35(台灣時間)自動更新。
 
 ## 版本驗證(防「假包」檢查)
 
-解壓或上傳前,確認三個檔案的版本號一致:
-
 ```bash
-grep -n "v1.0.0" index.html scripts/update_data.py README.md
+grep -n "v1.1.0" index.html scripts/update_data.py README.md
 ```
 
-三個檔案都應出現 `v1.0.0`,且頁面 footer 會顯示 `BUILD v1.0.0`。
+三個檔案都應出現 `v1.1.0`,頁面 footer 顯示 `BUILD v1.1.0`。
 
-## 資料來源與注意事項
+## 獎金資料注意事項
 
-- 資料來源:台灣彩券官方網站 API(`api.taiwanlottery.com`)。
-  若官方調整 API 格式,`scripts/update_data.py` 的 `normalize()` 需對應修改;
-  腳本已做防禦性解析(自動尋找回應中的清單欄位、欄位名大小寫容錯)。
-- 排程時間可在 `.github/workflows/update.yml` 的 cron 調整(注意 cron 使用 UTC)。
+- 獎金分配依台彩官方 API 單期查詢解析;腳本採通用欄位辨識(容忍多種命名),
+  並在首次無法解析時於 log 印出實際回應結構。
+- **首次執行請查看 Actions log**:會印出「官方欄位範例」與獎金查詢結果;
+  若獎金持續顯示「尚未取得」,把 log 貼回即可依實際格式出修正版。
+- 對獎規則(獎項名稱)內建於前端,單注固定獎金與浮動獎金金額一律以台彩官方公告為準。
 - 本站僅供統計參考與娛樂,彩券為隨機機率遊戲,請理性投注。
