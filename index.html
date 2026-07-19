@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>彩研所 TWLottery Lab|威力彩・大樂透・今彩539 開獎數據分析</title>
+<meta name="description" content="台灣彩券開獎數據自動更新與統計分析:威力彩、大樂透、今彩539 的頻率、遺漏、走勢與可調式策略選號器。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<style>
+/* ============ 彩研所 v1.0.0 ============
+   色彩:攝影棚靛藍底 + 紙白卡 + 三遊戲主色
+   大樂透=金 #F0BE4A|威力彩=硃紅 #DF4B3B|今彩539=青玉 #2E9E8A */
+:root{
+  --ink:#16233F; --ink-deep:#0E1730; --ink-line:#2B3A5E;
+  --paper:#F7F4EC; --paper-dim:#EDE8DB; --text:#20242C; --text-dim:#6A6F7B;
+  --gold:#F0BE4A; --red:#DF4B3B; --jade:#2E9E8A;
+  --accent:var(--gold);
+  --radius:14px;
+  --font-body:"Noto Sans TC",system-ui,sans-serif;
+  --font-disp:"Noto Serif TC",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto} *{animation:none!important;transition:none!important}}
+body{background:var(--ink);color:var(--paper);font-family:var(--font-body);line-height:1.65;
+  background-image:radial-gradient(ellipse 80% 50% at 50% -10%, #24365E 0%, transparent 60%)}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* ---- Header ---- */
+header{padding:34px 0 10px}
+.brand{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.brand h1{font-family:var(--font-disp);font-weight:900;font-size:clamp(1.7rem,4vw,2.4rem);letter-spacing:.06em}
+.brand h1 .en{font-family:var(--font-body);font-weight:500;font-size:.45em;letter-spacing:.22em;color:#9FB0D4;margin-left:10px}
+.meta-line{color:#9FB0D4;font-size:.85rem;margin-top:6px}
+.meta-line b{color:var(--paper)}
+
+/* ---- 遊戲切換籤(彩券票根造型) ---- */
+.tabs{display:flex;gap:10px;margin:22px 0 0;flex-wrap:wrap}
+.tab{appearance:none;border:1px solid var(--ink-line);background:var(--ink-deep);color:#B9C6E4;
+  font-family:var(--font-body);font-weight:700;font-size:1rem;padding:12px 22px;cursor:pointer;
+  border-radius:10px 10px 0 0;position:relative;transition:background .15s,color .15s}
+.tab:hover{color:var(--paper)}
+.tab:focus-visible{outline:2px solid var(--paper);outline-offset:2px}
+.tab .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:1px}
+.tab[data-g="lotto649"] .dot{background:var(--gold)}
+.tab[data-g="superlotto638"] .dot{background:var(--red)}
+.tab[data-g="dailycash539"] .dot{background:var(--jade)}
+.tab.active{background:var(--paper);color:var(--text);border-color:var(--paper)}
+
+/* ---- Hero:最新開獎 ---- */
+.hero{background:var(--paper);color:var(--text);border-radius:0 var(--radius) var(--radius) var(--radius);
+  padding:26px 26px 22px;box-shadow:0 14px 40px rgba(0,0,0,.35)}
+.hero-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.hero-top .t{font-family:var(--font-disp);font-weight:900;font-size:1.3rem}
+.hero-top .p{color:var(--text-dim);font-size:.9rem}
+.balls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:18px 0 6px}
+.ball{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:1.35rem;color:#3B2A05;position:relative;
+  background:radial-gradient(circle at 32% 28%, #fff 0%, var(--ball,#F0BE4A) 42%, var(--ball-deep,#C79226) 100%);
+  box-shadow:inset -3px -6px 10px rgba(0,0,0,.22), 0 6px 12px rgba(0,0,0,.18)}
+.ball.sp{color:#fff;--ball:#3A4A73;--ball-deep:#1C2846}
+.ball-plus{font-size:1.5rem;color:var(--text-dim);font-weight:700}
+.ball-label{font-size:.72rem;color:var(--text-dim);text-align:center;margin-top:4px}
+.ball-col{display:flex;flex-direction:column;align-items:center}
+.hero-note{font-size:.82rem;color:var(--text-dim)}
+
+/* ---- 版面 ---- */
+main{padding:26px 0 40px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+@media(max-width:860px){.grid{grid-template-columns:1fr}}
+.card{background:var(--paper);color:var(--text);border-radius:var(--radius);padding:20px 22px}
+.card.dark{background:var(--ink-deep);color:var(--paper);border:1px solid var(--ink-line)}
+.card h2{font-family:var(--font-disp);font-weight:900;font-size:1.08rem;margin-bottom:4px}
+.card .sub{font-size:.8rem;color:var(--text-dim);margin-bottom:12px}
+.card.dark .sub{color:#9FB0D4}
+.card.full{grid-column:1 / -1}
+
+/* 快速統計卡 */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+@media(max-width:720px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--ink-deep);border:1px solid var(--ink-line);border-radius:12px;padding:14px 16px}
+.stat .k{font-size:.78rem;color:#9FB0D4}
+.stat .v{font-family:var(--font-disp);font-weight:900;font-size:1.5rem;color:var(--paper);margin-top:2px}
+.stat .v small{font-size:.65em;color:#9FB0D4;font-family:var(--font-body);font-weight:500}
+
+/* 視窗選擇 */
+.win-picker{display:flex;gap:8px;align-items:center;margin-top:22px;flex-wrap:wrap}
+.win-picker span{font-size:.85rem;color:#9FB0D4}
+.win-btn{appearance:none;border:1px solid var(--ink-line);background:transparent;color:#B9C6E4;
+  padding:6px 14px;border-radius:999px;cursor:pointer;font-size:.85rem;font-weight:500}
+.win-btn:focus-visible{outline:2px solid var(--paper);outline-offset:2px}
+.win-btn.active{background:var(--paper);color:var(--text);border-color:var(--paper);font-weight:700}
+
+/* 表格 */
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th{text-align:left;color:var(--text-dim);font-weight:500;font-size:.78rem;padding:6px 8px;border-bottom:1px solid var(--paper-dim)}
+td{padding:7px 8px;border-bottom:1px solid var(--paper-dim)}
+tr:last-child td{border-bottom:none}
+.mini-ball{display:inline-flex;width:30px;height:30px;border-radius:50%;align-items:center;justify-content:center;
+  font-weight:700;font-size:.85rem;color:#3B2A05;margin-right:4px;
+  background:radial-gradient(circle at 32% 28%, #fff 0%, var(--ball,#F0BE4A) 45%, var(--ball-deep,#C79226) 100%)}
+.mini-ball.sp{color:#fff;--ball:#3A4A73;--ball-deep:#1C2846}
+.bar-track{background:var(--paper-dim);border-radius:99px;height:8px;overflow:hidden}
+.bar-fill{height:100%;border-radius:99px;background:var(--accent)}
+
+/* 策略選號器 */
+.sliders{display:grid;grid-template-columns:1fr 1fr;gap:14px 26px;margin:14px 0}
+@media(max-width:720px){.sliders{grid-template-columns:1fr}}
+.slider label{display:flex;justify-content:space-between;font-size:.85rem;font-weight:500;margin-bottom:4px}
+.slider label output{color:var(--accent);font-weight:700}
+input[type=range]{width:100%;accent-color:var(--red)}
+.strategy-row{display:flex;gap:14px;flex-wrap:wrap;align-items:end;margin-top:10px}
+.field{display:flex;flex-direction:column;gap:4px;font-size:.82rem}
+.field input[type=text],.field input[type=number],.field select{
+  font-family:var(--font-body);font-size:.9rem;padding:8px 10px;border-radius:8px;border:1px solid #C9C2B0;background:#fff;color:var(--text)}
+.btn{appearance:none;border:none;background:var(--red);color:#fff;font-family:var(--font-body);
+  font-weight:700;font-size:.95rem;padding:11px 26px;border-radius:10px;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}
+.btn:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid #C9C2B0;font-weight:500}
+.gen-out{margin-top:16px;display:flex;flex-direction:column;gap:10px}
+.gen-set{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#fff;border:1px dashed #D8D2C2;border-radius:10px;padding:10px 12px}
+.gen-set .idx{font-family:var(--font-disp);font-weight:900;color:var(--text-dim);width:2.2em}
+.empty-hint{background:var(--ink-deep);border:1px dashed var(--ink-line);border-radius:var(--radius);
+  padding:26px;text-align:center;color:#9FB0D4;margin-top:18px}
+.empty-hint b{color:var(--paper)}
+
+/* 近期開獎列表 */
+.recent-list td{white-space:nowrap}
+.scroll-x{overflow-x:auto}
+
+/* Footer */
+footer{border-top:1px solid var(--ink-line);padding:26px 0 40px;color:#9FB0D4;font-size:.82rem}
+.disclaimer{background:var(--ink-deep);border:1px solid var(--ink-line);border-left:4px solid var(--gold);
+  border-radius:10px;padding:14px 18px;margin-bottom:16px;line-height:1.8}
+.disclaimer b{color:var(--paper)}
+.build-tag{font-family:monospace;color:#7285AC}
+canvas{max-width:100%}
+.chart-box{position:relative;height:300px}
+.chart-box.tall{height:340px}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="brand">
+    <h1>彩研所<span class="en">TWLOTTERY LAB</span></h1>
+  </div>
+  <div class="meta-line">開獎資料每日自動更新|資料更新於:<b id="updatedAt">載入中…</b></div>
+  <div class="tabs" role="tablist" aria-label="遊戲切換">
+    <button class="tab active" role="tab" data-g="lotto649"><span class="dot"></span>大樂透</button>
+    <button class="tab" role="tab" data-g="superlotto638"><span class="dot"></span>威力彩</button>
+    <button class="tab" role="tab" data-g="dailycash539"><span class="dot"></span>今彩539</button>
+  </div>
+  <section class="hero" id="hero" aria-live="polite"></section>
+  <div class="stats" id="quickStats"></div>
+  <div class="win-picker" id="winPicker">
+    <span>統計視窗:</span>
+    <button class="win-btn" data-w="30">近 30 期</button>
+    <button class="win-btn active" data-w="50">近 50 期</button>
+    <button class="win-btn" data-w="100">近 100 期</button>
+    <button class="win-btn" data-w="0">全部</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="emptyHint" class="empty-hint" hidden>
+    此遊戲尚無歷史資料。請到 GitHub 儲存庫的 <b>Actions → 更新開獎資料 → Run workflow</b> 手動執行一次,
+    系統會自動回補約 14 個月的開獎歷史。
+  </div>
+
+  <div class="grid" id="analysisGrid">
+    <div class="card full">
+      <h2>號碼出現頻率</h2>
+      <div class="sub" id="freqSub"></div>
+      <div class="chart-box tall"><canvas id="freqChart"></canvas></div>
+    </div>
+
+    <div class="card">
+      <h2>熱號排行</h2>
+      <div class="sub">統計視窗內出現次數最多的號碼</div>
+      <table id="hotTable"></table>
+    </div>
+
+    <div class="card">
+      <h2>遺漏排行(冷號)</h2>
+      <div class="sub">距離上次開出的期數(愈久未開愈上面)</div>
+      <table id="missTable"></table>
+    </div>
+
+    <div class="card">
+      <h2>奇偶走勢</h2>
+      <div class="sub">近 20 期正選號碼中的奇數個數</div>
+      <div class="chart-box"><canvas id="oddChart"></canvas></div>
+    </div>
+
+    <div class="card">
+      <h2>尾數分布</h2>
+      <div class="sub" id="tailSub"></div>
+      <div class="chart-box"><canvas id="tailChart"></canvas></div>
+    </div>
+
+    <div class="card full" id="area2Card" hidden>
+      <h2>威力彩第二區(1–8)出現頻率</h2>
+      <div class="sub">第二區為獨立搖出的 1 顆球</div>
+      <div class="chart-box"><canvas id="area2Chart"></canvas></div>
+    </div>
+
+    <div class="card full" id="strategyCard">
+      <h2>策略選號器</h2>
+      <div class="sub">拉動權重即可隨時調整選號方向;設定會自動儲存在你的瀏覽器。權重代表「策略偏好」,不代表中獎機率——每期開獎皆為獨立事件。</div>
+      <div class="sliders">
+        <div class="slider">
+          <label>熱號權重(偏好近期常開)<output id="oHot">50</output></label>
+          <input type="range" id="wHot" min="0" max="100" value="50" aria-label="熱號權重">
+        </div>
+        <div class="slider">
+          <label>冷號權重(偏好近期少開)<output id="oCold">30</output></label>
+          <input type="range" id="wCold" min="0" max="100" value="30" aria-label="冷號權重">
+        </div>
+        <div class="slider">
+          <label>遺漏回補權重(偏好久未開出)<output id="oMiss">40</output></label>
+          <input type="range" id="wMiss" min="0" max="100" value="40" aria-label="遺漏回補權重">
+        </div>
+        <div class="slider">
+          <label>隨機性(愈高愈接近純隨機)<output id="oRand">50</output></label>
+          <input type="range" id="wRand" min="0" max="100" value="50" aria-label="隨機性">
+        </div>
+      </div>
+      <div class="strategy-row">
+        <div class="field">
+          <label for="excludeNums">排除號碼(逗號分隔,可留空)</label>
+          <input type="text" id="excludeNums" placeholder="例:4, 14, 44" size="18">
+        </div>
+        <div class="field">
+          <label for="setCount">產生組數</label>
+          <select id="setCount">
+            <option>1</option><option>2</option><option>3</option><option selected>5</option><option>8</option><option>10</option>
+          </select>
+        </div>
+        <button class="btn" id="genBtn">產生號碼</button>
+        <button class="btn ghost" id="resetBtn">重設策略</button>
+      </div>
+      <div class="gen-out" id="genOut"></div>
+    </div>
+
+    <div class="card full">
+      <h2>近期開獎紀錄</h2>
+      <div class="sub">最近 12 期</div>
+      <div class="scroll-x"><table class="recent-list" id="recentTable"></table></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="disclaimer">
+      <b>免責聲明:</b>本站所有統計皆為歷史資料的描述性分析;彩券每期開獎為獨立隨機事件,
+      任何號碼組合的中獎機率完全相同,「熱號」「冷號」「遺漏」對未來開獎不具預測力。
+      策略選號器僅供娛樂與選號輔助參考,請理性投注、量力而為。開獎結果以台灣彩券官方公告為準。
+    </div>
+    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v1.0.0</span></div>
+  </div>
+</footer>
+
+<script>
+"use strict";
+const BUILD_VERSION = "v1.0.0";
+
+/* ============ 遊戲設定 ============ */
+const GAMES = {
+  lotto649:      { name:"大樂透",  file:"data/lotto649.json",      max:49, picks:6, special:"same",  spLabel:"特別號", color:"#F0BE4A", deep:"#C79226", schedule:"每週二、五開獎" },
+  superlotto638: { name:"威力彩",  file:"data/superlotto638.json", max:38, picks:6, special:"area2", spLabel:"第二區", spMax:8, color:"#DF4B3B", deep:"#A82F22", schedule:"每週一、四開獎" },
+  dailycash539:  { name:"今彩539", file:"data/dailycash539.json",  max:39, picks:5, special:"none",  color:"#2E9E8A", deep:"#1E7263", schedule:"每日開獎(週日除外)" }
+};
+
+const state = { game:"lotto649", win:50, data:{}, charts:{} };
+
+/* ============ 工具 ============ */
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const pad2 = n => String(n).padStart(2,"0");
+function cfg(){ return GAMES[state.game]; }
+function draws(){ return (state.data[state.game]?.draws) || []; }
+function windowed(){ const d = draws(); return state.win>0 ? d.slice(0,state.win) : d; }
+
+/* ============ 資料載入 ============ */
+async function loadAll(){
+  for(const [key,g] of Object.entries(GAMES)){
+    try{
+      const r = await fetch(g.file + "?t=" + Date.now());
+      state.data[key] = r.ok ? await r.json() : {draws:[]};
+    }catch(e){ state.data[key] = {draws:[]}; }
+  }
+  render();
+}
+
+/* ============ 統計 ============ */
+function calcFreq(ds){
+  const f = new Array(cfg().max+1).fill(0);
+  ds.forEach(d => d.numbers.forEach(n => { if(n>=1 && n<=cfg().max) f[n]++; }));
+  return f;
+}
+function calcMiss(){
+  const d = draws(), miss = new Array(cfg().max+1).fill(d.length);
+  for(let n=1;n<=cfg().max;n++){
+    for(let i=0;i<d.length;i++){
+      if(d[i].numbers.includes(n)){ miss[n]=i; break; }
+    }
+  }
+  return miss;
+}
+
+/* ============ 畫面 ============ */
+function ballHTML(n, sp=false){
+  const g = cfg();
+  const style = sp ? "" : `style="--ball:${g.color};--ball-deep:${g.deep}"`;
+  return `<div class="ball ${sp?"sp":""}" ${style}>${pad2(n)}</div>`;
+}
+function miniBall(n, sp=false){
+  const g = cfg();
+  const style = sp ? "" : `style="--ball:${g.color};--ball-deep:${g.deep}"`;
+  return `<span class="mini-ball ${sp?"sp":""}" ${style}>${pad2(n)}</span>`;
+}
+
+function renderHero(){
+  const d = draws()[0], g = cfg(), el = $("#hero");
+  if(!d){ el.innerHTML = `<div class="hero-top"><div class="t">${g.name}</div><div class="p">${g.schedule}</div></div><p class="hero-note">尚無資料,等待首次自動更新。</p>`; return; }
+  let balls = d.numbers.map(n=>`<div class="ball-col">${ballHTML(n)}</div>`).join("");
+  if(g.special!=="none" && d.special!=null){
+    balls += `<div class="ball-plus">+</div><div class="ball-col">${ballHTML(d.special,true)}<div class="ball-label">${g.spLabel}</div></div>`;
+  }
+  el.innerHTML = `
+    <div class="hero-top">
+      <div class="t">${g.name} 最新開獎</div>
+      <div class="p">第 ${d.period} 期・${d.date}・${g.schedule}</div>
+    </div>
+    <div class="balls">${balls}</div>
+    <p class="hero-note">正選號碼由小至大排列;開獎結果以台灣彩券官方公告為準。</p>`;
+}
+
+function renderStats(){
+  const ds = windowed(), el = $("#quickStats");
+  if(!ds.length){ el.innerHTML=""; return; }
+  const f = calcFreq(ds), miss = calcMiss();
+  let hotN=1, coldN=1, missN=1;
+  for(let n=1;n<=cfg().max;n++){
+    if(f[n]>f[hotN]) hotN=n;
+    if(f[n]<f[coldN]) coldN=n;
+    if(miss[n]>miss[missN]) missN=n;
+  }
+  el.innerHTML = `
+    <div class="stat"><div class="k">累計期數(全部)</div><div class="v">${draws().length}<small> 期</small></div></div>
+    <div class="stat"><div class="k">視窗內最熱號碼</div><div class="v">${pad2(hotN)}<small> ${f[hotN]} 次</small></div></div>
+    <div class="stat"><div class="k">視窗內最冷號碼</div><div class="v">${pad2(coldN)}<small> ${f[coldN]} 次</small></div></div>
+    <div class="stat"><div class="k">最大遺漏</div><div class="v">${pad2(missN)}<small> ${miss[missN]} 期未開</small></div></div>`;
+}
+
+function destroyChart(id){ if(state.charts[id]){ state.charts[id].destroy(); delete state.charts[id]; } }
+function makeChart(id, config){ destroyChart(id); state.charts[id] = new Chart($("#"+id), config); }
+
+function renderFreqChart(){
+  const ds = windowed(), g = cfg();
+  $("#freqSub").textContent = `統計範圍:${state.win>0?`近 ${Math.min(state.win,ds.length)} 期`:`全部 ${ds.length} 期`}(正選號碼)`;
+  const f = calcFreq(ds);
+  const labels=[], vals=[];
+  for(let n=1;n<=g.max;n++){ labels.push(pad2(n)); vals.push(f[n]); }
+  const maxV = Math.max(...vals,1);
+  makeChart("freqChart",{
+    type:"bar",
+    data:{labels, datasets:[{data:vals, backgroundColor:vals.map(v=>v===maxV?g.deep:g.color), borderRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{x:{ticks:{font:{size:10}},grid:{display:false}},y:{beginAtZero:true,ticks:{precision:0}}}}
+  });
+}
+
+function renderHotTable(){
+  const ds = windowed(), f = calcFreq(ds);
+  const rows = [];
+  for(let n=1;n<=cfg().max;n++) rows.push([n,f[n]]);
+  rows.sort((a,b)=>b[1]-a[1]);
+  const top = rows.slice(0,8), maxV = top[0]?.[1]||1;
+  $("#hotTable").innerHTML = `<tr><th>號碼</th><th>次數</th><th style="width:45%">相對熱度</th></tr>` +
+    top.map(([n,v])=>`<tr><td>${miniBall(n)}</td><td>${v} 次</td>
+      <td><div class="bar-track"><div class="bar-fill" style="width:${Math.round(v/maxV*100)}%;background:${cfg().color}"></div></div></td></tr>`).join("");
+}
+
+function renderMissTable(){
+  const miss = calcMiss();
+  const rows=[];
+  for(let n=1;n<=cfg().max;n++) rows.push([n,miss[n]]);
+  rows.sort((a,b)=>b[1]-a[1]);
+  const top = rows.slice(0,8), maxV = top[0]?.[1]||1;
+  $("#missTable").innerHTML = `<tr><th>號碼</th><th>遺漏</th><th style="width:45%">相對長度</th></tr>` +
+    top.map(([n,v])=>`<tr><td>${miniBall(n)}</td><td>${v} 期</td>
+      <td><div class="bar-track"><div class="bar-fill" style="width:${Math.round(v/maxV*100)}%;background:#3A4A73"></div></div></td></tr>`).join("");
+}
+
+function renderOddChart(){
+  const ds = draws().slice(0,20).reverse(), g = cfg();
+  makeChart("oddChart",{
+    type:"line",
+    data:{labels:ds.map(d=>d.period.slice(-3)),
+      datasets:[{label:"奇數個數",data:ds.map(d=>d.numbers.filter(n=>n%2===1).length),
+        borderColor:g.color,backgroundColor:g.color,tension:.3,pointRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{y:{min:0,max:g.picks,ticks:{stepSize:1}},x:{grid:{display:false},title:{display:true,text:"期別(末三碼)"}}}}
+  });
+}
+
+function renderTailChart(){
+  const ds = windowed(), g = cfg();
+  $("#tailSub").textContent = `統計視窗內正選號碼的個位數(0–9 尾)出現次數`;
+  const t = new Array(10).fill(0);
+  ds.forEach(d=>d.numbers.forEach(n=>t[n%10]++));
+  makeChart("tailChart",{
+    type:"bar",
+    data:{labels:[..."0123456789"].map(x=>x+" 尾"),datasets:[{data:t,backgroundColor:g.color,borderRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{y:{beginAtZero:true,ticks:{precision:0}},x:{grid:{display:false}}}}
+  });
+}
+
+function renderArea2(){
+  const card = $("#area2Card");
+  if(state.game!=="superlotto638"){ card.hidden = true; destroyChart("area2Chart"); return; }
+  card.hidden = false;
+  const ds = windowed(), g = cfg();
+  const f = new Array(9).fill(0);
+  ds.forEach(d=>{ if(d.special>=1 && d.special<=8) f[d.special]++; });
+  makeChart("area2Chart",{
+    type:"bar",
+    data:{labels:[1,2,3,4,5,6,7,8].map(pad2),datasets:[{data:f.slice(1),backgroundColor:"#3A4A73",borderRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{y:{beginAtZero:true,ticks:{precision:0}},x:{grid:{display:false}}}}
+  });
+}
+
+function renderRecent(){
+  const ds = draws().slice(0,12), g = cfg();
+  if(!ds.length){ $("#recentTable").innerHTML=""; return; }
+  $("#recentTable").innerHTML =
+    `<tr><th>期別</th><th>日期</th><th>正選號碼</th>${g.special!=="none"?`<th>${g.spLabel}</th>`:""}<th>奇:偶</th></tr>` +
+    ds.map(d=>{
+      const odd = d.numbers.filter(n=>n%2===1).length;
+      return `<tr><td>${d.period}</td><td>${d.date}</td>
+        <td>${d.numbers.map(n=>miniBall(n)).join("")}</td>
+        ${g.special!=="none"?`<td>${d.special!=null?miniBall(d.special,true):"—"}</td>`:""}
+        <td>${odd}:${d.numbers.length-odd}</td></tr>`;
+    }).join("");
+}
+
+/* ============ 策略選號器 ============ */
+const SLIDERS = ["wHot","wCold","wMiss","wRand"];
+function strategyKey(){ return "twlab-strategy-" + state.game; }
+function loadStrategy(){
+  let s = null;
+  try{ s = JSON.parse(localStorage.getItem(strategyKey())); }catch(e){}
+  const def = {wHot:50,wCold:30,wMiss:40,wRand:50,exclude:""};
+  s = Object.assign(def, s||{});
+  SLIDERS.forEach(id=>{ $("#"+id).value = s[id]; $("#o"+id.slice(1)).textContent = s[id]; });
+  $("#excludeNums").value = s.exclude;
+}
+function saveStrategy(){
+  const s = {exclude: $("#excludeNums").value};
+  SLIDERS.forEach(id=> s[id] = +$("#"+id).value);
+  try{ localStorage.setItem(strategyKey(), JSON.stringify(s)); }catch(e){}
+}
+function parseExclude(){
+  return new Set($("#excludeNums").value.split(/[,，\s]+/).map(x=>parseInt(x,10)).filter(n=>!isNaN(n)));
+}
+function weightedPick(weights, count, excluded){
+  const pool = [];
+  weights.forEach((w,n)=>{ if(n>=1 && !excluded.has(n)) pool.push([n,w]); });
+  const out = [];
+  const avail = pool.slice();
+  while(out.length<count && avail.length){
+    const total = avail.reduce((s,[,w])=>s+w,0);
+    let r = Math.random()*total;
+    let idx = 0;
+    for(let i=0;i<avail.length;i++){ r -= avail[i][1]; if(r<=0){ idx=i; break; } }
+    out.push(avail[idx][0]);
+    avail.splice(idx,1);
+  }
+  return out.sort((a,b)=>a-b);
+}
+function buildWeights(){
+  const ds = windowed(), g = cfg();
+  const f = calcFreq(ds), miss = calcMiss();
+  const maxF = Math.max(...f.slice(1),1), maxM = Math.max(...miss.slice(1),1);
+  const wHot=+$("#wHot").value/100, wCold=+$("#wCold").value/100,
+        wMiss=+$("#wMiss").value/100, rand=+$("#wRand").value/100;
+  const weights = new Array(g.max+1).fill(0);
+  for(let n=1;n<=g.max;n++){
+    const fh = f[n]/maxF, fm = miss[n]/maxM;
+    const score = 0.15 + wHot*fh + wCold*(1-fh) + wMiss*fm;   // 策略分數
+    weights[n] = (1-rand)*score + rand*1;                     // 隨機性 = 拉回均勻分布
+  }
+  return weights;
+}
+function generateSets(){
+  const g = cfg(), excluded = parseExclude();
+  if(g.max - excluded.size < g.picks){ $("#genOut").innerHTML = `<div class="gen-set">排除的號碼太多,剩餘號碼不足 ${g.picks} 個。</div>`; return; }
+  const weights = buildWeights();
+  const count = +$("#setCount").value;
+  const html = [];
+  for(let i=1;i<=count;i++){
+    const nums = weightedPick(weights, g.picks, excluded);
+    let sp = "";
+    if(g.special==="area2"){
+      const a2 = 1 + Math.floor(Math.random()*g.spMax);
+      sp = `<span class="ball-plus" style="font-size:1rem">+</span>` + miniBall(a2,true);
+    }else if(g.special==="same"){
+      const rest = [];
+      for(let n=1;n<=g.max;n++) if(!nums.includes(n) && !excluded.has(n)) rest.push(n);
+      const spN = rest[Math.floor(Math.random()*rest.length)];
+      sp = `<span class="ball-plus" style="font-size:1rem">+</span>` + miniBall(spN,true);
+    }
+    html.push(`<div class="gen-set"><span class="idx">${pad2(i)}</span>${nums.map(n=>miniBall(n)).join("")}${sp}</div>`);
+  }
+  html.push(`<div class="sub" style="margin-top:4px">以上為依目前策略權重加權隨機產生,僅供參考;每期開獎為獨立事件,任何組合機率相同。</div>`);
+  $("#genOut").innerHTML = html.join("");
+  saveStrategy();
+}
+
+/* ============ 事件與總渲染 ============ */
+function render(){
+  const info = state.data[state.game] || {};
+  $("#updatedAt").textContent = info.updated || "—";
+  const has = draws().length > 0;
+  $("#emptyHint").hidden = has;
+  $("#analysisGrid").style.display = has ? "" : "none";
+  renderHero();
+  if(!has) return;
+  renderStats(); renderFreqChart(); renderHotTable(); renderMissTable();
+  renderOddChart(); renderTailChart(); renderArea2(); renderRecent();
+  loadStrategy();
+  $("#genOut").innerHTML = "";
+}
+
+$$(".tab").forEach(b=>b.addEventListener("click",()=>{
+  $$(".tab").forEach(x=>x.classList.remove("active"));
+  b.classList.add("active");
+  state.game = b.dataset.g;
+  document.documentElement.style.setProperty("--accent", cfg().color);
+  render();
+}));
+$$(".win-btn").forEach(b=>b.addEventListener("click",()=>{
+  $$(".win-btn").forEach(x=>x.classList.remove("active"));
+  b.classList.add("active");
+  state.win = +b.dataset.w;
+  render();
+}));
+SLIDERS.forEach(id=>$("#"+id).addEventListener("input",e=>{
+  $("#o"+id.slice(1)).textContent = e.target.value; saveStrategy();
+}));
+$("#excludeNums").addEventListener("change", saveStrategy);
+$("#genBtn").addEventListener("click", generateSets);
+$("#resetBtn").addEventListener("click", ()=>{
+  try{ localStorage.removeItem(strategyKey()); }catch(e){}
+  loadStrategy(); $("#genOut").innerHTML = "";
+});
+
+loadAll();
+</script>
+</body>
+</html>
