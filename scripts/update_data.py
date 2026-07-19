@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 彩研所 TWLottery Lab — 開獎資料自動更新腳本
-BUILD_VERSION = v2.0.0
+BUILD_VERSION = v3.0.0
 
 資料來源:台灣彩券官方網站 API(api.taiwanlottery.com)
 執行方式:由 GitHub Actions 排程呼叫(每日台灣時間 21:35),
         亦可手動執行:python scripts/update_data.py
 
-v2.0.0 新增:
+v3.0.0 新增:
   - 抓取各期「獎金分配」(獎項/中獎注數/單注獎金),存入每期 draws[].prizes
   - 首次遇到未知欄位時,log 會印出官方回應的欄位名稱,便於除錯
 
@@ -26,7 +26,7 @@ import datetime as dt
 
 import requests
 
-BUILD_VERSION = "v2.0.0"
+BUILD_VERSION = "v3.0.0"
 API_BASE = "https://api.taiwanlottery.com/TLCAPIWeB/Lottery/{endpoint}"
 BACKFILL_MONTHS = 14   # 首次回補的月數
 PRIZE_LOOKBACK = 8     # 每次執行最多補抓幾期的獎金分配
