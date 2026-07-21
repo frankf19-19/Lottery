@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 彩研所 TWLottery Lab — 開獎資料自動更新腳本
-BUILD_VERSION = v3.1.0
+BUILD_VERSION = v3.2.0
 
 資料來源:台灣彩券官方網站 API(api.taiwanlottery.com)
 執行方式:由 GitHub Actions 排程呼叫(每日台灣時間 21:35),
         亦可手動執行:python scripts/update_data.py
 
-v3.1.0(依 Actions log 確認之官方格式接通):
+v3.2.0(依 Actions log 確認之官方格式接通):
   - 今彩539 端點修正為 Daily539Result(原 DailyCashResult 為 404)
   - 獎金分配改由月份 API 內嵌的 *Assign 欄位解析(jackpotAssign / super638JackpotAssign 等)
   - 既有資料缺獎金時自動全量回補升級
@@ -27,7 +27,7 @@ import datetime as dt
 
 import requests
 
-BUILD_VERSION = "v3.1.0"
+BUILD_VERSION = "v3.2.0"
 API_BASE = "https://api.taiwanlottery.com/TLCAPIWeB/Lottery/{endpoint}"
 BACKFILL_MONTHS = 14   # 首次回補的月數
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
@@ -225,6 +225,13 @@ def update_game(key, cfg):
     if not draws:
         print(f"[{cfg['name']}] 無資料可寫入,略過。", file=sys.stderr)
         return False
+
+    # 資料內容無變動就不改寫檔案:密集排程下避免只因時間戳而產生無意義 commit
+    if not first_run and json.dumps(draws, sort_keys=True, ensure_ascii=False) == json.dumps(
+        old_draws, sort_keys=True, ensure_ascii=False
+    ):
+        print(f"[{cfg['name']}] 資料無變動(累計 {len(draws)} 期),略過寫檔。")
+        return True
 
     out = {
         "game": key,
