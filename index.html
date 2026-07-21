@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="assets/chart.umd.js"></script>
 <style>
-/* ================= 彩研所 v3.2.0 ─ 明亮現代(銀行 App 風) =================
+/* ================= 彩研所 v3.2.1 ─ 明亮現代(銀行 App 風) =================
    白底・鮮明色彩・粗黑體・柔和彩色陰影
    大樂透=琥珀橘 #F59E0B|威力彩=珊瑚紅 #EF4444|今彩539=翡翠綠 #10B981|品牌藍 #2563EB */
 :root{
@@ -199,6 +199,12 @@ input[type=range]{width:100%;accent-color:var(--accent);height:30px}
   border-radius:999px;padding:3px 11px}
 .tier-none{color:#CBD5E1;font-size:.82rem}
 
+.pred-details summary{cursor:pointer;font-size:.8rem;font-weight:700;color:var(--accent);
+  padding:6px 0;list-style:none;display:flex;align-items:center;gap:6px;user-select:none;min-height:32px}
+.pred-details summary::-webkit-details-marker{display:none}
+.pred-details summary::before{content:"▸";transition:transform .15s;font-size:.9em}
+.pred-details[open] summary::before{transform:rotate(90deg)}
+
 .recent-list td{white-space:nowrap}
 .scroll-x{overflow-x:auto;-webkit-overflow-scrolling:touch}
 
@@ -351,13 +357,13 @@ canvas{max-width:100%}
       任何號碼組合的中獎機率完全相同,「熱號」「冷號」「遺漏」對未來開獎不具預測力。
       策略選號器與預測核對僅供娛樂與選號輔助參考,請理性投注、量力而為。開獎結果與獎金以台灣彩券官方公告為準。
     </div>
-    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v3.2.0</span></div>
+    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v3.2.1</span></div>
   </div>
 </footer>
 
 <script>
 "use strict";
-const BUILD_VERSION = "v3.2.0";
+const BUILD_VERSION = "v3.2.1";
 
 /* ============ 錯誤攔截 ============ */
 function showErr(msg){
@@ -820,13 +826,20 @@ function renderPreds(){
     el.innerHTML = `<div class="pred-wait">尚無預測紀錄。在上方策略選號器產生號碼後,按「儲存為預測」即可在下期開獎後自動對獎。紀錄存於此瀏覽器。</div>`;
     return;
   }
-  el.innerHTML = preds.slice(0,10).map(rec=>{
+  el.innerHTML = preds.slice(0,10).map((rec, idx)=>{
     const w = rec.weights || {};
     const wTxt = `熱${w.wHot??"—"}/冷${w.wCold??"—"}/遺${w.wMiss??"—"}/隨${w.wRand??"—"}`;
     const target = findTargetDraw(rec.afterPeriod);
     let body, sum = "";
     if(!target){
-      body = `<div class="pred-wait">等待開獎——將以第 ${esc(rec.afterPeriod)} 期之後的下一期自動對獎。</div>`;
+      const rows = rec.sets.map((s,i)=>`<tr>
+          <td>${pad2(i+1)}</td>
+          <td>${s.n.map(n=>miniBall(n)).join("")}${s.a2!=null?`<span class="ball-plus" style="font-size:.9rem">+</span>`+miniBall(s.a2,{sp:true}):""}</td>
+        </tr>`).join("");
+      body = `<div class="pred-wait">等待開獎——將以第 ${esc(rec.afterPeriod)} 期之後的下一期自動對獎。</div>
+        <div class="scroll-x"><table>
+          <tr><th>組</th><th>已儲存的號碼</th></tr>${rows}
+        </table></div>`;
     }else{
       const drawnSet = new Set(target.numbers);
       let totalHit = 0;
@@ -861,7 +874,10 @@ function renderPreds(){
           <button class="btn ghost small" data-del="${rec.id}">刪除</button>
         </div>
       </div>
-      ${body}${sum}
+      <details class="pred-details"${idx===0?" open":""}>
+        <summary>${target?"查看號碼與對獎結果":"查看已儲存的號碼"}</summary>
+        ${body}${sum}
+      </details>
     </div>`;
   }).join("");
   el.querySelectorAll("[data-apply]").forEach(b=>b.addEventListener("click",()=>{
