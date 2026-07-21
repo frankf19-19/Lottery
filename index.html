@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="assets/chart.umd.js"></script>
 <style>
-/* ================= 彩研所 v3.1.0 ─ 明亮現代(銀行 App 風) =================
+/* ================= 彩研所 v3.2.0 ─ 明亮現代(銀行 App 風) =================
    白底・鮮明色彩・粗黑體・柔和彩色陰影
    大樂透=琥珀橘 #F59E0B|威力彩=珊瑚紅 #EF4444|今彩539=翡翠綠 #10B981|品牌藍 #2563EB */
 :root{
@@ -73,15 +73,15 @@ a{color:inherit}
 .tag-strike{display:inline-block;background:#FEE2E2;color:#DC2626;font-size:.72rem;font-weight:700;
   border-radius:999px;padding:4px 11px;margin-left:8px;vertical-align:2px}
 .hero-meta{font-size:clamp(.76rem,2.6vw,.85rem);color:var(--muted)}
-.balls{display:flex;gap:clamp(6px,1.8vw,12px);flex-wrap:wrap;align-items:center;margin:clamp(14px,3vw,20px) 0 2px}
-.ball{--sz:clamp(46px,11.5vw,62px);width:var(--sz);height:var(--sz);border-radius:50%;
+.balls{display:flex;gap:clamp(4px,1.5vw,12px);flex-wrap:wrap;align-items:center;margin:clamp(14px,3vw,20px) 0 2px}
+.ball{--sz:clamp(38px,9.2vw,62px);width:var(--sz);height:var(--sz);border-radius:50%;
   display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;
   font-size:calc(var(--sz)*.4);font-variant-numeric:tabular-nums;letter-spacing:-.02em;
   background:linear-gradient(150deg,var(--b1,var(--a1)) 10%,var(--b2,var(--a2)) 90%);
   box-shadow:inset 0 2px 5px rgba(255,255,255,.35), inset 0 -3px 6px rgba(0,0,0,.12),
              0 8px 18px -6px var(--b2,var(--a2))}
 .ball.sp{--b1:var(--sp1);--b2:var(--sp2)}
-.ball-plus{font-size:1.35rem;color:#CBD5E1;font-weight:700}
+.ball-plus{font-size:clamp(1rem,3vw,1.35rem);color:#CBD5E1;font-weight:700}
 .ball-col{display:flex;flex-direction:column;align-items:center;gap:5px}
 .ball-label{font-size:.7rem;color:var(--muted);letter-spacing:.1em}
 .hero-note{font-size:.74rem;color:var(--muted);margin-top:10px}
@@ -351,21 +351,32 @@ canvas{max-width:100%}
       任何號碼組合的中獎機率完全相同,「熱號」「冷號」「遺漏」對未來開獎不具預測力。
       策略選號器與預測核對僅供娛樂與選號輔助參考,請理性投注、量力而為。開獎結果與獎金以台灣彩券官方公告為準。
     </div>
-    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v3.1.0</span></div>
+    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v3.2.0</span></div>
   </div>
 </footer>
 
 <script>
 "use strict";
-const BUILD_VERSION = "v3.1.0";
+const BUILD_VERSION = "v3.2.0";
 
 /* ============ 錯誤攔截 ============ */
 function showErr(msg){
   const bar = document.getElementById("errBar");
   if(bar){ bar.style.display = "block"; bar.innerHTML = "<b>頁面發生錯誤(請截圖回報):</b>" + String(msg).replace(/[<>]/g,""); }
 }
-window.addEventListener("error", e => showErr((e.message||"未知錯誤") + (e.filename? " @ " + e.filename.split("/").pop() + ":" + e.lineno : "")));
-window.addEventListener("unhandledrejection", e => showErr("Promise: " + (e.reason && e.reason.message || e.reason)));
+window.addEventListener("error", e => {
+  // 外部注入腳本(App 內建瀏覽器、瀏覽器擴充等)的錯誤會被遮蔽為 "Script error." 且無本站檔名,
+  // 與本站無關,不顯示橫幅;僅回報本站自身腳本的錯誤。
+  const own = e.filename && (e.filename.startsWith(location.origin) || e.filename.startsWith("/"));
+  if(!own || /^Script error\.?$/.test(e.message || "")) return;
+  showErr((e.message || "未知錯誤") + " @ " + e.filename.split("/").pop() + ":" + e.lineno);
+});
+window.addEventListener("unhandledrejection", e => {
+  const r = e.reason;
+  if(r instanceof Error && r.stack && r.stack.includes(location.hostname)){
+    showErr("Promise: " + r.message);
+  }
+});
 function safe(label, fn){
   try{ fn(); }catch(err){ console.error(label, err); showErr(label + ":" + (err && err.message || err)); }
 }
