@@ -1,12 +1,16 @@
 # 彩研所 TWLottery Lab — 自動更新開獎資料
-# BUILD_VERSION: v1.0.0
+# BUILD_VERSION: v3.2.0
 name: 更新開獎資料
 
 on:
   schedule:
-    # 台灣時間每日 21:35(UTC 13:35),開獎後約一小時執行
-    - cron: "35 13 * * *"
-  workflow_dispatch: {}   # 允許在 Actions 頁面手動觸發(首次建站請手動跑一次)
+    # 開獎密集時段:台灣 20:35 起每 15 分鐘至 22:35(UTC 12:35–14:35)
+    - cron: "35,50 12 * * *"
+    - cron: "5,20,35,50 13 * * *"
+    - cron: "5,20,35 14 * * *"
+    # 白天保底:台灣 09:05 / 12:05 / 15:05 / 18:05(補官方事後修正)
+    - cron: "5 1,4,7,10 * * *"
+  workflow_dispatch: {}   # 允許在 Actions 頁面手動觸發
 
 permissions:
   contents: write
