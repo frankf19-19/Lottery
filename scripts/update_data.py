@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 彩研所 TWLottery Lab — 開獎資料自動更新腳本
-BUILD_VERSION = v3.2.0
+BUILD_VERSION = v3.3.1
 
 資料來源:台灣彩券官方網站 API(api.taiwanlottery.com)
 執行方式:由 GitHub Actions 排程呼叫(每日台灣時間 21:35),
         亦可手動執行:python scripts/update_data.py
 
-v3.2.0(依 Actions log 確認之官方格式接通):
+v3.3.1(依 Actions log 確認之官方格式接通):
   - 今彩539 端點修正為 Daily539Result(原 DailyCashResult 為 404)
   - 獎金分配改由月份 API 內嵌的 *Assign 欄位解析(jackpotAssign / super638JackpotAssign 等)
   - 既有資料缺獎金時自動全量回補升級
@@ -27,7 +27,7 @@ import datetime as dt
 
 import requests
 
-BUILD_VERSION = "v3.2.0"
+BUILD_VERSION = "v3.3.1"
 API_BASE = "https://api.taiwanlottery.com/TLCAPIWeB/Lottery/{endpoint}"
 BACKFILL_MONTHS = 14   # 首次回補的月數
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
