@@ -1,11 +1,20 @@
 # 彩研所 TWLottery Lab
 
-**BUILD_VERSION: v3.2.0**
+**BUILD_VERSION: v3.3.1**
 
 台灣彩券(威力彩・大樂透・今彩539)開獎數據自動更新與統計分析網站。
 零成本靜態架構:單一 `index.html` 前端 + GitHub Actions Python 後端,部署於 GitHub Pages。
 
-## v3.2.0 變更(更新頻率提升)
+## v3.3.1 變更(跨裝置同步)
+
+- 新增「跨裝置同步」:以你自己的 GitHub 儲存庫為後端(寫入 `data/sync.json`),
+  電腦/手機各輸入一次 Fine-grained Token 後,預測紀錄自動雙向合併同步
+- Token 建立:GitHub → Settings → Developer settings → Fine-grained tokens →
+  Repository access 僅選本儲存庫 → Permissions → Contents: Read and write
+- 合併採 id 聯集,不會覆蓋任一裝置的紀錄;同時寫入衝突會自動拉取合併後重試
+- 注意:公開儲存庫的 sync.json 內容(號碼與策略權重)為公開可見
+
+## 前版變更(更新頻率提升)
 
 - 排程改為每日約 13 次:開獎密集時段台灣 20:35–22:35 每 15 分鐘一次,
   白天 09:05/12:05/15:05/18:05 保底(GitHub 排程可能延遲數分鐘,屬正常)
@@ -92,10 +101,10 @@ data/dailycash539.json          今彩539 資料
 ## 版本驗證(防「假包」檢查)
 
 ```bash
-grep -n "v3.2.0" index.html scripts/update_data.py README.md
+grep -n "v3.3.1" index.html scripts/update_data.py README.md
 ```
 
-三個檔案都應出現 `v3.2.0`,頁面 footer 顯示 `BUILD v3.2.0`。
+三個檔案都應出現 `v3.3.1`,頁面 footer 顯示 `BUILD v3.3.1`。
 
 ## 獎金資料注意事項
 

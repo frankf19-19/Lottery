@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="assets/chart.umd.js"></script>
 <style>
-/* ================= 彩研所 v3.2.1 ─ 明亮現代(銀行 App 風) =================
+/* ================= 彩研所 v3.3.1 ─ 明亮現代(銀行 App 風) =================
    白底・鮮明色彩・粗黑體・柔和彩色陰影
    大樂透=琥珀橘 #F59E0B|威力彩=珊瑚紅 #EF4444|今彩539=翡翠綠 #10B981|品牌藍 #2563EB */
 :root{
@@ -205,6 +205,15 @@ input[type=range]{width:100%;accent-color:var(--accent);height:30px}
 .pred-details summary::before{content:"▸";transition:transform .15s;font-size:.9em}
 .pred-details[open] summary::before{transform:rotate(90deg)}
 
+.sync-status{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;
+  border-radius:999px;padding:5px 12px;background:#EFF3F9;color:var(--ink-soft)}
+.sync-status.ok{background:#E5F8F1;color:#0E7A5C}
+.sync-status.err{background:#FEE2E2;color:#DC2626}
+.sync-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:720px){.sync-grid{grid-template-columns:1fr}}
+.sync-note{font-size:.78rem;color:var(--muted);line-height:1.8;margin-top:10px}
+.sync-note code{background:#EFF3F9;border-radius:5px;padding:1px 6px;font-size:.9em}
+
 .recent-list td{white-space:nowrap}
 .scroll-x{overflow-x:auto;-webkit-overflow-scrolling:touch}
 
@@ -342,6 +351,27 @@ canvas{max-width:100%}
       <div id="predList"></div>
     </div>
 
+    <div class="card full" id="syncCard">
+      <h2>跨裝置同步 <span class="sync-status" id="syncStatus" style="margin-left:6px">未啟用</span></h2>
+      <div class="sub">把「預測核對」的紀錄透過你自己的 GitHub 儲存庫同步(寫入 <code>data/sync.json</code>)。每台裝置輸入一次 Token,之後儲存/刪除預測會自動同步,打開網頁會自動合併其他裝置的紀錄。</div>
+      <div class="sync-grid">
+        <div class="field"><label for="syncOwner">GitHub 帳號</label><input type="text" id="syncOwner" autocomplete="off"></div>
+        <div class="field"><label for="syncRepo">儲存庫名稱</label><input type="text" id="syncRepo" autocomplete="off"></div>
+        <div class="field" style="grid-column:1 / -1"><label for="syncToken">Fine-grained Token(只需此儲存庫的 Contents 讀寫權限)</label><input type="text" id="syncToken" autocomplete="off" placeholder="github_pat_..." style="font-family:ui-monospace,monospace"></div>
+      </div>
+      <div class="strategy-row">
+        <button class="btn accent" id="syncEnableBtn">啟用同步</button>
+        <button class="btn ghost" id="syncNowBtn">立即同步</button>
+        <button class="btn ghost" id="syncOffBtn">停用並清除此裝置的 Token</button>
+      </div>
+      <div class="sync-note">
+        Token 建立方式:GitHub → Settings → Developer settings → Fine-grained personal access tokens →
+        Repository access 只勾選這個儲存庫 → Permissions → <code>Contents: Read and write</code> → Generate。
+        Token 只儲存在此裝置的瀏覽器內、只用於連線 GitHub 官方 API;請勿分享給他人。
+        注意:公開儲存庫的 <code>data/sync.json</code> 任何人都看得到(內容只有你儲存的號碼與策略權重)。
+      </div>
+    </div>
+
     <div class="card full">
       <h2>近期開獎紀錄</h2>
       <div class="sub">最近 12 期</div>
@@ -357,13 +387,13 @@ canvas{max-width:100%}
       任何號碼組合的中獎機率完全相同,「熱號」「冷號」「遺漏」對未來開獎不具預測力。
       策略選號器與預測核對僅供娛樂與選號輔助參考,請理性投注、量力而為。開獎結果與獎金以台灣彩券官方公告為準。
     </div>
-    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v3.2.1</span></div>
+    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v3.3.1</span></div>
   </div>
 </footer>
 
 <script>
 "use strict";
-const BUILD_VERSION = "v3.2.1";
+const BUILD_VERSION = "v3.3.1";
 
 /* ============ 錯誤攔截 ============ */
 function showErr(msg){
@@ -758,14 +788,17 @@ function loadPreds(){
 }
 function storePreds(arr){
   try{ localStorage.setItem(predKey(), JSON.stringify(arr.slice(0,30))); }catch(e){}
+  schedulePush();
 }
 function savePrediction(){
   if(!lastGenerated) return;
   const latest = draws()[0];
   const preds = loadPreds();
+  const now = new Date();
+  const localTs = `${now.getFullYear()}-${pad2(now.getMonth()+1)}-${pad2(now.getDate())} ${pad2(now.getHours())}:${pad2(now.getMinutes())}`;
   preds.unshift({
     id: Date.now(),
-    ts: new Date().toISOString().slice(0,16).replace("T"," "),
+    ts: localTs,
     afterPeriod: latest ? latest.period : "0",
     weights: lastGenerated.weights,
     sets: lastGenerated.sets
@@ -836,7 +869,7 @@ function renderPreds(){
           <td>${pad2(i+1)}</td>
           <td>${s.n.map(n=>miniBall(n)).join("")}${s.a2!=null?`<span class="ball-plus" style="font-size:.9rem">+</span>`+miniBall(s.a2,{sp:true}):""}</td>
         </tr>`).join("");
-      body = `<div class="pred-wait">等待開獎——將以第 ${esc(rec.afterPeriod)} 期之後的下一期自動對獎。</div>
+      body = `<div class="pred-wait">等待開獎——儲存當下最新已開至第 ${esc(rec.afterPeriod)} 期,將以下一期(開獎約 20:30,資料進站後)自動對獎;之後重新整理本頁即可看到結果。</div>
         <div class="scroll-x"><table>
           <tr><th>組</th><th>已儲存的號碼</th></tr>${rows}
         </table></div>`;
@@ -890,6 +923,119 @@ function renderPreds(){
   }));
 }
 
+/* ============ 跨裝置同步(GitHub Contents API) ============ */
+const SYNC_CFG_KEY = "twlab-sync-cfg";
+const SYNC_PATH = "data/sync.json";
+let syncSha = null, syncTimer = null, syncBusy = false;
+
+function syncCfg(){ try{ return JSON.parse(localStorage.getItem(SYNC_CFG_KEY)) || null; }catch(e){ return null; } }
+function setSyncStatus(text, cls){
+  const el = $("#syncStatus");
+  if(el){ el.textContent = text; el.className = "sync-status" + (cls?" "+cls:""); }
+}
+function b64EncodeUtf8(str){ return btoa(unescape(encodeURIComponent(str))); }
+function b64DecodeUtf8(b64){ return decodeURIComponent(escape(atob(String(b64).replace(/\s/g,"")))); }
+
+async function ghContents(method, body){
+  const c = syncCfg(); if(!c) throw new Error("尚未設定同步");
+  const base = `https://api.github.com/repos/${c.owner}/${c.repo}/contents/${SYNC_PATH}`;
+  const url = method === "GET" ? `${base}?ref=main&cb=${Date.now()}` : base;
+  return fetch(url, {
+    method,
+    headers: { "Authorization": "Bearer " + c.token, "Accept": "application/vnd.github+json" },
+    body: body ? JSON.stringify(body) : undefined
+  });
+}
+function allLocalPreds(){
+  const out = {};
+  for(const key of Object.keys(GAMES)){
+    try{ out[key] = JSON.parse(localStorage.getItem("twlab-preds-" + key)) || []; }catch(e){ out[key] = []; }
+  }
+  return out;
+}
+function mergePreds(remote){
+  // 以 id 聯集合併每個遊戲的預測紀錄;不會覆蓋、不會遺失任一裝置的紀錄
+  let changed = false;
+  for(const key of Object.keys(GAMES)){
+    const localArr = allLocalPreds()[key];
+    const remoteArr = (remote && remote.preds && remote.preds[key]) || [];
+    const byId = new Map();
+    [...localArr, ...remoteArr].forEach(r => { if(r && r.id != null && !byId.has(String(r.id))) byId.set(String(r.id), r); });
+    const merged = [...byId.values()].sort((a,b)=>(b.id||0)-(a.id||0)).slice(0,30);
+    if(JSON.stringify(merged) !== JSON.stringify(localArr)){
+      try{ localStorage.setItem("twlab-preds-" + key, JSON.stringify(merged)); }catch(e){}
+      changed = true;
+    }
+  }
+  return changed;
+}
+async function syncPull(){
+  const r = await ghContents("GET");
+  if(r.status === 404){ syncSha = null; return null; }
+  if(r.status === 401 || r.status === 403) throw new Error("Token 無效或權限不足(" + r.status + ")");
+  if(!r.ok) throw new Error("讀取失敗 HTTP " + r.status);
+  const j = await r.json();
+  syncSha = j.sha;
+  try{ return JSON.parse(b64DecodeUtf8(j.content)); }catch(e){ return null; }
+}
+async function syncPush(retry){
+  const payload = { updated: new Date().toISOString(), device: navigator.platform || "unknown", preds: allLocalPreds() };
+  const body = { message: "同步預測紀錄", content: b64EncodeUtf8(JSON.stringify(payload, null, 1)), branch: "main" };
+  if(syncSha) body.sha = syncSha;
+  const r = await ghContents("PUT", body);
+  if(r.status === 409 || r.status === 422){
+    if(retry) throw new Error("同步衝突,請稍後再試");
+    const remote = await syncPull();       // 另一台裝置剛寫入:拉下來合併後重推一次
+    mergePreds(remote);
+    return syncPush(true);
+  }
+  if(r.status === 401 || r.status === 403) throw new Error("Token 無效或權限不足(" + r.status + ")");
+  if(!r.ok) throw new Error("寫入失敗 HTTP " + r.status);
+  const j = await r.json();
+  syncSha = j.content && j.content.sha || syncSha;
+}
+async function syncFull(showBusy){
+  if(!syncCfg() || syncBusy) return;
+  syncBusy = true;
+  if(showBusy) setSyncStatus("同步中…");
+  try{
+    const remote = await syncPull();
+    const changed = mergePreds(remote);
+    if(changed) safe("預測核對", renderPreds);
+    await syncPush(false);
+    setSyncStatus("已同步 " + new Date().toTimeString().slice(0,5), "ok");
+  }catch(err){
+    setSyncStatus("同步失敗:" + (err && err.message || err), "err");
+  }finally{ syncBusy = false; }
+}
+function schedulePush(){
+  if(!syncCfg()) return;
+  clearTimeout(syncTimer);
+  setSyncStatus("待同步…");
+  syncTimer = setTimeout(()=>syncFull(false), 1800);
+}
+function initSyncUI(){
+  const c = syncCfg();
+  const host = location.hostname, seg = location.pathname.split("/").filter(Boolean)[0] || "";
+  const guessOwner = host.endsWith(".github.io") ? host.split(".")[0] : "";
+  $("#syncOwner").value = c ? c.owner : guessOwner;
+  $("#syncRepo").value = c ? c.repo : (seg || (guessOwner ? guessOwner + ".github.io" : ""));
+  if(c){ $("#syncToken").value = c.token; setSyncStatus("已啟用", "ok"); }
+  $("#syncEnableBtn").addEventListener("click", ()=>{
+    const owner = $("#syncOwner").value.trim(), repo = $("#syncRepo").value.trim(), token = $("#syncToken").value.trim();
+    if(!owner || !repo || !token){ setSyncStatus("請填寫帳號、儲存庫與 Token", "err"); return; }
+    try{ localStorage.setItem(SYNC_CFG_KEY, JSON.stringify({owner, repo, token})); }catch(e){}
+    syncSha = null;
+    syncFull(true);
+  });
+  $("#syncNowBtn").addEventListener("click", ()=>syncFull(true));
+  $("#syncOffBtn").addEventListener("click", ()=>{
+    try{ localStorage.removeItem(SYNC_CFG_KEY); }catch(e){}
+    $("#syncToken").value = ""; syncSha = null;
+    setSyncStatus("未啟用");
+  });
+}
+
 /* ============ 事件與總渲染 ============ */
 function render(){
   applyAccent();
@@ -939,7 +1085,8 @@ $("#resetBtn").addEventListener("click", ()=>{
   loadStrategy(); $("#genOut").innerHTML = ""; lastGenerated = null;
 });
 
-loadAll();
+safe("同步設定", initSyncUI);
+loadAll().then(()=>{ if(syncCfg()) syncFull(false); });
 </script>
 </body>
 </html>
