@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="assets/chart.umd.js"></script>
 <style>
-/* ================= 彩研所 v3.6.0 ─ 明亮現代(銀行 App 風) =================
+/* ================= 彩研所 v4.0.0 ─ 明亮現代(銀行 App 風) =================
    白底・鮮明色彩・粗黑體・柔和彩色陰影
    大樂透=琥珀橘 #F59E0B|威力彩=珊瑚紅 #EF4444|今彩539=翡翠綠 #10B981|品牌藍 #2563EB */
 :root{
@@ -205,6 +205,15 @@ input[type=range]{width:100%;accent-color:var(--accent);height:30px}
 .pred-details summary::before{content:"▸";transition:transform .15s;font-size:.9em}
 .pred-details[open] summary::before{transform:rotate(90deg)}
 
+.sync-status{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;
+  border-radius:999px;padding:5px 12px;background:#EFF3F9;color:var(--ink-soft)}
+.sync-status.ok{background:#E5F8F1;color:#0E7A5C}
+.sync-status.err{background:#FEE2E2;color:#DC2626}
+.auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:720px){.auth-grid{grid-template-columns:1fr}}
+.auth-note{font-size:.78rem;color:var(--muted);line-height:1.8;margin-top:10px}
+.auth-note code{background:#EFF3F9;border-radius:5px;padding:1px 6px;font-size:.9em}
+
 .recent-list td{white-space:nowrap}
 .scroll-x{overflow-x:auto;-webkit-overflow-scrolling:touch}
 
@@ -342,6 +351,45 @@ canvas{max-width:100%}
       <div id="predList"></div>
     </div>
 
+    <div class="card full" id="authCard">
+      <h2>帳號登入 <span class="sync-status" id="authStatus" style="margin-left:6px">檢查中…</span></h2>
+      <div class="sub">單一帳號:在任何裝置輸入同一組密碼登入,預測紀錄自動同步(儲存/刪除自動上傳、開網頁自動合併)。登入狀態會保留在此裝置,登出即清除。</div>
+
+      <div id="authLogin" hidden>
+        <div class="auth-grid">
+          <div class="field" style="grid-column:1 / -1"><label for="loginPw">密碼</label><input type="password" id="loginPw" autocomplete="current-password"></div>
+        </div>
+        <div class="strategy-row">
+          <button class="btn accent" id="loginBtn">登入</button>
+        </div>
+      </div>
+
+      <div id="authDone" hidden>
+        <div class="strategy-row">
+          <button class="btn ghost" id="syncNowBtn">立即同步</button>
+          <button class="btn ghost" id="logoutBtn">登出此裝置</button>
+        </div>
+      </div>
+
+      <div id="authSetup" hidden>
+        <div class="auth-note" style="margin:0 0 8px"><b>初次設定(整個帳號只需做這一次,之後所有裝置都用密碼登入):</b><br>
+        1. 到 GitHub → Settings → Developer settings → <b>Fine-grained personal access tokens</b> → Generate new token(免費)<br>
+        2. Repository access 只勾選這個儲存庫;Permissions → <code>Contents: Read and write</code> → Generate<br>
+        3. 把 <code>github_pat_</code> 開頭的金鑰貼到下面,設定一組登入密碼(至少 8 碼,建議混合英數)</div>
+        <div class="auth-grid">
+          <div class="field"><label for="setupOwner">GitHub 帳號</label><input type="text" id="setupOwner" autocomplete="off"></div>
+          <div class="field"><label for="setupRepo">儲存庫名稱</label><input type="text" id="setupRepo" autocomplete="off"></div>
+          <div class="field" style="grid-column:1 / -1"><label for="setupToken">金鑰(github_pat_...)</label><input type="text" id="setupToken" autocomplete="off" style="font-family:ui-monospace,monospace"></div>
+          <div class="field"><label for="setupPw">設定登入密碼(至少 8 碼)</label><input type="password" id="setupPw" autocomplete="new-password"></div>
+          <div class="field"><label for="setupPw2">再輸入一次密碼</label><input type="password" id="setupPw2" autocomplete="new-password"></div>
+        </div>
+        <div class="strategy-row">
+          <button class="btn accent" id="setupBtn">建立帳號並登入</button>
+        </div>
+        <div class="auth-note">運作方式:金鑰會用你的密碼以 AES-256-GCM 加密後存到儲存庫(<code>data/auth.enc</code>),之後任何裝置輸入密碼即可解鎖並自動同步。密碼不會被上傳、也無法找回——忘記密碼時重新做一次初次設定即可。加密檔在公開儲存庫中,請務必使用有強度的密碼。</div>
+      </div>
+    </div>
+
     <div class="card full">
       <h2>近期開獎紀錄</h2>
       <div class="sub">最近 12 期</div>
@@ -357,13 +405,13 @@ canvas{max-width:100%}
       任何號碼組合的中獎機率完全相同,「熱號」「冷號」「遺漏」對未來開獎不具預測力。
       策略選號器與預測核對僅供娛樂與選號輔助參考,請理性投注、量力而為。開獎結果與獎金以台灣彩券官方公告為準。
     </div>
-    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v3.6.0</span></div>
+    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v4.0.0</span></div>
   </div>
 </footer>
 
 <script>
 "use strict";
-const BUILD_VERSION = "v3.6.0";
+const BUILD_VERSION = "v4.0.0";
 
 /* ============ 錯誤攔截 ============ */
 function showErr(msg){
@@ -758,6 +806,7 @@ function loadPreds(){
 }
 function storePreds(arr){
   try{ localStorage.setItem(predKey(), JSON.stringify(arr.slice(0,30))); }catch(e){}
+  schedulePush();
 }
 function savePrediction(){
   if(!lastGenerated) return;
@@ -902,7 +951,209 @@ function renderPreds(){
   }));
 }
 
-/* ============ 事件與總渲染 ============ *//* ============ 事件與總渲染 ============ */
+/* ============ 帳號登入(單一帳號)與自動同步 ============ */
+const AUTH_FILE = "data/auth.enc";
+const SYNC_FILE = "data/sync.json";
+const LOGIN_KEY = "twlab-login";
+const PBKDF2_ITERS = 600000;
+let syncSha = null, syncTimer = null, syncBusy = false;
+
+function detectRepo(){
+  const host = location.hostname, seg = location.pathname.split("/").filter(Boolean)[0] || "";
+  const owner = host.endsWith(".github.io") ? host.split(".")[0] : "";
+  return { owner, repo: seg || (owner ? owner + ".github.io" : "") };
+}
+function loginCfg(){ try{ return JSON.parse(localStorage.getItem(LOGIN_KEY)) || null; }catch(e){ return null; } }
+function setAuthStatus(text, cls){
+  const el = $("#authStatus");
+  if(el){ el.textContent = text; el.className = "sync-status" + (cls?" "+cls:""); }
+}
+function showAuthSection(which){
+  ["authLogin","authDone","authSetup"].forEach(id => { const el = $("#"+id); if(el) el.hidden = (id !== which); });
+}
+function allLocalPreds(){
+  const out = {};
+  for(const key of Object.keys(GAMES)){
+    try{ out[key] = JSON.parse(localStorage.getItem("twlab-preds-" + key)) || []; }catch(e){ out[key] = []; }
+  }
+  return out;
+}
+function mergePreds(remote){
+  let changed = false;
+  for(const key of Object.keys(GAMES)){
+    const localArr = allLocalPreds()[key];
+    const remoteArr = (remote && remote.preds && remote.preds[key]) || [];
+    const byId = new Map();
+    [...localArr, ...remoteArr].forEach(r => { if(r && r.id != null && !byId.has(String(r.id))) byId.set(String(r.id), r); });
+    const merged = [...byId.values()].sort((a,b)=>(b.id||0)-(a.id||0)).slice(0,30);
+    if(JSON.stringify(merged) !== JSON.stringify(localArr)){
+      try{ localStorage.setItem("twlab-preds-" + key, JSON.stringify(merged)); }catch(e){}
+      changed = true;
+    }
+  }
+  return changed;
+}
+function bufToB64(buf){ let s=""; new Uint8Array(buf).forEach(b=>s+=String.fromCharCode(b)); return btoa(s); }
+function b64ToBuf(b64){ const bin=atob(b64); return Uint8Array.from(bin, c=>c.charCodeAt(0)); }
+async function deriveKey(password, salt){
+  const material = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveKey"]);
+  return crypto.subtle.deriveKey(
+    { name:"PBKDF2", salt, iterations:PBKDF2_ITERS, hash:"SHA-256" },
+    material, { name:"AES-GCM", length:256 }, false, ["encrypt","decrypt"]);
+}
+async function encryptToken(password, token){
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const key = await deriveKey(password, salt);
+  const ct = await crypto.subtle.encrypt({name:"AES-GCM", iv}, key, new TextEncoder().encode(token));
+  return JSON.stringify({ v:1, iters:PBKDF2_ITERS, salt:bufToB64(salt), iv:bufToB64(iv), ct:bufToB64(ct) });
+}
+async function decryptToken(password, blobJson){
+  const o = JSON.parse(blobJson);
+  const key = await deriveKey(password, b64ToBuf(o.salt));
+  const pt = await crypto.subtle.decrypt({name:"AES-GCM", iv:b64ToBuf(o.iv)}, key, b64ToBuf(o.ct));
+  return new TextDecoder().decode(pt);
+}
+async function ghContents(cfg, method, path, body){
+  const base = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}`;
+  const url = method === "GET" ? `${base}?ref=main&cb=${Date.now()}` : base;
+  return fetch(url, {
+    method,
+    headers: { "Authorization": "Bearer " + cfg.token, "Accept": "application/vnd.github+json" },
+    body: body ? JSON.stringify(body) : undefined
+  });
+}
+function b64EncodeUtf8(str){ return btoa(unescape(encodeURIComponent(str))); }
+function b64DecodeUtf8(b64){ return decodeURIComponent(escape(atob(String(b64).replace(/\s/g,"")))); }
+async function fetchPublicFile(owner, repo, path){
+  const r = await fetch(`https://raw.githubusercontent.com/${owner}/${repo}/main/${path}?cb=${Date.now()}`);
+  if(r.status === 404) return null;
+  if(!r.ok) throw new Error("讀取失敗 HTTP " + r.status);
+  return r.text();
+}
+async function cloudPull(cfg){
+  const r = await ghContents(cfg, "GET", SYNC_FILE);
+  if(r.status === 404){ syncSha = null; return null; }
+  if(r.status === 401 || r.status === 403) throw new Error("登入憑證失效,請重新登入(" + r.status + ")");
+  if(!r.ok) throw new Error("讀取失敗 HTTP " + r.status);
+  const j = await r.json();
+  syncSha = j.sha;
+  try{ return JSON.parse(b64DecodeUtf8(j.content)); }catch(e){ return null; }
+}
+async function cloudPush(cfg, retry){
+  const payload = { v:1, updated:new Date().toISOString(), preds:allLocalPreds() };
+  const body = { message:"同步預測紀錄", content:b64EncodeUtf8(JSON.stringify(payload, null, 1)), branch:"main" };
+  if(syncSha) body.sha = syncSha;
+  const r = await ghContents(cfg, "PUT", SYNC_FILE, body);
+  if(r.status === 409 || r.status === 422){
+    if(retry) throw new Error("同步衝突,請稍後再試");
+    mergePreds(await cloudPull(cfg));
+    return cloudPush(cfg, true);
+  }
+  if(r.status === 401 || r.status === 403) throw new Error("登入憑證失效,請重新登入(" + r.status + ")");
+  if(!r.ok) throw new Error("寫入失敗 HTTP " + r.status);
+  const j = await r.json();
+  syncSha = (j.content && j.content.sha) || syncSha;
+}
+async function syncFull(showBusy){
+  const cfg = loginCfg();
+  if(!cfg || syncBusy) return;
+  syncBusy = true;
+  if(showBusy) setAuthStatus("同步中…");
+  try{
+    if(mergePreds(await cloudPull(cfg))) safe("預測核對", renderPreds);
+    await cloudPush(cfg, false);
+    setAuthStatus("已登入・同步完成 " + new Date().toTimeString().slice(0,5), "ok");
+  }catch(err){
+    setAuthStatus(String(err && err.message || err), "err");
+  }finally{ syncBusy = false; }
+}
+function schedulePush(){
+  if(!loginCfg()) return;
+  clearTimeout(syncTimer);
+  setAuthStatus("待同步…");
+  syncTimer = setTimeout(()=>syncFull(false), 1800);
+}
+async function initAuthUI(){
+  $("#loginBtn").addEventListener("click", doLogin);
+  $("#loginPw").addEventListener("keydown", e => { if(e.key === "Enter") doLogin(); });
+  $("#logoutBtn").addEventListener("click", ()=>{
+    try{ localStorage.removeItem(LOGIN_KEY); }catch(e){}
+    setAuthStatus("已登出");
+    refreshAuthState();
+  });
+  $("#syncNowBtn").addEventListener("click", ()=>syncFull(true));
+  $("#setupBtn").addEventListener("click", doSetup);
+  const det = detectRepo();
+  $("#setupOwner").value = det.owner;
+  $("#setupRepo").value = det.repo;
+  await refreshAuthState();
+  if(loginCfg()) syncFull(false);
+}
+async function refreshAuthState(){
+  if(loginCfg()){
+    showAuthSection("authDone");
+    setAuthStatus("已登入", "ok");
+    return;
+  }
+  setAuthStatus("檢查中…");
+  const det = detectRepo();
+  try{
+    const blob = await fetchPublicFile(det.owner, det.repo, AUTH_FILE);
+    if(blob){ showAuthSection("authLogin"); setAuthStatus("請輸入密碼登入"); }
+    else{ showAuthSection("authSetup"); setAuthStatus("尚未建立帳號"); }
+  }catch(e){
+    showAuthSection("authSetup");
+    setAuthStatus("無法確認帳號狀態:" + (e && e.message || e), "err");
+  }
+}
+async function doLogin(){
+  const pw = $("#loginPw").value;
+  if(!pw){ setAuthStatus("請輸入密碼", "err"); return; }
+  setAuthStatus("驗證中…");
+  const det = detectRepo();
+  try{
+    const blob = await fetchPublicFile(det.owner, det.repo, AUTH_FILE);
+    if(!blob) throw new Error("找不到帳號設定,請先完成初次設定");
+    let token;
+    try{ token = await decryptToken(pw, blob); }
+    catch(e){ throw new Error("密碼錯誤"); }
+    try{ localStorage.setItem(LOGIN_KEY, JSON.stringify({owner:det.owner, repo:det.repo, token})); }catch(e){}
+    $("#loginPw").value = "";
+    showAuthSection("authDone");
+    syncFull(true);
+  }catch(err){
+    setAuthStatus(String(err && err.message || err), "err");
+  }
+}
+async function doSetup(){
+  const owner = $("#setupOwner").value.trim(), repo = $("#setupRepo").value.trim(),
+        token = $("#setupToken").value.trim(), pw = $("#setupPw").value, pw2 = $("#setupPw2").value;
+  if(!owner || !repo || !token){ setAuthStatus("請填寫帳號、儲存庫與金鑰", "err"); return; }
+  if(pw.length < 8){ setAuthStatus("密碼至少 8 碼", "err"); return; }
+  if(pw !== pw2){ setAuthStatus("兩次密碼不一致", "err"); return; }
+  setAuthStatus("建立帳號中…");
+  try{
+    const cfg = { owner, repo, token };
+    const enc = await encryptToken(pw, token);
+    let sha = null;
+    const chk = await ghContents(cfg, "GET", AUTH_FILE);
+    if(chk.ok){ sha = (await chk.json()).sha; }
+    else if(chk.status === 401 || chk.status === 403){ throw new Error("金鑰無效或權限不足(" + chk.status + ")"); }
+    const body = { message:"建立登入帳號", content:b64EncodeUtf8(enc), branch:"main" };
+    if(sha) body.sha = sha;
+    const r = await ghContents(cfg, "PUT", AUTH_FILE, body);
+    if(!r.ok) throw new Error("寫入失敗 HTTP " + r.status);
+    try{ localStorage.setItem(LOGIN_KEY, JSON.stringify(cfg)); }catch(e){}
+    ["setupToken","setupPw","setupPw2"].forEach(id => $("#"+id).value = "");
+    showAuthSection("authDone");
+    syncFull(true);
+  }catch(err){
+    setAuthStatus(String(err && err.message || err), "err");
+  }
+}
+
+/* ============ 事件與總渲染 ============ */
 function render(){
   applyAccent();
   const info = state.data[state.game] || {};
@@ -951,7 +1202,7 @@ $("#resetBtn").addEventListener("click", ()=>{
   loadStrategy(); $("#genOut").innerHTML = ""; lastGenerated = null;
 });
 
-loadAll();
+loadAll().then(()=>safe("帳號登入", initAuthUI));
 </script>
 </body>
 </html>

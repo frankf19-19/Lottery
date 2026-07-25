@@ -1,11 +1,11 @@
 # 彩研所 TWLottery Lab
 
-**BUILD_VERSION: v3.6.0**
+**BUILD_VERSION: v4.0.0**
 
 台灣彩券(威力彩・大樂透・今彩539)開獎數據自動更新與統計分析網站。
 零成本靜態架構:單一 `index.html` 前端 + GitHub Actions Python 後端,部署於 GitHub Pages。
 
-## v3.6.0 變更(免 Token 跨裝置同步)
+## v4.0.0 變更(免 Token 跨裝置同步)
 
 - 同步改為「同步碼 / QR」方式,完全不需要 GitHub Token 或任何帳號金鑰:
   電腦按「產生同步碼」→ 手機相機掃 QR → 自動開站匯入合併;
@@ -110,10 +110,10 @@ data/dailycash539.json          今彩539 資料
 ## 版本驗證(防「假包」檢查)
 
 ```bash
-grep -n "v3.6.0" index.html scripts/update_data.py README.md
+grep -n "v4.0.0" index.html scripts/update_data.py README.md
 ```
 
-三個檔案都應出現 `v3.6.0`,頁面 footer 顯示 `BUILD v3.6.0`。
+三個檔案都應出現 `v4.0.0`,頁面 footer 顯示 `BUILD v4.0.0`。
 
 ## 獎金資料注意事項
 
