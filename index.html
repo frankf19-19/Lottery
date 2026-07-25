@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="assets/chart.umd.js"></script>
 <style>
-/* ================= 彩研所 v4.0.2 ─ 明亮現代(銀行 App 風) =================
+/* ================= 彩研所 v4.1.0 ─ 明亮現代(銀行 App 風) =================
    白底・鮮明色彩・粗黑體・柔和彩色陰影
    大樂透=琥珀橘 #F59E0B|威力彩=珊瑚紅 #EF4444|今彩539=翡翠綠 #10B981|品牌藍 #2563EB */
 :root{
@@ -182,6 +182,7 @@ input[type=range]{width:100%;accent-color:var(--accent);height:30px}
 .gen-set{display:flex;align-items:center;gap:9px;flex-wrap:wrap;background:#F8FAFD;
   border:1px solid var(--line);border-radius:14px;padding:12px 14px}
 .gen-set .idx{font-weight:900;color:#CBD5E1;width:2em;font-size:.95rem;font-variant-numeric:tabular-nums}
+.gen-basis{flex-basis:100%;font-size:.7rem;color:var(--muted);line-height:1.6;margin-top:2px}
 .empty-hint{background:var(--card);border:1.5px dashed var(--line);border-radius:var(--r-xl);
   padding:26px;text-align:center;color:var(--muted);margin-top:16px}
 .empty-hint b{color:var(--ink)}
@@ -351,7 +352,13 @@ canvas{max-width:100%}
       <div id="predList"></div>
     </div>
 
-    <div class="card full" id="authCard">
+    <div class="card full">
+      <h2>近期開獎紀錄</h2>
+      <div class="sub">最近 12 期</div>
+      <div class="scroll-x"><table class="recent-list" id="recentTable"></table></div>
+    </div>
+  </div>
+    <div class="card full" id="authCard" style="margin-top:14px">
       <h2>帳號登入 <span class="sync-status" id="authStatus" style="margin-left:6px">檢查中…</span></h2>
       <div class="sub">單一帳號:在任何裝置輸入同一組密碼登入,預測紀錄自動同步(儲存/刪除自動上傳、開網頁自動合併)。登入狀態會保留在此裝置,登出即清除。</div>
 
@@ -390,12 +397,6 @@ canvas{max-width:100%}
       </div>
     </div>
 
-    <div class="card full">
-      <h2>近期開獎紀錄</h2>
-      <div class="sub">最近 12 期</div>
-      <div class="scroll-x"><table class="recent-list" id="recentTable"></table></div>
-    </div>
-  </div>
 </main>
 
 <footer>
@@ -405,13 +406,13 @@ canvas{max-width:100%}
       任何號碼組合的中獎機率完全相同,「熱號」「冷號」「遺漏」對未來開獎不具預測力。
       策略選號器與預測核對僅供娛樂與選號輔助參考,請理性投注、量力而為。開獎結果與獎金以台灣彩券官方公告為準。
     </div>
-    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v4.0.2</span></div>
+    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v4.1.0</span></div>
   </div>
 </footer>
 
 <script>
 "use strict";
-const BUILD_VERSION = "v4.0.2";
+const BUILD_VERSION = "v4.1.0";
 
 /* ============ 錯誤攔截 ============ */
 function showErr(msg){
@@ -504,6 +505,15 @@ function jackpotStreak(){
 function jackpotInfo(){
   const d = draws()[0];
   const fp = firstPrizeRow(d);
+  // 今彩539 頭獎為固定制(NT$800 萬),不適用累積計算
+  if(state.game==="dailycash539"){
+    if(fp && fp.winners!=null && +fp.winners>0){
+      return { label:`上期頭獎開出 ${+fp.winners} 注`, amount:fp.amount || 8000000,
+               note:"今彩539 頭獎固定 NT$800 萬(多注中獎依規定分配),以台彩公告為準" };
+    }
+    return { label:"頭獎固定獎金", amount:8000000,
+             note:`今彩539 頭獎為固定 NT$800 萬・已連摃 ${jackpotStreak()} 期,以台彩公告為準` };
+  }
   if(fp){
     if(fp.winners!=null && +fp.winners===0){
       const accum = (fp.pool||0) + (fp.carry||0) || fp.amount;
@@ -513,9 +523,6 @@ function jackpotInfo(){
     if(fp.winners!=null && +fp.winners>0 && fp.amount){
       return { label:`上期頭獎開出 ${+fp.winners} 注`, amount:fp.amount, note:"單注頭獎獎金" };
     }
-  }
-  if(state.game==="dailycash539"){
-    return { label:"頭獎固定獎金", amount:8000000, note:"今彩539 頭獎為固定 NT$800 萬(多注中獎依規定分配),以台彩公告為準" };
   }
   return null;
 }
@@ -789,9 +796,12 @@ function generateSets(){
     sets.push(rec);
   }
   lastGenerated = { sets, weights: currentStrategy() };
+  const fStat = calcFreq(windowed()), mStat = calcMiss();
   const html = sets.map((s,i)=>{
     const sp = s.a2 ? `<span class="ball-plus" style="font-size:1rem">+</span>` + miniBall(s.a2,{sp:true}) : "";
-    return `<div class="gen-set"><span class="idx">${pad2(i+1)}</span>${s.n.map(n=>miniBall(n)).join("")}${sp}</div>`;
+    const basis = s.n.map(n=>`${pad2(n)}:${fStat[n]}次/遺${mStat[n]}`).join("・");
+    return `<div class="gen-set"><span class="idx">${pad2(i+1)}</span>${s.n.map(n=>miniBall(n)).join("")}${sp}
+      <div class="gen-basis">選號依據(視窗內出現次數/目前遺漏期數):${basis}</div></div>`;
   });
   html.push(`<div class="strategy-row">
       <button class="btn small" id="savePredBtn">儲存為預測(下期自動對獎)</button>
@@ -885,13 +895,45 @@ function spTierNote(){
   if(state.game==="superlotto638") return "威力彩需同時比對第二區。";
   return "";
 }
+function predSummaryHTML(preds){
+  const g = cfg();
+  let recs = 0, sets = 0, hits = 0, wins = 0, winAmt = 0;
+  for(const rec of preds){
+    const target = findTargetDraw(rec.afterPeriod);
+    if(!target || !rec.sets) continue;
+    recs++;
+    const drawnSet = new Set(target.numbers);
+    const prizeByName = {};
+    (target.prizes || []).forEach(p => { if(p.name) prizeByName[p.name] = p; });
+    for(const s of rec.sets){
+      sets++;
+      const m = s.n.filter(n=>drawnSet.has(n)).length;
+      hits += m;
+      let spHit = false;
+      if(g.special==="drawn7th") spHit = s.n.includes(target.special);
+      else if(g.special==="area2") spHit = s.a2 === target.special;
+      const tier = tierName(m, spHit);
+      if(tier){
+        wins++;
+        const pr = prizeByName[tier];
+        if(pr && pr.amount > 0) winAmt += pr.amount;
+      }
+    }
+  }
+  if(!recs) return "";
+  const avg = (hits / sets).toFixed(2);
+  return `<div class="pred-rec" style="background:#fff">
+    <div class="pred-head" style="margin-bottom:0"><div class="info"><b>策略績效總覽(已對獎 ${recs} 筆・${sets} 組)</b></div></div>
+    <div class="pred-sum" style="margin-top:4px">平均命中 <b>${avg}</b> 碼(純隨機理論期望 <b>${g.expect.toFixed(2)}</b> 碼)・中獎 <b>${wins}</b> 組・若有實際投注累計中獎 <b>${fmtNTD(winAmt)}</b>。<br>提醒:平均命中長期會貼近理論值,高低屬隨機波動;此表僅供對照判讀,非策略有效性證明。</div>
+  </div>`;
+}
 function renderPreds(){
   const g = cfg(), preds = loadPreds(), el = $("#predList");
   if(!preds.length){
     el.innerHTML = `<div class="pred-wait">尚無預測紀錄。在上方策略選號器產生號碼後,按「儲存為預測」即可在下期開獎後自動對獎。紀錄存於此瀏覽器。</div>`;
     return;
   }
-  el.innerHTML = preds.slice(0,10).map((rec, idx)=>{
+  el.innerHTML = predSummaryHTML(preds) + preds.slice(0,10).map((rec, idx)=>{
     const w = rec.weights || {};
     const wTxt = `熱${w.wHot??"—"}/冷${w.wCold??"—"}/遺${w.wMiss??"—"}/隨${w.wRand??"—"}`;
     const target = findTargetDraw(rec.afterPeriod);
@@ -1118,6 +1160,29 @@ async function initAuthUI(){
   await refreshAuthState();
   if(loginCfg()) syncFull(false);
 }
+function authLocHint(){ try{ return JSON.parse(localStorage.getItem("twlab-auth-loc")) || null; }catch(e){ return null; } }
+function saveAuthLoc(owner, repo){ try{ localStorage.setItem("twlab-auth-loc", JSON.stringify({owner, repo})); }catch(e){} }
+async function findAuthLocation(){
+  // 依序嘗試:上次成功位置 → URL 偵測 → 常見候選,找到 auth.enc 即回傳
+  const det = detectRepo(), tried = new Set(), candidates = [];
+  const hint = authLocHint();
+  if(hint) candidates.push(hint);
+  candidates.push({owner:det.owner, repo:det.repo});
+  if(det.owner){
+    candidates.push({owner:det.owner, repo:"Lottery"});
+    candidates.push({owner:det.owner, repo:det.owner + ".github.io"});
+  }
+  for(const c of candidates){
+    const key = c.owner + "/" + c.repo;
+    if(!c.owner || !c.repo || tried.has(key)) continue;
+    tried.add(key);
+    try{
+      const blob = await fetchPublicFile(c.owner, c.repo, AUTH_FILE);
+      if(blob) return { ...c, blob };
+    }catch(e){}
+  }
+  return null;
+}
 async function refreshAuthState(){
   if(loginCfg()){
     showAuthSection("authDone");
@@ -1125,28 +1190,22 @@ async function refreshAuthState(){
     return;
   }
   setAuthStatus("檢查中…");
-  const det = detectRepo();
-  try{
-    const blob = await fetchPublicFile(det.owner, det.repo, AUTH_FILE);
-    if(blob){ showAuthSection("authLogin"); setAuthStatus("請輸入密碼登入"); }
-    else{ showAuthSection("authSetup"); setAuthStatus("尚未建立帳號"); }
-  }catch(e){
-    showAuthSection("authSetup");
-    setAuthStatus("無法確認帳號狀態:" + (e && e.message || e), "err");
-  }
+  const loc = await findAuthLocation();
+  if(loc){ saveAuthLoc(loc.owner, loc.repo); showAuthSection("authLogin"); setAuthStatus("請輸入密碼登入"); }
+  else{ showAuthSection("authSetup"); setAuthStatus("尚未建立帳號"); }
 }
 async function doLogin(){
   const pw = $("#loginPw").value;
   if(!pw){ setAuthStatus("請輸入密碼", "err"); return; }
   setAuthStatus("驗證中…");
-  const det = detectRepo();
   try{
-    const blob = await fetchPublicFile(det.owner, det.repo, AUTH_FILE);
-    if(!blob) throw new Error("找不到帳號設定,請先完成初次設定");
+    const loc = await findAuthLocation();
+    if(!loc) throw new Error("找不到帳號設定,請先完成初次設定");
     let token;
-    try{ token = await decryptToken(pw, blob); }
+    try{ token = await decryptToken(pw, loc.blob); }
     catch(e){ throw new Error("密碼錯誤"); }
-    try{ localStorage.setItem(LOGIN_KEY, JSON.stringify({owner:det.owner, repo:det.repo, token})); }catch(e){}
+    saveAuthLoc(loc.owner, loc.repo);
+    try{ localStorage.setItem(LOGIN_KEY, JSON.stringify({owner:loc.owner, repo:loc.repo, token})); }catch(e){}
     $("#loginPw").value = "";
     showAuthSection("authDone");
     syncFull(true);
@@ -1173,6 +1232,7 @@ async function doSetup(){
     const r = await ghContents(cfg, "PUT", AUTH_FILE, body);
     if(!r.ok) throw new Error("寫入失敗 HTTP " + r.status);
     try{ localStorage.setItem(LOGIN_KEY, JSON.stringify(cfg)); }catch(e){}
+    saveAuthLoc(owner, repo);
     ["setupToken","setupPw","setupPw2"].forEach(id => $("#"+id).value = "");
     showAuthSection("authDone");
     syncFull(true);
