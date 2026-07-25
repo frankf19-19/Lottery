@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="assets/chart.umd.js"></script>
 <style>
-/* ================= 彩研所 v4.0.1 ─ 明亮現代(銀行 App 風) =================
+/* ================= 彩研所 v4.0.2 ─ 明亮現代(銀行 App 風) =================
    白底・鮮明色彩・粗黑體・柔和彩色陰影
    大樂透=琥珀橘 #F59E0B|威力彩=珊瑚紅 #EF4444|今彩539=翡翠綠 #10B981|品牌藍 #2563EB */
 :root{
@@ -405,13 +405,13 @@ canvas{max-width:100%}
       任何號碼組合的中獎機率完全相同,「熱號」「冷號」「遺漏」對未來開獎不具預測力。
       策略選號器與預測核對僅供娛樂與選號輔助參考,請理性投注、量力而為。開獎結果與獎金以台灣彩券官方公告為準。
     </div>
-    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v4.0.1</span></div>
+    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v4.0.2</span></div>
   </div>
 </footer>
 
 <script>
 "use strict";
-const BUILD_VERSION = "v4.0.1";
+const BUILD_VERSION = "v4.0.2";
 
 /* ============ 錯誤攔截 ============ */
 function showErr(msg){
@@ -866,6 +866,20 @@ function findTargetDraw(afterPeriod){
   }
   return target;
 }
+function nextDrawInfo(afterPeriod){
+  // 依遊戲開獎日計算 afterPeriod 之後的下一個開獎日
+  const days = state.game==="lotto649" ? [2,5]            // 週二、五
+             : state.game==="superlotto638" ? [1,4]       // 週一、四
+             : [1,2,3,4,5,6];                             // 週一~六
+  const base = draws().find(d => String(d.period) === String(afterPeriod)) || draws()[0];
+  const dt = base ? new Date(base.date + "T00:00:00") : new Date();
+  for(let i=0; i<8; i++){
+    dt.setDate(dt.getDate() + 1);
+    if(days.includes(dt.getDay())) break;
+  }
+  const wd = "日一二三四五六"[dt.getDay()];
+  return `${dt.getFullYear()}-${pad2(dt.getMonth()+1)}-${pad2(dt.getDate())}(週${wd})`;
+}
 function spTierNote(){
   if(state.game==="lotto649") return "大樂透以你的 6 碼比對第 7 顆開出的特別號。";
   if(state.game==="superlotto638") return "威力彩需同時比對第二區。";
@@ -887,7 +901,7 @@ function renderPreds(){
           <td>${pad2(i+1)}</td>
           <td>${s.n.map(n=>miniBall(n)).join("")}${s.a2!=null?`<span class="ball-plus" style="font-size:.9rem">+</span>`+miniBall(s.a2,{sp:true}):""}</td>
         </tr>`).join("");
-      body = `<div class="pred-wait">等待開獎——儲存當下最新已開至第 ${esc(rec.afterPeriod)} 期,將以下一期(開獎約 20:30,資料進站後)自動對獎;之後重新整理本頁即可看到結果。</div>
+      body = `<div class="pred-wait">等待開獎——下一期開獎日:<b>${nextDrawInfo(rec.afterPeriod)} 約 20:30</b>。開獎資料進站後自動對獎(儲存當下最新已開至第 ${esc(rec.afterPeriod)} 期)。</div>
         <div class="scroll-x"><table>
           <tr><th>組</th><th>已儲存的號碼</th></tr>${rows}
         </table></div>`;
