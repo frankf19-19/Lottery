@@ -2,9 +2,61 @@
  "game": "dailycash539",
  "name": "今彩539",
  "build": "v4.1.0",
- "updated": "2026-08-05 22:59:09 +08:00",
- "count": 372,
+ "updated": "2026-08-06 22:58:08 +08:00",
+ "count": 373,
  "draws": [
+  {
+   "period": "115000190",
+   "date": "2026-08-06",
+   "numbers": [
+    3,
+    9,
+    16,
+    24,
+    35
+   ],
+   "raw": [
+    24,
+    9,
+    16,
+    35,
+    3
+   ],
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 3,
+     "amount": 8000000,
+     "pool": null,
+     "carry": null
+    },
+    {
+     "name": "貳獎",
+     "winners": 161,
+     "amount": 20000,
+     "pool": null,
+     "carry": null
+    },
+    {
+     "name": "參獎",
+     "winners": 6116,
+     "amount": 300,
+     "pool": null,
+     "carry": null
+    },
+    {
+     "name": "肆獎",
+     "winners": 70189,
+     "amount": 50,
+     "pool": null,
+     "carry": null
+    }
+   ],
+   "money": {
+    "sellAmount": 34976850,
+    "totalAmount": 32564250
+   }
+  },
   {
    "period": "115000189",
    "date": "2026-08-05",
