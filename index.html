@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="assets/chart.umd.js"></script>
 <style>
-/* ================= 彩研所 v4.1.1 ─ 明亮現代(銀行 App 風) =================
+/* ================= 彩研所 v4.2.0 ─ 明亮現代(銀行 App 風) =================
    白底・鮮明色彩・粗黑體・柔和彩色陰影
    大樂透=琥珀橘 #F59E0B|威力彩=珊瑚紅 #EF4444|今彩539=翡翠綠 #10B981|品牌藍 #2563EB */
 :root{
@@ -183,6 +183,20 @@ input[type=range]{width:100%;accent-color:var(--accent);height:30px}
   border:1px solid var(--line);border-radius:14px;padding:12px 14px}
 .gen-set .idx{font-weight:900;color:#CBD5E1;width:2em;font-size:.95rem;font-variant-numeric:tabular-nums}
 .gen-basis{flex-basis:100%;font-size:.7rem;color:var(--muted);line-height:1.6;margin-top:2px}
+.crowd-warn{flex-basis:100%;font-size:.72rem;color:#B45309;background:#FEF3E2;border-radius:8px;
+  padding:6px 10px;margin-top:4px;line-height:1.6}
+.mode-tabs{display:inline-flex;gap:3px;background:#EFF3F9;border-radius:12px;padding:4px;margin-bottom:14px}
+.mode-tab{appearance:none;border:none;background:transparent;color:var(--ink-soft);cursor:pointer;
+  font-family:var(--font);font-weight:700;font-size:.86rem;padding:9px 18px;border-radius:9px;min-height:40px}
+.mode-tab.active{background:#fff;color:var(--ink);box-shadow:0 2px 6px -2px rgba(15,23,42,.25)}
+.fortune-panel{background:linear-gradient(125deg,#FFF7ED,#FEF2F2 60%,#F5F3FF);
+  border:1px solid #F3E8D6;border-radius:16px;padding:clamp(14px,3.4vw,20px);margin:4px 0 14px}
+.fortune-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:10px}
+.fortune-item{background:rgba(255,255,255,.75);border-radius:12px;padding:10px 13px}
+.fortune-item .k{font-size:.7rem;color:var(--muted)}
+.fortune-item .v{font-weight:900;font-size:.98rem;margin-top:2px}
+.fortune-word{font-size:.84rem;color:var(--ink-soft);line-height:1.8;margin-top:12px}
+.fortune-seed{font-size:.7rem;color:var(--muted);margin-top:8px;font-family:ui-monospace,monospace}
 .empty-hint{background:var(--card);border:1.5px dashed var(--line);border-radius:var(--r-xl);
   padding:26px;text-align:center;color:var(--muted);margin-top:16px}
 .empty-hint b{color:var(--ink)}
@@ -311,7 +325,35 @@ canvas{max-width:100%}
     <div class="card full" id="strategyCard">
       <h2>策略選號器</h2>
       <div class="sub" id="strategySub"></div>
-      <div class="sliders">
+      <div class="mode-tabs" role="tablist">
+        <button class="mode-tab active" data-mode="data">數據流</button>
+        <button class="mode-tab" data-mode="fortune">運勢流</button>
+      </div>
+
+      <div id="fortunePanel" hidden>
+        <div class="fortune-panel">
+          <div style="font-weight:900;font-size:1rem" id="fortuneTitle">今日運勢</div>
+          <div class="fortune-grid" id="fortuneGrid"></div>
+          <div class="fortune-word" id="fortuneWord"></div>
+          <div class="fortune-seed" id="fortuneSeed"></div>
+        </div>
+        <div class="strategy-row">
+          <div class="field">
+            <label for="fSeedText">今日心情 / 夢見什麼 / 任何一句話(可留空)</label>
+            <input type="text" id="fSeedText" placeholder="例:夢到大魚、心情很好" size="20">
+          </div>
+          <div class="field">
+            <label for="fZodiac">生肖</label>
+            <select id="fZodiac"><option value="">不指定</option><option>鼠</option><option>牛</option><option>虎</option><option>兔</option><option>龍</option><option>蛇</option><option>馬</option><option>羊</option><option>猴</option><option>雞</option><option>狗</option><option>豬</option></select>
+          </div>
+          <div class="field">
+            <label for="fPlace">投注地點 / 縣市</label>
+            <input type="text" id="fPlace" placeholder="例:台北市中山區" size="14">
+          </div>
+        </div>
+      </div>
+
+      <div class="sliders" id="dataSliders">
         <div class="slider">
           <label>熱號權重(偏好近期常開)<output id="oHot">50</output></label>
           <input type="range" id="wHot" min="0" max="100" value="50" aria-label="熱號權重">
@@ -406,13 +448,13 @@ canvas{max-width:100%}
       任何號碼組合的中獎機率完全相同,「熱號」「冷號」「遺漏」對未來開獎不具預測力。
       策略選號器與預測核對僅供娛樂與選號輔助參考,請理性投注、量力而為。開獎結果與獎金以台灣彩券官方公告為準。
     </div>
-    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v4.1.1</span></div>
+    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v4.2.0</span></div>
   </div>
 </footer>
 
 <script>
 "use strict";
-const BUILD_VERSION = "v4.1.1";
+const BUILD_VERSION = "v4.2.0";
 
 /* ============ 錯誤攔截 ============ */
 function showErr(msg){
@@ -443,7 +485,7 @@ const GAMES = {
   dailycash539:  { name:"今彩539", file:"data/dailycash539.json",  max:39, picks:5, special:"none",     c1:"#34D399", c2:"#10B981", soft:"#E5F8F1", schedule:"每日開獎(週日除外)", expect:25/39 }
 };
 
-const state = { game:"lotto649", win:50, data:{}, charts:{} };
+const state = { game:"lotto649", win:50, mode:"data", data:{}, charts:{} };
 
 /* ============ 工具 ============ */
 const $ = s => document.querySelector(s);
@@ -757,13 +799,14 @@ function saveStrategy(){
 function parseExclude(){
   return new Set($("#excludeNums").value.split(/[,，\s]+/).map(x=>parseInt(x,10)).filter(n=>!isNaN(n)));
 }
-function weightedPick(weights, count, excluded){
+function weightedPick(weights, count, excluded){ return weightedPickWith(weights, count, excluded, Math.random); }
+function weightedPickWith(weights, count, excluded, rnd){
   const avail = [];
   weights.forEach((w,n)=>{ if(n>=1 && !excluded.has(n)) avail.push([n,w]); });
   const out = [];
   while(out.length<count && avail.length){
     const total = avail.reduce((s,[,w])=>s+w,0);
-    let r = Math.random()*total, idx = 0;
+    let r = rnd()*total, idx = 0;
     for(let i=0;i<avail.length;i++){ r -= avail[i][1]; if(r<=0){ idx=i; break; } }
     out.push(avail[idx][0]);
     avail.splice(idx,1);
@@ -784,24 +827,141 @@ function buildWeights(){
   }
   return weights;
 }
+/* ============ 運勢流:命定種子選號(趣味性質) ============ */
+const HEAVENLY = "甲乙丙丁戊己庚辛壬癸", EARTHLY = "子丑寅卯辰巳午未申酉戌亥";
+const ZODIAC12 = ["鼠","牛","虎","兔","龍","蛇","馬","羊","猴","雞","狗","豬"];
+const LUCKY_COLORS = ["正紅","金黃","翠綠","天藍","純白","朱橘","靛紫","檀黑"];
+const DIRECTIONS = ["正東","東南","正南","西南","正西","西北","正北","東北"];
+const DAY_DEEDS = [
+  {yi:"祈福・納財", ji:"爭執・遠行"}, {yi:"開市・交易", ji:"動土・爭訟"},
+  {yi:"出行・會友", ji:"借貸・簽約"}, {yi:"沐浴・祭祀", ji:"嫁娶・搬遷"},
+  {yi:"立約・求財", ji:"衝動消費"},   {yi:"安床・靜心", ji:"熬夜・賭氣"},
+];
+const FORTUNE_WORDS = [
+  "宜穩紮穩打,小注怡情,見好就收。",
+  "偏財氣息浮動,守住預算就是最好的策略。",
+  "心情放鬆時運氣自來,別讓數字綁住今天。",
+  "今日適合換個角度選號,直覺勝過糾結。",
+  "財不入急門,慢慢來反而順。",
+  "小賭怡情、大賭傷身,今天以樂趣為上。",
+];
+function hashStr(str){
+  // FNV-1a 32-bit:同樣輸入必得同樣結果(命定感的來源)
+  let h = 0x811c9dc5;
+  for(let i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+  return h >>> 0;
+}
+function mulberry32(seed){
+  return function(){
+    seed = (seed + 0x6D2B79F5) >>> 0;
+    let t = seed;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function ganzhiOf(date){
+  // 以 1984-02-02(甲子日)為基準推算日干支
+  const base = Date.UTC(1984, 1, 2);
+  const days = Math.floor((Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - base) / 86400000);
+  const i = ((days % 60) + 60) % 60;
+  return HEAVENLY[i % 10] + EARTHLY[i % 12];
+}
+function fortuneContext(){
+  const now = new Date();
+  const dateStr = `${now.getFullYear()}-${pad2(now.getMonth()+1)}-${pad2(now.getDate())}`;
+  const wd = "日一二三四五六"[now.getDay()];
+  const zodiac = ($("#fZodiac") && $("#fZodiac").value) || "";
+  const place = ($("#fPlace") && $("#fPlace").value.trim()) || "";
+  const text = ($("#fSeedText") && $("#fSeedText").value.trim()) || "";
+  const seedStr = [dateStr, state.game, zodiac, place, text].join("|");
+  const h = hashStr(seedStr);
+  const deeds = DAY_DEEDS[h % DAY_DEEDS.length];
+  return {
+    now, dateStr, wd, zodiac, place, text, seedStr, hash: h,
+    ganzhi: ganzhiOf(now),
+    color: LUCKY_COLORS[(h >>> 3) % LUCKY_COLORS.length],
+    dir: DIRECTIONS[(h >>> 7) % DIRECTIONS.length],
+    hour: `${pad2(((h >>> 11) % 12) * 2)}:00–${pad2((((h >>> 11) % 12) * 2 + 2) % 24)}:00`,
+    score: 55 + ((h >>> 17) % 45),
+    yi: deeds.yi, ji: deeds.ji,
+    word: FORTUNE_WORDS[(h >>> 23) % FORTUNE_WORDS.length],
+    sheng: zodiac ? ZODIAC12[(ZODIAC12.indexOf(zodiac) + 6) % 12] : ""
+  };
+}
+function renderFortune(){
+  const f = fortuneContext();
+  $("#fortuneTitle").textContent = `今日運勢・${f.dateStr}(週${f.wd})`;
+  $("#fortuneGrid").innerHTML = [
+    ["今日運勢指數", f.score + " 分"],
+    ["日干支", f.ganzhi + " 日"],
+    ["幸運色", f.color],
+    ["幸運方位", f.dir],
+    ["旺時", f.hour],
+    ["宜", f.yi],
+    ["忌", f.ji],
+    f.sheng ? ["今日沖", f.sheng] : null,
+  ].filter(Boolean).map(([k,v])=>`<div class="fortune-item"><div class="k">${k}</div><div class="v">${esc(v)}</div></div>`).join("");
+  $("#fortuneWord").textContent = f.word;
+  $("#fortuneSeed").textContent = `命定種子:${f.seedStr}(同日同條件必得同一組號碼;此為趣味性質,不影響中獎機率)`;
+  return f;
+}
+/* ---- 熱門組合檢測:機率不變,但避開熱門組合可提高「中獎時的期望分得金額」 ---- */
+function crowdRisk(nums){
+  const warns = [];
+  if(nums.every(n=>n<=31)) warns.push("全部落在 1–31(生日區),為最多人選擇的區間");
+  let consec = 1, maxConsec = 1;
+  for(let i=1;i<nums.length;i++){
+    if(nums[i] === nums[i-1]+1){ consec++; maxConsec = Math.max(maxConsec, consec); } else consec = 1;
+  }
+  if(maxConsec >= 4) warns.push(`含 ${maxConsec} 個以上連號`);
+  const tails = {};
+  nums.forEach(n=>{ tails[n%10] = (tails[n%10]||0)+1; });
+  const maxTail = Math.max(...Object.values(tails));
+  if(maxTail >= 4) warns.push(`同尾數 ${maxTail} 個`);
+  const gaps = nums.slice(1).map((n,i)=>n-nums[i]);
+  if(gaps.length >= 4 && gaps.every(gp=>gp===gaps[0])) warns.push("整組為等差數列");
+  const last = draws()[0];
+  if(last){
+    const dup = nums.filter(n=>last.numbers.includes(n)).length;
+    if(dup >= 4) warns.push(`與上期開獎重複 ${dup} 碼`);
+  }
+  const mults = [5,7].filter(m=>nums.every(n=>n%m===0));
+  if(mults.length) warns.push(`整組皆為 ${mults[0]} 的倍數`);
+  return warns;
+}
+
 function generateSets(){
   const g = cfg(), excluded = parseExclude();
   if(g.max - excluded.size < g.picks){ $("#genOut").innerHTML = `<div class="gen-set">排除的號碼太多,剩餘號碼不足 ${g.picks} 個。</div>`; lastGenerated=null; return; }
-  const weights = buildWeights();
   const count = +$("#setCount").value;
   const sets = [];
+  let fInfo = null, rnd = Math.random;
+  if(state.mode === "fortune"){
+    fInfo = renderFortune();
+    rnd = mulberry32(fInfo.hash);                    // 命定種子:同日同條件結果相同
+  }
+  const weights = state.mode === "fortune"
+    ? new Array(g.max+1).fill(1)                     // 運勢流:均等機率,純由種子決定
+    : buildWeights();
   for(let i=0;i<count;i++){
-    const rec = { n: weightedPick(weights, g.picks, excluded) };
-    if(g.special==="area2") rec.a2 = 1 + Math.floor(Math.random()*g.spMax);
+    const rec = { n: weightedPickWith(weights, g.picks, excluded, rnd) };
+    if(g.special==="area2") rec.a2 = 1 + Math.floor(rnd()*g.spMax);
     sets.push(rec);
   }
   lastGenerated = { sets, weights: currentStrategy() };
   const fStat = calcFreq(windowed()), mStat = calcMiss();
   const html = sets.map((s,i)=>{
     const sp = s.a2 ? `<span class="ball-plus" style="font-size:1rem">+</span>` + miniBall(s.a2,{sp:true}) : "";
-    const basis = s.n.map(n=>`${pad2(n)}:${fStat[n]}次/遺${mStat[n]}`).join("・");
+    const basis = state.mode === "fortune"
+      ? `選號依據:今日命定種子(${esc(fInfo.ganzhi)}日・${esc(fInfo.dir)}・${esc(fInfo.color)})`
+      : `選號依據(視窗內出現次數/目前遺漏期數):${s.n.map(n=>`${pad2(n)}:${fStat[n]}次/遺${mStat[n]}`).join("・")}`;
+    const warns = crowdRisk(s.n);
+    const warnHTML = warns.length
+      ? `<div class="crowd-warn">熱門組合提醒:${warns.join("、")}——機率不變,但這類組合較多人選,中獎時分得金額可能較少。</div>`
+      : "";
     return `<div class="gen-set"><span class="idx">${pad2(i+1)}</span>${s.n.map(n=>miniBall(n)).join("")}${sp}
-      <div class="gen-basis">選號依據(視窗內出現次數/目前遺漏期數):${basis}</div></div>`;
+      <div class="gen-basis">${basis}</div>${warnHTML}</div>`;
   });
   html.push(`<div class="strategy-row">
       <button class="btn small" id="savePredBtn">儲存為預測(下期自動對獎)</button>
@@ -1284,6 +1444,15 @@ SLIDERS.forEach(id=>$("#"+id).addEventListener("input",e=>{
   $("#o"+id.slice(1)).textContent = e.target.value; saveStrategy();
 }));
 $("#excludeNums").addEventListener("change", saveStrategy);
+$$(".mode-tab").forEach(b=>b.addEventListener("click",()=>{
+  $$(".mode-tab").forEach(x=>x.classList.remove("active"));
+  b.classList.add("active");
+  state.mode = b.dataset.mode;
+  $("#fortunePanel").hidden = state.mode !== "fortune";
+  $("#dataSliders").hidden = state.mode === "fortune";
+  $("#genOut").innerHTML = "";
+  if(state.mode === "fortune") safe("今日運勢", renderFortune);
+}));
 $("#genBtn").addEventListener("click", generateSets);
 $("#resetBtn").addEventListener("click", ()=>{
   try{ localStorage.removeItem(strategyKey()); }catch(e){}
