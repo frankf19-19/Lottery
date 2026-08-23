@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="assets/chart.umd.js"></script>
 <style>
-/* ================= 彩研所 v4.3.0 ─ 明亮現代(銀行 App 風) =================
+/* ================= 彩研所 v4.3.2 ─ 明亮現代(銀行 App 風) =================
    白底・鮮明色彩・粗黑體・柔和彩色陰影
    大樂透=琥珀橘 #F59E0B|威力彩=珊瑚紅 #EF4444|今彩539=翡翠綠 #10B981|品牌藍 #2563EB */
 :root{
@@ -25,6 +25,7 @@
   --font:"Noto Sans TC",system-ui,-apple-system,sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.65}
 a{color:inherit}
@@ -339,6 +340,7 @@ canvas{max-width:100%}
         <button class="mode-tab active" data-mode="data">數據流</button>
         <button class="mode-tab" data-mode="fortune">運勢流</button>
       </div>
+      <div class="sub" id="modeNote" style="margin-top:-6px"></div>
 
       <div id="fortunePanel" hidden>
         <div class="fortune-panel">
@@ -478,13 +480,13 @@ canvas{max-width:100%}
       任何號碼組合的中獎機率完全相同,「熱號」「冷號」「遺漏」對未來開獎不具預測力。
       策略選號器與預測核對僅供娛樂與選號輔助參考,請理性投注、量力而為。開獎結果與獎金以台灣彩券官方公告為準。
     </div>
-    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v4.3.0</span></div>
+    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v4.3.2</span></div>
   </div>
 </footer>
 
 <script>
 "use strict";
-const BUILD_VERSION = "v4.3.0";
+const BUILD_VERSION = "v4.3.2";
 
 /* ============ 錯誤攔截 ============ */
 function showErr(msg){
@@ -1589,6 +1591,9 @@ $$(".mode-tab").forEach(b=>b.addEventListener("click",()=>{
   $("#destinyWrap").hidden = state.mode !== "fortune";
   $("#dataSliders").hidden = state.mode === "fortune";
   $("#genOut").innerHTML = "";
+  $("#modeNote").textContent = state.mode === "fortune"
+    ? "運勢流:號碼由命定種子(日期/生辰/心情/地點)決定,與開獎統計完全無關。"
+    : "數據流:號碼依開獎歷史統計(熱號/冷號/遺漏)加權產生。";
   if(state.mode === "fortune"){
     safe("今日運勢", renderFortune);
     const p = destinyProfile();
