@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 彩研所 TWLottery Lab — 開獎資料自動更新腳本
-BUILD_VERSION = v4.3.2
+BUILD_VERSION = v4.3.3
 
 資料來源:台灣彩券官方網站 API(api.taiwanlottery.com)
 執行方式:由 GitHub Actions 排程呼叫(每日台灣時間 21:35),
         亦可手動執行:python scripts/update_data.py
 
-v4.3.2(依 Actions log 確認之官方格式接通):
+v4.3.3(依 Actions log 確認之官方格式接通):
   - 今彩539 端點修正為 Daily539Result(原 DailyCashResult 為 404)
   - 獎金分配改由月份 API 內嵌的 *Assign 欄位解析(jackpotAssign / super638JackpotAssign 等)
   - 既有資料缺獎金時自動全量回補升級
@@ -27,7 +27,7 @@ import datetime as dt
 
 import requests
 
-BUILD_VERSION = "v4.3.2"
+BUILD_VERSION = "v4.3.3"
 API_BASE = "https://api.taiwanlottery.com/TLCAPIWeB/Lottery/{endpoint}"
 BACKFILL_MONTHS = 14   # 首次回補的月數
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
@@ -251,40 +251,53 @@ def update_game(key, cfg):
     return True
 
 
-STORE_PROBE_ENDPOINTS = [
-    # 大獎商店候選
-    "WinShopList", "GetWinShop", "WinShop", "BigPrizeStore", "HistoryStore",
-    "StoreWinList", "PrizeStore", "DrawWinStore",
-    # 投注站清單候選
-    "SaleLocation", "SaleLocationList", "GetSaleLocation", "StoreList",
-]
-STORE_PROBE_BASES = [
-    "https://api.taiwanlottery.com/TLCAPIWeB/Lottery/{endpoint}",
-    "https://api.taiwanlottery.com/TLCAPIWeB/{endpoint}",
-]
-STORE_PROBE_PARAMS = [
-    {},
-    {"city": "臺北市"},
-    {"pageNum": 1, "pageSize": 5},
+STORE_PAGES = [
+    "https://www.taiwanlottery.com/lotto/history/store/",   # 大獎商店
+    "https://www.taiwanlottery.com/lotto/salelocation",     # 投注站查詢
 ]
 
 
 def probe_store_endpoints():
-    """掃描投注站/大獎商店候選端點,把回應寫進 log(供接通正式功能用)。"""
-    print("=== 投注站/大獎商店端點探測開始 ===")
-    for ep in STORE_PROBE_ENDPOINTS:
-        for base in STORE_PROBE_BASES:
-            url = base.format(endpoint=ep)
-            for params in STORE_PROBE_PARAMS:
-                try:
-                    r = requests.get(url, params=params, headers=HEADERS, timeout=12)
-                    body = r.text[:400].replace("\n", " ")
-                    tag = "HIT " if r.status_code == 200 and "html" not in r.headers.get("content-type", "") else ""
-                    print(f"[站探] {tag}{url} {params or '{}'} -> HTTP {r.status_code}:{body}")
-                except requests.RequestException as e:
-                    print(f"[站探] {url} {params or '{}'} -> 失敗:{e}")
-                time.sleep(0.35)
-    print("=== 投注站/大獎商店端點探測結束 ===")
+    """探測 v2:抓官方頁面與其 JS 程式碼,萃取真實 API 路徑寫入 log。"""
+    import re as _re
+    print("=== 投注站/大獎商店端點探測 v2 開始 ===")
+    js_urls, api_paths = [], set()
+    for page in STORE_PAGES:
+        try:
+            r = requests.get(page, headers=HEADERS, timeout=15)
+            print(f"[站探] 頁面 {page} -> HTTP {r.status_code},長度 {len(r.text)}")
+            for m in _re.findall(r'src="([^"]+?\.js[^"]*)"', r.text):
+                u = m if m.startswith("http") else "https://www.taiwanlottery.com" + (m if m.startswith("/") else "/" + m)
+                if u not in js_urls:
+                    js_urls.append(u)
+            # 頁面本身也掃一次
+            for p in _re.findall(r'TLCAPIWeB/[A-Za-z0-9_/]+', r.text):
+                api_paths.add(p)
+        except requests.RequestException as e:
+            print(f"[站探] 頁面 {page} -> 失敗:{e}")
+        time.sleep(0.4)
+    print(f"[站探] 發現 JS 檔 {len(js_urls)} 個")
+    for u in js_urls[:20]:
+        try:
+            r = requests.get(u, headers=HEADERS, timeout=20)
+            found = set(_re.findall(r'TLCAPIWeB/[A-Za-z0-9_/]+', r.text))
+            found |= set(_re.findall(r'api\.taiwanlottery\.com/[A-Za-z0-9_/\.]+', r.text))
+            if found:
+                print(f"[站探] {u.split('/')[-1][:60]} 內含 API 路徑 {len(found)} 條")
+            api_paths |= found
+        except requests.RequestException as e:
+            print(f"[站探] JS {u[:80]} -> 失敗:{e}")
+        time.sleep(0.3)
+    print(f"[站探] ===== 萃取到的全部 API 路徑({len(api_paths)} 條)=====")
+    for p in sorted(api_paths):
+        print(f"[站探] API: {p}")
+    # 舊版靜態資料目錄
+    try:
+        r = requests.get("https://www.taiwanlottery.com/TLC_WEB/json/", headers=HEADERS, timeout=15)
+        print(f"[站探] TLC_WEB/json/ -> HTTP {r.status_code}:{r.text[:1500]}")
+    except requests.RequestException as e:
+        print(f"[站探] TLC_WEB/json/ -> 失敗:{e}")
+    print("=== 投注站/大獎商店端點探測 v2 結束 ===")
 
 
 def main():
