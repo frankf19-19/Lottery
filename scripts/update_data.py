@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 彩研所 TWLottery Lab — 開獎資料自動更新腳本
-BUILD_VERSION = v4.3.3
+BUILD_VERSION = v4.3.4
 
 資料來源:台灣彩券官方網站 API(api.taiwanlottery.com)
 執行方式:由 GitHub Actions 排程呼叫(每日台灣時間 21:35),
         亦可手動執行:python scripts/update_data.py
 
-v4.3.3(依 Actions log 確認之官方格式接通):
+v4.3.4(依 Actions log 確認之官方格式接通):
   - 今彩539 端點修正為 Daily539Result(原 DailyCashResult 為 404)
   - 獎金分配改由月份 API 內嵌的 *Assign 欄位解析(jackpotAssign / super638JackpotAssign 等)
   - 既有資料缺獎金時自動全量回補升級
@@ -27,7 +27,7 @@ import datetime as dt
 
 import requests
 
-BUILD_VERSION = "v4.3.3"
+BUILD_VERSION = "v4.3.4"
 API_BASE = "https://api.taiwanlottery.com/TLCAPIWeB/Lottery/{endpoint}"
 BACKFILL_MONTHS = 14   # 首次回補的月數
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
@@ -258,46 +258,63 @@ STORE_PAGES = [
 
 
 def probe_store_endpoints():
-    """探測 v2:抓官方頁面與其 JS 程式碼,萃取真實 API 路徑寫入 log。"""
+    """探測 v3:廣義萃取所有 JS 資產(含延遲載入分塊),追兩層,撈出 API 路徑。"""
     import re as _re
-    print("=== 投注站/大獎商店端點探測 v2 開始 ===")
-    js_urls, api_paths = [], set()
+    print("=== 投注站/大獎商店端點探測 v3 開始 ===")
+    js_re = _re.compile(r'["\'(=]([A-Za-z0-9_\-./@]+?\.m?js)(?:\?[^"\')\s]*)?["\')\s]')
+    api_re = _re.compile(r'TLCAPIWeB[A-Za-z0-9_/]*|api\.taiwanlottery\.com[^"\'\s\\)]*')
+    hint_re = _re.compile(r'["\']([A-Za-z0-9_/]{3,60}?(?:Shop|Store|Location|Winner|Sale|shop|store|location)[A-Za-z0-9_/]{0,40})["\']')
+
+    def absolutize(u, base_page):
+        if u.startswith("http"): return u
+        if u.startswith("//"): return "https:" + u
+        if u.startswith("/"): return "https://www.taiwanlottery.com" + u
+        return "https://www.taiwanlottery.com/" + u
+
+    seen, queue, api_paths, hints = set(), [], set(), set()
     for page in STORE_PAGES:
         try:
             r = requests.get(page, headers=HEADERS, timeout=15)
             print(f"[站探] 頁面 {page} -> HTTP {r.status_code},長度 {len(r.text)}")
-            for m in _re.findall(r'src="([^"]+?\.js[^"]*)"', r.text):
-                u = m if m.startswith("http") else "https://www.taiwanlottery.com" + (m if m.startswith("/") else "/" + m)
-                if u not in js_urls:
-                    js_urls.append(u)
-            # 頁面本身也掃一次
-            for p in _re.findall(r'TLCAPIWeB/[A-Za-z0-9_/]+', r.text):
-                api_paths.add(p)
+            found = {absolutize(m, page) for m in js_re.findall(r.text)}
+            print(f"[站探] 頁面內 JS 參照 {len(found)} 個:{sorted(x.split('/')[-1] for x in found)[:25]}")
+            queue.extend(found)
+            api_paths |= set(api_re.findall(r.text))
         except requests.RequestException as e:
             print(f"[站探] 頁面 {page} -> 失敗:{e}")
-        time.sleep(0.4)
-    print(f"[站探] 發現 JS 檔 {len(js_urls)} 個")
-    for u in js_urls[:20]:
+        time.sleep(0.3)
+
+    fetched = 0
+    while queue and fetched < 40:
+        u = queue.pop(0)
+        if u in seen or "googletagmanager" in u or "gtag" in u:
+            continue
+        seen.add(u); fetched += 1
         try:
             r = requests.get(u, headers=HEADERS, timeout=20)
-            found = set(_re.findall(r'TLCAPIWeB/[A-Za-z0-9_/]+', r.text))
-            found |= set(_re.findall(r'api\.taiwanlottery\.com/[A-Za-z0-9_/\.]+', r.text))
-            if found:
-                print(f"[站探] {u.split('/')[-1][:60]} 內含 API 路徑 {len(found)} 條")
-            api_paths |= found
+            hits = set(api_re.findall(r.text))
+            hs = set(hint_re.findall(r.text))
+            child = {absolutize(m, u) for m in js_re.findall(r.text)}
+            # 相對分塊補到同目錄
+            base_dir = u.rsplit("/", 1)[0] + "/"
+            child |= { (c if c.startswith("http") else base_dir + c.lstrip("./")) for c in js_re.findall(r.text) if not c.startswith(("http","/")) }
+            new_children = [c for c in child if c not in seen][:15]
+            queue.extend(new_children)
+            if hits or hs:
+                print(f"[站探] {u.split('/')[-1][:70]} -> API {len(hits)} 條 / 疑似 {len(hs)} 條(子分塊 +{len(new_children)})")
+            api_paths |= hits; hints |= hs
         except requests.RequestException as e:
-            print(f"[站探] JS {u[:80]} -> 失敗:{e}")
-        time.sleep(0.3)
-    print(f"[站探] ===== 萃取到的全部 API 路徑({len(api_paths)} 條)=====")
+            print(f"[站探] JS {u[:90]} -> 失敗:{e}")
+        time.sleep(0.25)
+
+    print(f"[站探] 共掃描 JS {fetched} 個")
+    print(f"[站探] ===== API 路徑({len(api_paths)} 條)=====")
     for p in sorted(api_paths):
         print(f"[站探] API: {p}")
-    # 舊版靜態資料目錄
-    try:
-        r = requests.get("https://www.taiwanlottery.com/TLC_WEB/json/", headers=HEADERS, timeout=15)
-        print(f"[站探] TLC_WEB/json/ -> HTTP {r.status_code}:{r.text[:1500]}")
-    except requests.RequestException as e:
-        print(f"[站探] TLC_WEB/json/ -> 失敗:{e}")
-    print("=== 投注站/大獎商店端點探測 v2 結束 ===")
+    print(f"[站探] ===== 疑似端點字串({len(hints)} 條)=====")
+    for p in sorted(hints):
+        print(f"[站探] HINT: {p}")
+    print("=== 投注站/大獎商店端點探測 v3 結束 ===")
 
 
 def main():
