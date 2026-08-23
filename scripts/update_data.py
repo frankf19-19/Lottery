@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 彩研所 TWLottery Lab — 開獎資料自動更新腳本
-BUILD_VERSION = v4.3.0
+BUILD_VERSION = v4.3.2
 
 資料來源:台灣彩券官方網站 API(api.taiwanlottery.com)
 執行方式:由 GitHub Actions 排程呼叫(每日台灣時間 21:35),
         亦可手動執行:python scripts/update_data.py
 
-v4.3.0(依 Actions log 確認之官方格式接通):
+v4.3.2(依 Actions log 確認之官方格式接通):
   - 今彩539 端點修正為 Daily539Result(原 DailyCashResult 為 404)
   - 獎金分配改由月份 API 內嵌的 *Assign 欄位解析(jackpotAssign / super638JackpotAssign 等)
   - 既有資料缺獎金時自動全量回補升級
@@ -27,7 +27,7 @@ import datetime as dt
 
 import requests
 
-BUILD_VERSION = "v4.3.0"
+BUILD_VERSION = "v4.3.2"
 API_BASE = "https://api.taiwanlottery.com/TLCAPIWeB/Lottery/{endpoint}"
 BACKFILL_MONTHS = 14   # 首次回補的月數
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
@@ -251,6 +251,42 @@ def update_game(key, cfg):
     return True
 
 
+STORE_PROBE_ENDPOINTS = [
+    # 大獎商店候選
+    "WinShopList", "GetWinShop", "WinShop", "BigPrizeStore", "HistoryStore",
+    "StoreWinList", "PrizeStore", "DrawWinStore",
+    # 投注站清單候選
+    "SaleLocation", "SaleLocationList", "GetSaleLocation", "StoreList",
+]
+STORE_PROBE_BASES = [
+    "https://api.taiwanlottery.com/TLCAPIWeB/Lottery/{endpoint}",
+    "https://api.taiwanlottery.com/TLCAPIWeB/{endpoint}",
+]
+STORE_PROBE_PARAMS = [
+    {},
+    {"city": "臺北市"},
+    {"pageNum": 1, "pageSize": 5},
+]
+
+
+def probe_store_endpoints():
+    """掃描投注站/大獎商店候選端點,把回應寫進 log(供接通正式功能用)。"""
+    print("=== 投注站/大獎商店端點探測開始 ===")
+    for ep in STORE_PROBE_ENDPOINTS:
+        for base in STORE_PROBE_BASES:
+            url = base.format(endpoint=ep)
+            for params in STORE_PROBE_PARAMS:
+                try:
+                    r = requests.get(url, params=params, headers=HEADERS, timeout=12)
+                    body = r.text[:400].replace("\n", " ")
+                    tag = "HIT " if r.status_code == 200 and "html" not in r.headers.get("content-type", "") else ""
+                    print(f"[站探] {tag}{url} {params or '{}'} -> HTTP {r.status_code}:{body}")
+                except requests.RequestException as e:
+                    print(f"[站探] {url} {params or '{}'} -> 失敗:{e}")
+                time.sleep(0.35)
+    print("=== 投注站/大獎商店端點探測結束 ===")
+
+
 def main():
     print(f"彩研所資料更新腳本 {BUILD_VERSION}")
     ok = 0
@@ -261,6 +297,13 @@ def main():
         except Exception as e:  # 單一遊戲失敗不中斷整體
             print(f"[{cfg['name']}] 未預期錯誤:{e}", file=sys.stderr)
     print(f"完成:{ok}/{len(GAMES)} 個遊戲更新成功。")
+
+    # 投注站資料尚未建立時,執行端點探測(接通後會建立 data/stores.json,之後不再探測)
+    try:
+        if not os.path.exists(os.path.join(DATA_DIR, "stores.json")):
+            probe_store_endpoints()
+    except Exception as e:
+        print(f"投注站探測略過:{e}", file=sys.stderr)
 
     sys.exit(0 if ok > 0 else 1)
 
