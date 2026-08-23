@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="assets/chart.umd.js"></script>
 <style>
-/* ================= 彩研所 v4.2.0 ─ 明亮現代(銀行 App 風) =================
+/* ================= 彩研所 v4.3.0 ─ 明亮現代(銀行 App 風) =================
    白底・鮮明色彩・粗黑體・柔和彩色陰影
    大樂透=琥珀橘 #F59E0B|威力彩=珊瑚紅 #EF4444|今彩539=翡翠綠 #10B981|品牌藍 #2563EB */
 :root{
@@ -197,6 +197,16 @@ input[type=range]{width:100%;accent-color:var(--accent);height:30px}
 .fortune-item .v{font-weight:900;font-size:.98rem;margin-top:2px}
 .fortune-word{font-size:.84rem;color:var(--ink-soft);line-height:1.8;margin-top:12px}
 .fortune-seed{font-size:.7rem;color:var(--muted);margin-top:8px;font-family:ui-monospace,monospace}
+.destiny-panel{background:linear-gradient(130deg,#F5F3FF,#FDF2F8 55%,#FFF7ED);
+  border:1px solid #E9E2F5;border-radius:16px;padding:clamp(14px,3.4vw,20px);margin:14px 0}
+.pillar-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
+.pillar{background:rgba(255,255,255,.8);border-radius:12px;padding:9px 6px;text-align:center}
+.pillar .k{font-size:.68rem;color:var(--muted)}
+.pillar .v{font-weight:900;font-size:1.05rem;letter-spacing:.1em}
+.elem-row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.elem-chip{font-size:.76rem;font-weight:700;border-radius:999px;padding:4px 12px;background:rgba(255,255,255,.85)}
+.elem-chip.need{outline:2px solid #7C3AED}
+.destiny-balls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0 4px}
 .empty-hint{background:var(--card);border:1.5px dashed var(--line);border-radius:var(--r-xl);
   padding:26px;text-align:center;color:var(--muted);margin-top:16px}
 .empty-hint b{color:var(--ink)}
@@ -353,6 +363,26 @@ canvas{max-width:100%}
         </div>
       </div>
 
+      <div id="destinyWrap" hidden>
+        <div class="destiny-panel">
+          <div style="font-weight:900;font-size:1rem">本命定號(八字・五行・氣場)</div>
+          <div class="sub" style="margin:4px 0 10px">輸入生辰,依八字五行與命定氣場排出一組<b>永久固定的本命號碼</b>——同樣的生辰,任何時候排都是同一組。想「固定簽同一組」就用它。</div>
+          <div class="strategy-row" style="margin-top:0">
+            <div class="field"><label for="birthDate">出生日期</label><input type="date" id="birthDate" style="font-family:var(--font);font-size:.9rem;padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);background:#fff;min-height:44px"></div>
+            <div class="field"><label for="birthHour">時辰</label>
+              <select id="birthHour"><option value="-1">不確定</option>
+                <option value="0">子(23–01)</option><option value="1">丑(01–03)</option><option value="2">寅(03–05)</option>
+                <option value="3">卯(05–07)</option><option value="4">辰(07–09)</option><option value="5">巳(09–11)</option>
+                <option value="6">午(11–13)</option><option value="7">未(13–15)</option><option value="8">申(15–17)</option>
+                <option value="9">酉(17–19)</option><option value="10">戌(19–21)</option><option value="11">亥(21–23)</option>
+              </select></div>
+            <div class="field"><label for="birthName">姓名(選填,納入氣場)</label><input type="text" id="birthName" size="10"></div>
+            <button class="btn accent" id="destinyBtn">排本命號碼</button>
+          </div>
+          <div id="destinyOut"></div>
+        </div>
+      </div>
+
       <div class="sliders" id="dataSliders">
         <div class="slider">
           <label>熱號權重(偏好近期常開)<output id="oHot">50</output></label>
@@ -448,13 +478,13 @@ canvas{max-width:100%}
       任何號碼組合的中獎機率完全相同,「熱號」「冷號」「遺漏」對未來開獎不具預測力。
       策略選號器與預測核對僅供娛樂與選號輔助參考,請理性投注、量力而為。開獎結果與獎金以台灣彩券官方公告為準。
     </div>
-    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v4.2.0</span></div>
+    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v4.3.0</span></div>
   </div>
 </footer>
 
 <script>
 "use strict";
-const BUILD_VERSION = "v4.2.0";
+const BUILD_VERSION = "v4.3.0";
 
 /* ============ 錯誤攔截 ============ */
 function showErr(msg){
@@ -929,6 +959,113 @@ function crowdRisk(nums){
   const mults = [5,7].filter(m=>nums.every(n=>n%m===0));
   if(mults.length) warns.push(`整組皆為 ${mults[0]} 的倍數`);
   return warns;
+}
+
+/* ============ 本命定號:簡化八字排盤 + 五行喜用 + 命定固定號碼 ============ */
+const STEM_ELEM = {甲:"木",乙:"木",丙:"火",丁:"火",戊:"土",己:"土",庚:"金",辛:"金",壬:"水",癸:"水"};
+const BRANCH_ELEM = {寅:"木",卯:"木",巳:"火",午:"火",申:"金",酉:"金",亥:"水",子:"水",辰:"土",戌:"土",丑:"土",未:"土"};
+const ELEM_DIGITS = {水:[1,6],火:[2,7],木:[3,8],金:[4,9],土:[5,0]};
+const ELEM_ORDER = ["木","火","土","金","水"];
+const SOLAR_TERMS = [[2,4],[3,6],[4,5],[5,6],[6,6],[7,7],[8,8],[9,8],[10,8],[11,7],[12,7],[1,6]];
+function ganzhiIndexOfDay(y, m, d){
+  const base = Date.UTC(1984, 1, 2);
+  const days = Math.floor((Date.UTC(y, m-1, d) - base) / 86400000);
+  return ((days % 60) + 60) % 60;
+}
+function baziOf(y, m, d, hourBranch){
+  let by = y;
+  if(m < 2 || (m === 2 && d < 4)) by = y - 1;
+  const yIdx = (((by - 1984) % 60) + 60) % 60;
+  const yStem = HEAVENLY[yIdx % 10], yBranch = EARTHLY[yIdx % 12];
+  let mi = -1;
+  for(let i = 0; i < 12; i++){
+    const [tm, td] = SOLAR_TERMS[i];
+    const startOk = (m > tm || (m === tm && d >= td));
+    const next = SOLAR_TERMS[(i + 1) % 12];
+    const before = (i === 11) ? (m < 2 || (m === 2 && d < 4)) : (m < next[0] || (m === next[0] && d < next[1]));
+    if(startOk && before){ mi = i; break; }
+  }
+  if(mi < 0) mi = 11;
+  const mBranch = EARTHLY[(2 + mi) % 12];
+  const tigerStart = {甲:2,己:2,乙:4,庚:4,丙:6,辛:6,丁:8,壬:8,戊:0,癸:0}[yStem];
+  const mStem = HEAVENLY[(tigerStart + mi) % 10];
+  const dIdx = ganzhiIndexOfDay(y, m, d);
+  const dStem = HEAVENLY[dIdx % 10], dBranch = EARTHLY[dIdx % 12];
+  let hStem = null, hBranch = null;
+  if(hourBranch >= 0){
+    hBranch = EARTHLY[hourBranch];
+    const ratStart = {甲:0,己:0,乙:2,庚:2,丙:4,辛:4,丁:6,壬:6,戊:8,癸:8}[dStem];
+    hStem = HEAVENLY[(ratStart + hourBranch) % 10];
+  }
+  return { pillars: [
+      {k:"年柱", s:yStem, b:yBranch}, {k:"月柱", s:mStem, b:mBranch},
+      {k:"日柱", s:dStem, b:dBranch}, hourBranch>=0 ? {k:"時柱", s:hStem, b:hBranch} : {k:"時柱", s:"—", b:"—"},
+    ], dayMaster: dStem, yearBranch: yBranch };
+}
+function elemCount(pillars){
+  const c = {木:0,火:0,土:0,金:0,水:0};
+  pillars.forEach(p => {
+    if(STEM_ELEM[p.s]) c[STEM_ELEM[p.s]]++;
+    if(BRANCH_ELEM[p.b]) c[BRANCH_ELEM[p.b]]++;
+  });
+  return c;
+}
+function destinyProfile(){
+  try{ return JSON.parse(localStorage.getItem("twlab-birth")) || null; }catch(e){ return null; }
+}
+function computeDestiny(){
+  const dateStr = $("#birthDate").value;
+  if(!dateStr){ return null; }
+  const hourBranch = +$("#birthHour").value;
+  const name = $("#birthName").value.trim();
+  try{ localStorage.setItem("twlab-birth", JSON.stringify({date:dateStr, hour:hourBranch, name})); }catch(e){}
+  const [y, m, d] = dateStr.split("-").map(Number);
+  const bz = baziOf(y, m, d, hourBranch);
+  const cnt = elemCount(bz.pillars.filter(p=>p.s!=="—"));
+  const minV = Math.min(...ELEM_ORDER.map(e=>cnt[e]));
+  const need = ELEM_ORDER.filter(e=>cnt[e]===minV);
+  const luckyDigits = new Set(); need.forEach(e=>ELEM_DIGITS[e].forEach(x=>luckyDigits.add(x)));
+  const zodiac = ZODIAC12[EARTHLY.indexOf(bz.yearBranch)];
+  const seedStr = ["destiny", dateStr, hourBranch, name, state.game].join("|");
+  const rnd = mulberry32(hashStr(seedStr));
+  const g = cfg(), weights = new Array(g.max+1).fill(0);
+  for(let n=1;n<=g.max;n++) weights[n] = luckyDigits.has(n%10) ? 3 : 1;
+  const nums = weightedPickWith(weights, g.picks, new Set(), rnd);
+  const a2 = g.special === "area2" ? 1 + Math.floor(rnd()*g.spMax) : null;
+  const h = hashStr(seedStr);
+  return { bz, cnt, need, luckyDigits, zodiac, nums, a2,
+           qi: 60 + (h % 40), mag: ["沉穩","溫潤","躍動","清朗","厚實"][h % 5] };
+}
+function renderDestiny(){
+  const r = computeDestiny();
+  const el = $("#destinyOut");
+  if(!r){ el.innerHTML = `<div class="sub" style="margin-top:8px">請先選擇出生日期。</div>`; return; }
+  const g = cfg();
+  const pillars = r.bz.pillars.map(p=>`<div class="pillar"><div class="k">${p.k}</div><div class="v">${p.s}${p.b}</div></div>`).join("");
+  const elems = ELEM_ORDER.map(e=>`<span class="elem-chip${r.need.includes(e)?" need":""}">${e} ${r.cnt[e]}${r.need.includes(e)?"・喜用":""}</span>`).join("");
+  const balls = r.nums.map(n=>miniBall(n)).join("") + (r.a2!=null ? `<span class="ball-plus" style="font-size:1rem">+</span>` + miniBall(r.a2,{sp:true}) : "");
+  const tags = r.nums.map(n=>{
+    const e = ELEM_ORDER.find(el2=>ELEM_DIGITS[el2].includes(n%10));
+    return `${pad2(n)}(${e})`;
+  }).join("・");
+  const warns = crowdRisk(r.nums);
+  const warnHTML = warns.length ? `<div class="crowd-warn">熱門組合提醒:${warns.join("、")}。</div>` : "";
+  el.innerHTML = `
+    <div class="pillar-row">${pillars}</div>
+    <div class="elem-row">${elems}</div>
+    <div class="sub" style="margin:6px 0 0">日主 <b>${r.bz.dayMaster}(${STEM_ELEM[r.bz.dayMaster]})</b>・生肖 <b>${r.zodiac}</b>・氣場指數 <b>${r.qi}</b>・磁場屬性 <b>${r.mag}</b>・本命數字尾:<b>${[...r.luckyDigits].sort().join("、")}</b></div>
+    <div class="destiny-balls">${balls}</div>
+    <div class="gen-basis">${g.name} 本命號碼(依喜用五行尾數定號):${tags}</div>
+    ${warnHTML}
+    <div class="strategy-row">
+      <button class="btn small" id="destinySaveBtn">儲存為預測(下期自動對獎)</button>
+      <span class="sub" style="margin:0;align-self:center">同生辰永遠同一組;趣味性質,機率與任何選法相同。</span>
+    </div>
+    <div class="auth-note" style="margin-top:8px">固定簽注小提醒:每期開獎獨立,「沒買的那期」不會偷走你的機率——想休息就休息,任何一期重新開始都一樣。請以固定娛樂預算進行。</div>`;
+  $("#destinySaveBtn").addEventListener("click", ()=>{
+    lastGenerated = { sets: [ r.a2!=null ? {n:r.nums, a2:r.a2} : {n:r.nums} ], weights: currentStrategy() };
+    savePrediction();
+  });
 }
 
 function generateSets(){
@@ -1449,10 +1586,21 @@ $$(".mode-tab").forEach(b=>b.addEventListener("click",()=>{
   b.classList.add("active");
   state.mode = b.dataset.mode;
   $("#fortunePanel").hidden = state.mode !== "fortune";
+  $("#destinyWrap").hidden = state.mode !== "fortune";
   $("#dataSliders").hidden = state.mode === "fortune";
   $("#genOut").innerHTML = "";
-  if(state.mode === "fortune") safe("今日運勢", renderFortune);
+  if(state.mode === "fortune"){
+    safe("今日運勢", renderFortune);
+    const p = destinyProfile();
+    if(p){
+      $("#birthDate").value = p.date || "";
+      $("#birthHour").value = String(p.hour ?? -1);
+      $("#birthName").value = p.name || "";
+      if(p.date) safe("本命定號", renderDestiny);
+    }
+  }
 }));
+$("#destinyBtn").addEventListener("click", ()=>safe("本命定號", renderDestiny));
 $("#genBtn").addEventListener("click", generateSets);
 $("#resetBtn").addEventListener("click", ()=>{
   try{ localStorage.removeItem(strategyKey()); }catch(e){}
