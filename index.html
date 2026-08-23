@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="assets/chart.umd.js"></script>
 <style>
-/* ================= 彩研所 v4.3.4 ─ 明亮現代(銀行 App 風) =================
+/* ================= 彩研所 v4.4.0 ─ 明亮現代(銀行 App 風) =================
    白底・鮮明色彩・粗黑體・柔和彩色陰影
    大樂透=琥珀橘 #F59E0B|威力彩=珊瑚紅 #EF4444|今彩539=翡翠綠 #10B981|品牌藍 #2563EB */
 :root{
@@ -334,7 +334,7 @@ canvas{max-width:100%}
     </div>
 
     <div class="card full" id="strategyCard">
-      <h2>策略選號器</h2>
+      <h2 id="pickerTitle">策略選號器</h2>
       <div class="sub" id="strategySub"></div>
       <div class="mode-tabs" role="tablist">
         <button class="mode-tab active" data-mode="data">數據流</button>
@@ -404,7 +404,7 @@ canvas{max-width:100%}
         </div>
       </div>
       <div class="strategy-row">
-        <div class="field">
+        <div class="field" id="excludeField">
           <label for="excludeNums">排除號碼(逗號分隔,可留空)</label>
           <input type="text" id="excludeNums" placeholder="例:4, 14, 44" size="16">
         </div>
@@ -480,13 +480,13 @@ canvas{max-width:100%}
       任何號碼組合的中獎機率完全相同,「熱號」「冷號」「遺漏」對未來開獎不具預測力。
       策略選號器與預測核對僅供娛樂與選號輔助參考,請理性投注、量力而為。開獎結果與獎金以台灣彩券官方公告為準。
     </div>
-    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v4.3.4</span></div>
+    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v4.4.0</span></div>
   </div>
 </footer>
 
 <script>
 "use strict";
-const BUILD_VERSION = "v4.3.4";
+const BUILD_VERSION = "v4.4.0";
 
 /* ============ 錯誤攔截 ============ */
 function showErr(msg){
@@ -1065,13 +1065,19 @@ function renderDestiny(){
     </div>
     <div class="auth-note" style="margin-top:8px">固定簽注小提醒:每期開獎獨立,「沒買的那期」不會偷走你的機率——想休息就休息,任何一期重新開始都一樣。請以固定娛樂預算進行。</div>`;
   $("#destinySaveBtn").addEventListener("click", ()=>{
-    lastGenerated = { sets: [ r.a2!=null ? {n:r.nums, a2:r.a2} : {n:r.nums} ], weights: currentStrategy() };
+    lastGenerated = {
+      sets: [ r.a2!=null ? {n:r.nums, a2:r.a2} : {n:r.nums} ],
+      mode: "destiny",
+      weights: null,
+      destiny: { dayMaster: r.bz.dayMaster + "(" + STEM_ELEM[r.bz.dayMaster] + ")",
+                 need: r.need.join("、"), tails: [...r.luckyDigits].sort().join("/") }
+    };
     savePrediction();
   });
 }
 
 function generateSets(){
-  const g = cfg(), excluded = parseExclude();
+  const g = cfg(), excluded = state.mode === "fortune" ? new Set() : parseExclude();
   if(g.max - excluded.size < g.picks){ $("#genOut").innerHTML = `<div class="gen-set">排除的號碼太多,剩餘號碼不足 ${g.picks} 個。</div>`; lastGenerated=null; return; }
   const count = +$("#setCount").value;
   const sets = [];
@@ -1088,7 +1094,13 @@ function generateSets(){
     if(g.special==="area2") rec.a2 = 1 + Math.floor(rnd()*g.spMax);
     sets.push(rec);
   }
-  lastGenerated = { sets, weights: currentStrategy() };
+  lastGenerated = {
+    sets,
+    mode: state.mode,
+    weights: state.mode === "fortune" ? null : currentStrategy(),
+    fortune: fInfo ? { ganzhi: fInfo.ganzhi, dir: fInfo.dir, color: fInfo.color,
+                       zodiac: fInfo.zodiac || "", place: fInfo.place || "" } : null
+  };
   const fStat = calcFreq(windowed()), mStat = calcMiss();
   const html = sets.map((s,i)=>{
     const sp = s.a2 ? `<span class="ball-plus" style="font-size:1rem">+</span>` + miniBall(s.a2,{sp:true}) : "";
@@ -1127,7 +1139,10 @@ function savePrediction(){
     id: Date.now(),
     ts: localTs,
     afterPeriod: latest ? latest.period : "0",
-    weights: lastGenerated.weights,
+    mode: lastGenerated.mode || "data",
+    weights: lastGenerated.weights || null,
+    fortune: lastGenerated.fortune || null,
+    destiny: lastGenerated.destiny || null,
     sets: lastGenerated.sets
   });
   storePreds(preds);
@@ -1197,10 +1212,12 @@ function spTierNote(){
 function predSummaryHTML(preds){
   const g = cfg();
   let recs = 0, sets = 0, hits = 0, wins = 0, winAmt = 0;
+  const byMode = { data: 0, fortune: 0, destiny: 0 };
   for(const rec of preds){
     const target = findTargetDraw(rec.afterPeriod);
     if(!target || !rec.sets) continue;
     recs++;
+    byMode[rec.mode || "data"] = (byMode[rec.mode || "data"] || 0) + 1;
     const drawnSet = new Set(target.numbers);
     const prizeByName = {};
     (target.prizes || []).forEach(p => { if(p.name) prizeByName[p.name] = p; });
@@ -1220,9 +1237,10 @@ function predSummaryHTML(preds){
     }
   }
   if(!recs) return "";
+  const modeCounts = `<span style="color:var(--muted);font-weight:500">・數據流 ${byMode.data||0}・運勢流 ${byMode.fortune||0}・本命 ${byMode.destiny||0}</span>`;
   const avg = (hits / sets).toFixed(2);
   return `<div class="pred-rec" style="background:#fff">
-    <div class="pred-head" style="margin-bottom:0"><div class="info"><b>策略績效總覽(已對獎 ${recs} 筆・${sets} 組)</b></div></div>
+    <div class="pred-head" style="margin-bottom:0"><div class="info"><b>績效總覽(已對獎 ${recs} 筆・${sets} 組)</b>${modeCounts}</div></div>
     <div class="pred-sum" style="margin-top:4px">平均命中 <b>${avg}</b> 碼(純隨機理論期望 <b>${g.expect.toFixed(2)}</b> 碼)・中獎 <b>${wins}</b> 組・若有實際投注累計中獎 <b>${fmtNTD(winAmt)}</b>。<br>提醒:平均命中長期會貼近理論值,高低屬隨機波動;此表僅供對照判讀,非策略有效性證明。</div>
   </div>`;
 }
@@ -1234,7 +1252,19 @@ function renderPreds(){
   }
   el.innerHTML = predSummaryHTML(preds) + preds.slice(0,10).map((rec, idx)=>{
     const w = rec.weights || {};
-    const wTxt = `熱${w.wHot??"—"}/冷${w.wCold??"—"}/遺${w.wMiss??"—"}/隨${w.wRand??"—"}`;
+    const mode = rec.mode || "data";
+    let modeTxt;
+    if(mode === "fortune"){
+      const f = rec.fortune || {};
+      modeTxt = "<b>運勢流</b>・" + esc(f.ganzhi || "?") + "日・" + esc(f.dir || "") + "・" + esc(f.color || "") +
+                (f.zodiac ? "・生肖" + esc(f.zodiac) : "") + (f.place ? "・" + esc(f.place) : "");
+    }else if(mode === "destiny"){
+      const dd = rec.destiny || {};
+      modeTxt = "<b>本命定號</b>・日主 " + esc(dd.dayMaster || "—") + "・喜用 " + esc(dd.need || "—") + "・數字尾 " + esc(dd.tails || "—");
+    }else{
+      modeTxt = "策略 <b>熱" + (w.wHot ?? "—") + "/冷" + (w.wCold ?? "—") + "/遺" + (w.wMiss ?? "—") + "/隨" + (w.wRand ?? "—") + "</b>" +
+                (w.exclude ? "・排除 " + esc(w.exclude) : "");
+    }
     const target = findTargetDraw(rec.afterPeriod);
     let body, sum = "";
     if(!target){
@@ -1284,9 +1314,9 @@ function renderPreds(){
     }
     return `<div class="pred-rec">
       <div class="pred-head">
-        <div class="info">建立於 <b>${esc(rec.ts)}</b>・策略 <b>${wTxt}</b>${w.exclude?`・排除 ${esc(w.exclude)}`:""}</div>
+        <div class="info">建立於 <b>${esc(rec.ts)}</b>・${modeTxt}</div>
         <div class="pred-actions">
-          <button class="btn ghost small" data-apply="${rec.id}">套用此策略</button>
+          ${mode === "data" ? `<button class="btn ghost small" data-apply="${rec.id}">套用此策略</button>` : ""}
           <button class="btn ghost small" data-del="${rec.id}">刪除</button>
         </div>
       </div>
@@ -1550,6 +1580,7 @@ function render(){
   $("#analysisGrid").style.display = has ? "" : "none";
   safe("最新開獎", renderHero);
   if(!has) return;
+  $("#strategySub").hidden = state.mode === "fortune";
   $("#strategySub").textContent = state.game==="lotto649"
     ? "拉動權重即可隨時調整選號方向;設定會自動儲存在你的瀏覽器。大樂透玩法為自選 6 碼(特別號以你的 6 碼比對)。權重代表「策略偏好」,不代表中獎機率——每期開獎皆為獨立事件。"
     : "拉動權重即可隨時調整選號方向;設定會自動儲存在你的瀏覽器。權重代表「策略偏好」,不代表中獎機率——每期開獎皆為獨立事件。";
@@ -1594,6 +1625,11 @@ $$(".mode-tab").forEach(b=>b.addEventListener("click",()=>{
   $("#modeNote").textContent = state.mode === "fortune"
     ? "運勢流:號碼由命定種子(日期/生辰/心情/地點)決定,與開獎統計完全無關。"
     : "數據流:號碼依開獎歷史統計(熱號/冷號/遺漏)加權產生。";
+  $("#pickerTitle").textContent = state.mode === "fortune" ? "運勢選號" : "策略選號器";
+  $("#genBtn").textContent = state.mode === "fortune" ? "以今日運勢產生號碼" : "產生號碼";
+  $("#excludeField").hidden = state.mode === "fortune";
+  $("#resetBtn").hidden = state.mode === "fortune";
+  $("#strategySub").hidden = state.mode === "fortune";
   if(state.mode === "fortune"){
     safe("今日運勢", renderFortune);
     const p = destinyProfile();
