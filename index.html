@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="assets/chart.umd.js"></script>
 <style>
-/* ================= 彩研所 v4.4.0 ─ 明亮現代(銀行 App 風) =================
+/* ================= 彩研所 v4.5.0 ─ 明亮現代(銀行 App 風) =================
    白底・鮮明色彩・粗黑體・柔和彩色陰影
    大樂透=琥珀橘 #F59E0B|威力彩=珊瑚紅 #EF4444|今彩539=翡翠綠 #10B981|品牌藍 #2563EB */
 :root{
@@ -208,6 +208,24 @@ input[type=range]{width:100%;accent-color:var(--accent);height:30px}
 .elem-chip{font-size:.76rem;font-weight:700;border-radius:999px;padding:4px 12px;background:rgba(255,255,255,.85)}
 .elem-chip.need{outline:2px solid #7C3AED}
 .destiny-balls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0 4px}
+.lucky-panel{background:linear-gradient(130deg,#FFFBEB,#FEF2F2 50%,#F0FDF4);
+  border:1px solid #F3E8C8;border-radius:16px;padding:clamp(14px,3.4vw,20px);margin:14px 0 0}
+.lucky-games{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:10px}
+.lucky-game{background:rgba(255,255,255,.8);border-radius:14px;padding:12px 14px}
+.lucky-game h4{font-weight:900;font-size:.92rem;margin-bottom:6px;display:flex;align-items:center;gap:7px}
+.lucky-game h4 .dot{width:8px;height:8px;border-radius:50%}
+.lucky-row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;
+  border-bottom:1px solid #F3F5F9;font-size:.8rem}
+.lucky-row:last-child{border-bottom:none}
+.lucky-row .d{font-weight:700;font-variant-numeric:tabular-nums}
+.lucky-row .gz{color:var(--muted);font-size:.72rem}
+.lucky-row .tags{font-size:.68rem;color:var(--ink-soft)}
+.lucky-badge{font-size:.7rem;font-weight:900;border-radius:999px;padding:3px 9px;white-space:nowrap}
+.lucky-badge.l4{background:#FEE2E2;color:#B91C1C}
+.lucky-badge.l3{background:#FEF3E2;color:#B45309}
+.lucky-badge.l2{background:#EFF3F9;color:#475569}
+.lucky-badge.l1{background:#E5E7EB;color:#6B7280}
+.lucky-row.best{background:#FFF7ED;border-radius:8px;padding-left:6px;padding-right:6px}
 .empty-hint{background:var(--card);border:1.5px dashed var(--line);border-radius:var(--r-xl);
   padding:26px;text-align:center;color:var(--muted);margin-top:16px}
 .empty-hint b{color:var(--ink)}
@@ -383,6 +401,12 @@ canvas{max-width:100%}
           </div>
           <div id="destinyOut"></div>
         </div>
+        <div class="lucky-panel" id="luckyPanel" hidden>
+          <div style="font-weight:900;font-size:1rem">天命吉日(下單時機)</div>
+          <div class="sub" style="margin:4px 0 0">依你的八字(日主・喜用・生肖)對照每個開獎日的日干支:<b>偏財日</b>(我剋者為財)最吉,三合/六合日加分,六沖日忌;並排出當天適合下單的<b>財時</b>。趣味性質,不影響中獎機率。</div>
+          <div class="lucky-games" id="luckyGames"></div>
+          <div class="auth-note" style="margin-top:10px">吉日是「選哪天買」的儀式感,不是加碼的理由——請維持固定娛樂預算;想跳過的日子就跳過,每期機率都一樣。</div>
+        </div>
       </div>
 
       <div class="sliders" id="dataSliders">
@@ -480,13 +504,13 @@ canvas{max-width:100%}
       任何號碼組合的中獎機率完全相同,「熱號」「冷號」「遺漏」對未來開獎不具預測力。
       策略選號器與預測核對僅供娛樂與選號輔助參考,請理性投注、量力而為。開獎結果與獎金以台灣彩券官方公告為準。
     </div>
-    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v4.4.0</span></div>
+    <div>彩研所 TWLottery Lab|資料來源:台灣彩券官方 API|<span class="build-tag">BUILD v4.5.0</span></div>
   </div>
 </footer>
 
 <script>
 "use strict";
-const BUILD_VERSION = "v4.4.0";
+const BUILD_VERSION = "v4.5.0";
 
 /* ============ 錯誤攔截 ============ */
 function showErr(msg){
@@ -1038,6 +1062,61 @@ function computeDestiny(){
   return { bz, cnt, need, luckyDigits, zodiac, nums, a2,
            qi: 60 + (h % 40), mag: ["沉穩","溫潤","躍動","清朗","厚實"][h % 5] };
 }
+/* ---- 天命吉日:八字 × 開獎日干支 ---- */
+const GEN_NEXT = {木:"火",火:"土",土:"金",金:"水",水:"木"};   // 我生
+const KE_NEXT  = {木:"土",土:"水",水:"火",火:"金",金:"木"};   // 我剋
+const LIUHE = {子:"丑",丑:"子",寅:"亥",亥:"寅",卯:"戌",戌:"卯",辰:"酉",酉:"辰",巳:"申",申:"巳",午:"未",未:"午"};
+const GAME_DAYS = { lotto649:[2,5], superlotto638:[1,4], dailycash539:[1,2,3,4,5,6] };
+function scoreDay(y, m, d, user){
+  const idx = ganzhiIndexOfDay(y, m, d);
+  const s = HEAVENLY[idx % 10], b = EARTHLY[idx % 12];
+  const E = STEM_ELEM[s], M = STEM_ELEM[user.dayMaster];
+  let score = 50; const tags = [];
+  if(KE_NEXT[M] === E){ score += 30; tags.push("偏財日"); }
+  else if(GEN_NEXT[E] === M){ score += 20; tags.push("印綬日"); }
+  else if(E === M){ score += 10; tags.push("比肩日"); }
+  else if(GEN_NEXT[M] === E){ score += 5; tags.push("食傷日"); }
+  else if(KE_NEXT[E] === M){ score -= 15; tags.push("官殺日"); }
+  const ub = EARTHLY.indexOf(user.yearBranch), db = EARTHLY.indexOf(b);
+  if((ub + 6) % 12 === db){ score -= 25; tags.push("沖生肖"); }
+  else if((ub + 4) % 12 === db || (ub + 8) % 12 === db){ score += 15; tags.push("三合"); }
+  else if(LIUHE[user.yearBranch] === b){ score += 15; tags.push("六合"); }
+  if(user.need.includes(E)){ score += 10; tags.push("喜用到位"); }
+  if(user.need.includes(BRANCH_ELEM[b])){ score += 5; }
+  // 財時:五鼠遁排十二時辰,取天干五行為「我剋」者
+  const ratStart = {甲:0,己:0,乙:2,庚:2,丙:4,辛:4,丁:6,壬:6,戊:8,癸:8}[s];
+  const hours = [];
+  for(let h = 0; h < 12; h++){
+    const hs = HEAVENLY[(ratStart + h) % 10];
+    if(STEM_ELEM[hs] === KE_NEXT[M]) hours.push(EARTHLY[h] + "時(" + pad2((h*2+23)%24) + "–" + pad2((h*2+1)%24) + ")");
+  }
+  score = Math.max(0, Math.min(100, score));
+  const lv = score >= 80 ? 4 : score >= 65 ? 3 : score >= 45 ? 2 : 1;
+  return { gz: s + b, score, lv, label: ["","忌","平","吉","大吉"][lv], tags, hours: hours.slice(0,2) };
+}
+function renderLuckyDays(user){
+  const panel = $("#luckyPanel"), grid = $("#luckyGames");
+  if(!user){ panel.hidden = true; return; }
+  panel.hidden = false;
+  const today = new Date(); today.setHours(0,0,0,0);
+  grid.innerHTML = Object.entries(GAMES).map(([key, g])=>{
+    const rows = [];
+    const dt = new Date(today);
+    for(let i = 0; i < 40 && rows.length < 8; i++){
+      if(i > 0) dt.setDate(dt.getDate() + 1);
+      if(!GAME_DAYS[key].includes(dt.getDay())) continue;
+      const r = scoreDay(dt.getFullYear(), dt.getMonth()+1, dt.getDate(), user);
+      rows.push({ date: `${pad2(dt.getMonth()+1)}/${pad2(dt.getDate())}(${"日一二三四五六"[dt.getDay()]})`, isToday: i===0, ...r });
+    }
+    const best = Math.max(...rows.map(r=>r.score));
+    return `<div class="lucky-game"><h4><span class="dot" style="background:${g.c2}"></span>${g.name}</h4>` +
+      rows.map(r=>`<div class="lucky-row${r.score===best?" best":""}">
+          <div><div class="d">${r.date}${r.isToday?" 今天":""}</div><div class="gz">${r.gz}日${r.hours.length?"・財時 "+r.hours.join("、"):""}</div>
+            <div class="tags">${r.tags.join("・")||"—"}</div></div>
+          <span class="lucky-badge l${r.lv}">${r.label} ${r.score}</span>
+        </div>`).join("") + `</div>`;
+  }).join("");
+}
 function renderDestiny(){
   const r = computeDestiny();
   const el = $("#destinyOut");
@@ -1064,6 +1143,7 @@ function renderDestiny(){
       <span class="sub" style="margin:0;align-self:center">同生辰永遠同一組;趣味性質,機率與任何選法相同。</span>
     </div>
     <div class="auth-note" style="margin-top:8px">固定簽注小提醒:每期開獎獨立,「沒買的那期」不會偷走你的機率——想休息就休息,任何一期重新開始都一樣。請以固定娛樂預算進行。</div>`;
+  safe("天命吉日", ()=>renderLuckyDays({ dayMaster: r.bz.dayMaster, yearBranch: r.bz.yearBranch, need: r.need }));
   $("#destinySaveBtn").addEventListener("click", ()=>{
     lastGenerated = {
       sets: [ r.a2!=null ? {n:r.nums, a2:r.a2} : {n:r.nums} ],
