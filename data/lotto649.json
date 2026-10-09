@@ -2,9 +2,93 @@
  "game": "lotto649",
  "name": "大樂透",
  "build": "v4.5.0",
- "updated": "2026-10-06 22:07:51 +08:00",
- "count": 155,
+ "updated": "2026-10-10 02:27:38 +08:00",
+ "count": 156,
  "draws": [
+  {
+   "period": "115000095",
+   "date": "2026-10-09",
+   "numbers": [
+    3,
+    9,
+    11,
+    25,
+    34,
+    41
+   ],
+   "raw": [
+    11,
+    34,
+    3,
+    9,
+    41,
+    25,
+    27
+   ],
+   "special": 27,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 31054652,
+     "carry": 273310776
+    },
+    {
+     "name": "貳獎",
+     "winners": 2,
+     "amount": 1230824,
+     "pool": 2461649,
+     "carry": 0
+    },
+    {
+     "name": "參獎",
+     "winners": 74,
+     "amount": 35824,
+     "pool": 2651006,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 186,
+     "amount": 9162,
+     "pool": 1704218,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 4256,
+     "amount": 2000,
+     "pool": 8512000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 5287,
+     "amount": 1000,
+     "pool": 5287000,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 47849,
+     "amount": 400,
+     "pool": 19139600,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 64949,
+     "amount": 400,
+     "pool": 25979600,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 370100504,
+    "sellAmount": 172838800
+   }
+  },
   {
    "period": "115000094",
    "date": "2026-10-06",
