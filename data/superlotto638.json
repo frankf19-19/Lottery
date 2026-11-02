@@ -2,9 +2,107 @@
  "game": "superlotto638",
  "name": "威力彩",
  "build": "v4.5.0",
- "updated": "2026-10-30 02:36:04 +08:00",
- "count": 148,
+ "updated": "2026-11-02 23:37:30 +08:00",
+ "count": 149,
  "draws": [
+  {
+   "period": "115000088",
+   "date": "2026-11-02",
+   "numbers": [
+    4,
+    6,
+    16,
+    19,
+    21,
+    37
+   ],
+   "raw": [
+    21,
+    37,
+    6,
+    4,
+    19,
+    16,
+    7
+   ],
+   "special": 7,
+   "prizes": [
+    {
+     "name": "頭獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 19969094,
+     "carry": 232515670
+    },
+    {
+     "name": "貳獎",
+     "winners": 0,
+     "amount": 0,
+     "pool": 2468090,
+     "carry": 4127114
+    },
+    {
+     "name": "參獎",
+     "winners": 3,
+     "amount": 150000,
+     "pool": 450000,
+     "carry": 0
+    },
+    {
+     "name": "肆獎",
+     "winners": 33,
+     "amount": 20000,
+     "pool": 660000,
+     "carry": 0
+    },
+    {
+     "name": "伍獎",
+     "winners": 192,
+     "amount": 4000,
+     "pool": 768000,
+     "carry": 0
+    },
+    {
+     "name": "陸獎",
+     "winners": 1394,
+     "amount": 800,
+     "pool": 1115200,
+     "carry": 0
+    },
+    {
+     "name": "柒獎",
+     "winners": 2570,
+     "amount": 400,
+     "pool": 1028000,
+     "carry": 0
+    },
+    {
+     "name": "捌獎",
+     "winners": 14406,
+     "amount": 200,
+     "pool": 2881200,
+     "carry": 0
+    },
+    {
+     "name": "玖獎",
+     "winners": 18694,
+     "amount": 100,
+     "pool": 1869400,
+     "carry": 0
+    },
+    {
+     "name": "普獎",
+     "winners": 33908,
+     "amount": 100,
+     "pool": 3390800,
+     "carry": 0
+    }
+   ],
+   "money": {
+    "totalAmount": 271242569,
+    "sellAmount": 62908700
+   }
+  },
   {
    "period": "115000087",
    "date": "2026-10-29",
